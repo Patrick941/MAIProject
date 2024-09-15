@@ -1,5 +1,4 @@
 name: Run main.py on Pull Request
-
 on:
   pull_request:
 
@@ -14,6 +13,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install langchain
+          pip install langchain_community
 
       - name: Run main.py
         run: python main.py
