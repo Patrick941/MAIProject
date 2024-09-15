@@ -2,7 +2,7 @@ from langchain.llms import Ollama
 import datetime
 import re
 
-class OllamaResponseGenerator:
+class ResponseGenerator:
     def __init__(self, model='llama3'):
         self.model = model
         self.llm = Ollama(model=self.model)
