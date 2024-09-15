@@ -1,4 +1,5 @@
 import Scripts.ollama_classes
+import os
 
 def write_temp_script(language, topic, output_file_path):
     ollama_response_generator = Scripts.ollama_classes.OllamaResponseGenerator()
@@ -15,6 +16,7 @@ def compile_script(output_file_path):
     result = subprocess.run(["python", output_file_path])
     if result.returncode == 0:
         print("\033[92mScript executed successfully.\033[0m")  # Green color
+        os.remove(output_file_path)
     else:
         print("\033[91mScript execution failed.\033[0m")  # Red color
         
