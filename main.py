@@ -1,15 +1,23 @@
 import Scripts.ollama_classes
+import Scripts.openAI_classes
 import subprocess
 import os
 import ast
 import random
 import io
 
-def write_temp_script(language, topic, output_file_path):
-    response_generator = Scripts.ollama_classes.ResponseGenerator()
+def write_temp_script(language, topic, output_file_path, type):
+    if type == "ollama":
+        response_generator = Scripts.ollama_classes.ResponseGenerator()
+    elif type == "openAI":
+        response_generator = Scripts.openAI_classes.ResponseGenerator()
+    else:
+        raise ValueError("Invalid type. Please specify 'ollama' or 'openAI'.")
     response = response_generator.generate_response("Write a runnable non-interactive program incorporating " + topic + " in " + language)
     start_index = response.find("```")
     end_index = response.rfind("```")
+    if start_index == end_index:
+        end_index = len(response)
     extracted_text = response[start_index + 3:end_index]
     if extracted_text.startswith("Python\n") or extracted_text.startswith("python\n"):
         extracted_text = extracted_text[7:]
@@ -45,7 +53,7 @@ def insert_bug(tree, output_file_path):
     
 
 output_file_path = "output.py"
-# write_temp_script("Python", "loops", output_file_path)
-tree = analyse_script(output_file_path)
-insert_bug(tree, output_file_path)
-# compile_script(output_file_path)
+write_temp_script("Python", "loops", output_file_path, "openAI")
+# tree = analyse_script(output_file_path)
+# insert_bug(tree, output_file_path)
+compile_script(output_file_path)
