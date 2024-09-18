@@ -1,25 +1,27 @@
 name: Pull Request Workflow
 
 on:
-    pull_request:
-        types:
-            - opened
-            - synchronize
-    workflow_dispatch:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  workflow_dispatch:
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest
 
-        steps:
-          - name: Checkout repository
-            uses: actions/checkout@v3 
-    
-        
-          - name: Set up Python
-            uses: actions/setup-python@v4 
-            with:
-              python-version: '3.9' 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3 
 
-          - name: Run main_compile action
-            uses: ./checks/main_compile
+      - name: Set up Python
+        uses: actions/setup-python@v4 
+        with:
+          python-version: '3.9' 
+
+      - name: Run main_compile action
+        uses: ./checks/main_compile
+        with:
+          runs: |
+            echo "Running main_compile action"
