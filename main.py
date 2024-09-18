@@ -4,7 +4,7 @@ import subprocess
 import os
 import ast
 import random
-import io
+import argparse
 
 def write_temp_script(language, topic, output_file_path, type):
     if type == "ollama":
@@ -25,7 +25,6 @@ def write_temp_script(language, topic, output_file_path, type):
         file.write(extracted_text)
 
 def compile_script(output_file_path):
-    import subprocess
     subprocess.run(["python", output_file_path])
     result = subprocess.run(["python", output_file_path])
     if result.returncode == 0:
@@ -53,7 +52,13 @@ def insert_bug(tree, output_file_path):
     
 
 output_file_path = "output.py"
-write_temp_script("Python", "loops", output_file_path, "openAI")
+parser = argparse.ArgumentParser()
+parser.add_argument("--type", help="Specify the type: 'ollama' or 'openAI'")
+args = parser.parse_args()
+
+type = args.type
+
+write_temp_script("Python", "loops", output_file_path, type)
 # tree = analyse_script(output_file_path)
 # insert_bug(tree, output_file_path)
 compile_script(output_file_path)
