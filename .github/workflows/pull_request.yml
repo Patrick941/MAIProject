@@ -12,13 +12,14 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
+          - name: Checkout repository
+            uses: actions/checkout@v3 
+    
+        
+          - name: Set up Python
+            uses: actions/setup-python@v4 
+            with:
+              python-version: '3.9' 
 
-            - name: Set up Python
-              uses: actions/setup-python@v2
-              with:
-                  python-version: '3.x'
-
-            - name: Run main.py
-              run: python main.py
+          - name: Run main_compile action
+            uses: ./checks/main_compile
