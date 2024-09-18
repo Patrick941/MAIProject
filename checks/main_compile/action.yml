@@ -16,8 +16,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install langchain
-          pip install langchain_community
+          pip install -r requirements.txt
 
       - name: Run main.py
         run: python main.py --type "openAI"
