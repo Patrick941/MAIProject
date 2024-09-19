@@ -20,7 +20,7 @@ runs:
       shell: bash
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt 
+        pip install -r ./checks/requirements.txt 
 
     - name: Run main.py
       shell: bash
