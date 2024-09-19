@@ -59,6 +59,6 @@ args = parser.parse_args()
 type = args.type
 
 write_temp_script("Python", "loops", output_file_path, type)
-# tree = analyse_script(output_file_path)
-# insert_bug(tree, output_file_path)
+tree = analyse_script(output_file_path)
+insert_bug(tree, output_file_path)
 compile_script(output_file_path)
