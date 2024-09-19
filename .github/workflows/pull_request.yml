@@ -23,5 +23,4 @@ jobs:
       - name: Run main_compile action
         uses: ./checks/main_compile
         with:
-          runs: |
-            echo "Running main_compile action"
+          type: "openAI"
