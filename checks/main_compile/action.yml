@@ -1,9 +1,7 @@
 name: Run Main Compile
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
 
 jobs:
   run-script:
