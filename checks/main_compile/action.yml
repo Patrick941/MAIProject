@@ -25,3 +25,5 @@ runs:
     - name: Run main.py
       shell: bash
       run: python main.py --type "${{ inputs.type }}"
+      env:
+        GPT_API_KEY: ${{ secrets.GPT_API_KEY }}

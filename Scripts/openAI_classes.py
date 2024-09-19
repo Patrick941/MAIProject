@@ -11,7 +11,8 @@ class ResponseGenerator:
     def read_api_key(self):
         file_path = os.path.dirname(os.path.abspath(__file__))
         api_key_path = os.path.join(file_path, '..', 'apiKey.txt')
-
+        if not os.path.exists(api_key_path):
+            api_key = os.getenv('GPT_API_KEY')
         with open(api_key_path, 'r') as file:
             api_key = file.read().strip()
         return api_key

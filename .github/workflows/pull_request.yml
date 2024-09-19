@@ -24,3 +24,5 @@ jobs:
         uses: ./checks/main_compile
         with:
           type: "openAI"
+        env: 
+          GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
