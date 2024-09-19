@@ -1,6 +1,4 @@
 # Debugging Problems
-## Meeting Booking Link
-https://outlook.office.com/bookwithme/user/6bb4ab2ffbf54676bcf386e3e7f1f413@tcd.ie?anonymous&ep=pcard
 ## Project Description
 It is argued that the advent of coding assistants like GitHub Copilot and Amazon
 CodeWhisperer will require educators to place more emphasis on skills related to code
