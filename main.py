@@ -40,8 +40,12 @@ def analyse_script(output_file_path):
         return tree
     
 def insert_bug(tree, output_file_path):
-    node = random.choice(list(ast.walk(tree)))
-    node.value = ast.BinOp(left=node.value, op=ast.Add(), right=ast.Num(n=1))
+    nodes = [node for node in ast.walk(tree) if isinstance(node, ast.Expr) and isinstance(node.value, ast.Num)]
+    if not nodes:
+        print("\033[91mNo suitable node found to insert a bug.\033[0m")
+        return
+    node = random.choice(nodes)
+    node.value = ast.BinOp(left=node.value, op=ast.Add(), right=ast.Constant(value=1))
     new_script = ast.unparse(tree)
     original_script = open(output_file_path, "r").read()
     if new_script == original_script:
@@ -58,7 +62,12 @@ args = parser.parse_args()
 
 type = args.type
 
-write_temp_script("Python", "loops", output_file_path, type)
-tree = analyse_script(output_file_path)
-insert_bug(tree, output_file_path)
-compile_script(output_file_path)
+for attempt in range(3):
+    try:
+        write_temp_script("Python", "loops", output_file_path, type)
+        tree = analyse_script(output_file_path)
+        insert_bug(tree, output_file_path)
+        compile_script(output_file_path)
+    except:
+        print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
+        continue
