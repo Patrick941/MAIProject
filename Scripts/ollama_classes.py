@@ -1,4 +1,4 @@
-from langchain.llms import Ollama
+from langchain_community.llms import Ollama
 import datetime
 import re
 
@@ -8,5 +8,5 @@ class ResponseGenerator:
         self.llm = Ollama(model=self.model)
     
     def generate_response(self, query):
-        response = self.llm.predict(query)
+        response = self.llm.invoke(query)
         return response
