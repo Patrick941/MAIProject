@@ -24,12 +24,19 @@ def write_temp_script(language, topic, output_file_path, type):
     with open(output_file_path, 'w') as file:
         file.write(extracted_text)
 
-def compile_script(output_file_path):
+def compile_script(output_file_path, keepScripts):
     subprocess.run(["python", output_file_path])
     result = subprocess.run(["python", output_file_path])
     if result.returncode == 0:
         print("\033[92mScript executed successfully.\033[0m")  # Green color
-        os.remove(output_file_path)
+        if not keepScripts:
+            os.remove(output_file_path)
+        else:
+            if not os.path.exists("artifacts"):
+                os.makedirs("artifacts")
+            new_path = os.path.join("artifacts", os.path.basename(output_file_path))
+            os.rename(output_file_path, new_path)
+            print(f"\033[93mScript saved to {new_path}\033[0m")
     else:
         print("\033[91mScript execution failed.\033[0m")  # Red color
         
@@ -58,16 +65,23 @@ def insert_bug(tree, output_file_path):
 output_file_path = "output.py"
 parser = argparse.ArgumentParser()
 parser.add_argument("--type", help="Specify the type: 'ollama' or 'openAI'")
+parser.add_argument("--amount", type=int, default=1, help="Specify the number of problems to generate")
+parser.add_argument("--save-scripts", type=bool, default=False, help="Save the generated scripts")
 args = parser.parse_args()
 
 type = args.type
+problemCount = args.amount
+keepScripts = args.save_scripts
 
-for attempt in range(3):
-    try:
-        write_temp_script("Python", "loops", output_file_path, type)
-        tree = analyse_script(output_file_path)
-        insert_bug(tree, output_file_path)
-        compile_script(output_file_path)
-    except:
-        print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
-        continue
+for problem, index in enumerate(range(problemCount)):
+    for attempt in range(3):
+        try:
+            print("\033[93mGenerating problem " + str(index) + "...\033[0m")
+            local_output_file_path = output_file_path + "_" + str(index) + ".py"
+            write_temp_script("Python", "loops", local_output_file_path, type)
+            tree = analyse_script(local_output_file_path)
+            insert_bug(tree, local_output_file_path)
+            compile_script(local_output_file_path, keepScripts)
+        except:
+            print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
+            continue
