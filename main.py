@@ -31,6 +31,12 @@ def compile_script(output_file_path, keepScripts):
         print("\033[92mScript executed successfully.\033[0m")  # Green color
         if not keepScripts:
             os.remove(output_file_path)
+        else:
+            if not os.path.exists("artifacts"):
+                os.makedirs("artifacts")
+            new_path = os.path.join("artifacts", os.path.basename(output_file_path))
+            os.rename(output_file_path, new_path)
+            print(f"\033[93mScript saved to {new_path}\033[0m")
     else:
         print("\033[91mScript execution failed.\033[0m")  # Red color
         

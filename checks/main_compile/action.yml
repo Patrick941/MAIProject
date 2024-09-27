@@ -25,3 +25,9 @@ runs:
     - name: Run main.py
       shell: bash
       run: python main.py --type "${{ inputs.type }}" --amount 3 --save-scripts True
+
+    - name: Save artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: scripts-upload
+        path: ./artifacts/
