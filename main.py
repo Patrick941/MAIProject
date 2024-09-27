@@ -58,16 +58,19 @@ def insert_bug(tree, output_file_path):
 output_file_path = "output.py"
 parser = argparse.ArgumentParser()
 parser.add_argument("--type", help="Specify the type: 'ollama' or 'openAI'")
+parser.add_argument("--amount", type=int, default=1, help="Specify the number of problems to generate")
 args = parser.parse_args()
 
 type = args.type
-
-for attempt in range(3):
-    try:
-        write_temp_script("Python", "loops", output_file_path, type)
-        tree = analyse_script(output_file_path)
-        insert_bug(tree, output_file_path)
-        compile_script(output_file_path)
-    except:
-        print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
-        continue
+problemCount = args.amount
+for problem, index in enumerate(range(problemCount)):
+    for attempt in range(3):
+        try:
+            local_output_file_path = output_file_path + "_" + str(index) + ".py"
+            write_temp_script("Python", "loops", local_output_file_path, type)
+            tree = analyse_script(local_output_file_path)
+            insert_bug(tree, local_output_file_path)
+            compile_script(local_output_file_path)
+        except:
+            print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
+            continue
