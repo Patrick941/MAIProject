@@ -24,4 +24,4 @@ runs:
 
     - name: Run main.py
       shell: bash
-      run: python main.py --type "${{ inputs.type }}"
+      run: python main.py --type "${{ inputs.type }}" --amount 3
