@@ -66,6 +66,7 @@ problemCount = args.amount
 for problem, index in enumerate(range(problemCount)):
     for attempt in range(3):
         try:
+            print("\033[93mGenerating problem " + str(index) + "...\033[0m")
             local_output_file_path = output_file_path + "_" + str(index) + ".py"
             write_temp_script("Python", "loops", local_output_file_path, type)
             tree = analyse_script(local_output_file_path)
