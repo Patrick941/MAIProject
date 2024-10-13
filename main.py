@@ -1,5 +1,3 @@
-import Scripts.ollama_classes
-import Scripts.openAI_classes
 import Scripts.code_repair
 import Scripts.code_generation
 import subprocess

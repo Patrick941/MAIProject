@@ -1,11 +1,9 @@
-from langchain_community.llms import Ollama
-import datetime
-import re
+from langchain_ollama import OllamaLLM
 
 class ResponseGenerator:
-    def __init__(self, model='llama3'):
+    def __init__(self, model='llama3.1:70b'):
         self.model = model
-        self.llm = Ollama(model=self.model)
+        self.llm = OllamaLLM(model=self.model)
     
     def generate_response(self, query):
         response = self.llm.invoke(query)
