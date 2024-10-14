@@ -1,44 +1,10 @@
-import Scripts.ollama_classes
-import Scripts.openAI_classes
+import Scripts.code_repair as code_repair
+import Scripts.code_generation as code_generation
 import subprocess
 import os
 import ast
 import random
 import argparse
-
-def write_temp_script(language, topic, output_file_path, type):
-    if type == "ollama":
-        response_generator = Scripts.ollama_classes.ResponseGenerator()
-    elif type == "openAI":
-        response_generator = Scripts.openAI_classes.ResponseGenerator()
-    else:
-        raise ValueError("Invalid type. Please specify 'ollama' or 'openAI'.")
-    response = response_generator.generate_response("Write a runnable non-interactive program incorporating " + topic + " in " + language)
-    start_index = response.find("```")
-    end_index = response.rfind("```")
-    if start_index == end_index:
-        end_index = len(response)
-    extracted_text = response[start_index + 3:end_index]
-    if extracted_text.startswith("Python\n") or extracted_text.startswith("python\n"):
-        extracted_text = extracted_text[7:]
-    with open(output_file_path, 'w') as file:
-        file.write(extracted_text)
-
-def compile_script(output_file_path, keepScripts):
-    subprocess.run(["python", output_file_path])
-    result = subprocess.run(["python", output_file_path])
-    if result.returncode == 0:
-        print("\033[92mScript executed successfully.\033[0m")  # Green color
-        if not keepScripts:
-            os.remove(output_file_path)
-        else:
-            if not os.path.exists("artifacts"):
-                os.makedirs("artifacts")
-            new_path = os.path.join("artifacts", os.path.basename(output_file_path))
-            os.rename(output_file_path, new_path)
-            print(f"\033[93mScript saved to {new_path}\033[0m")
-    else:
-        print("\033[91mScript execution failed.\033[0m")  # Red color
         
 def analyse_script(output_file_path):
     with open(output_file_path, "r") as temp_script:
@@ -78,10 +44,9 @@ for problem, index in enumerate(range(problemCount)):
         try:
             print("\033[93mGenerating problem " + str(index) + "...\033[0m")
             local_output_file_path = output_file_path + "_" + str(index) + ".py"
-            write_temp_script("Python", "loops", local_output_file_path, type)
-            tree = analyse_script(local_output_file_path)
-            insert_bug(tree, local_output_file_path)
-            compile_script(local_output_file_path, keepScripts)
+            code_generation = code_generation.CodeGeneration("Python", "loops", local_output_file_path, type)
+            code_generation.write_temp_script()
+            code_generation.compile_script()
         except:
             print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
             continue
