@@ -1,7 +1,7 @@
 import subprocess
 import Scripts.ollama_classes as ollama_classes
 import Scripts.openAI_classes as openAI_classes
-import code_generation
+import Scripts.code_generation as code_generation
 
 class CodeRepair:
     def __init__(self, file_path, type, program_input, expected_output):
