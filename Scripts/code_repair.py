@@ -35,6 +35,3 @@ class CodeRepair:
         except subprocess.CalledProcessError as e:
             print(f"An error occurred while running the script: {e.stderr}")
             return e.stderr
-        
-CodeRepair("test.py", "ollama", "", "1\n2\n3\n").read_file()
-            
