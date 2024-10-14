@@ -1,6 +1,6 @@
 import subprocess
-import ollama_classes
-import openAI_classes
+import Scripts.ollama_classes as ollama_classes
+import Scripts.openAI_classes as openAI_classes
 import code_generation
 
 class CodeRepair:

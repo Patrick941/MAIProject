@@ -1,5 +1,5 @@
-import Scripts.code_repair
-import Scripts.code_generation
+import Scripts.code_repair as code_repair
+import Scripts.code_generation as code_generation
 import subprocess
 import os
 import ast
@@ -44,7 +44,7 @@ for problem, index in enumerate(range(problemCount)):
         try:
             print("\033[93mGenerating problem " + str(index) + "...\033[0m")
             local_output_file_path = output_file_path + "_" + str(index) + ".py"
-            code_generation = Scripts.CodeGeneration("Python", "loops", local_output_file_path, type)
+            code_generation = code_generation.CodeGeneration("Python", "loops", local_output_file_path, type)
             code_generation.write_temp_script()
             tree = analyse_script(local_output_file_path)
             insert_bug(tree, local_output_file_path)

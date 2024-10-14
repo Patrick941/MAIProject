@@ -1,7 +1,7 @@
 import subprocess
 import os
-import ollama_classes
-import openAI_classes
+import Scripts.ollama_classes as ollama_classes
+import Scripts.openAI_classes as openAI_classes
 
 class CodeGeneration:
     def __init__(self, language, topic, output_file_path, type, prompt_override=None):
