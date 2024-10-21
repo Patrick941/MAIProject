@@ -47,13 +47,17 @@ for problem, index in enumerate(range(problemCount)):
         try:
             print("\033[93mGenerating problem " + str(index) + "...\033[0m")
             local_output_file_path = output_file_path + "_" + str(index) + ".py"
-            code_generation = code_generation.CodeGeneration("Python", "loops", local_output_file_path, type, model)
-            code_generation.write_temp_script()
-            code_generation.compile_script()
+            code_gen = code_generation.CodeGeneration("Python", "loops", local_output_file_path, type, model)
+            code_gen.write_temp_script()
+            code_gen.compile_script(keepScripts)
             print("\033[92mOriginal working script compiled correctly\033[0m")
             
-            llm_bug_insertion = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a syntax bug that a novice is likely to write that will cause an error in the code")
-            llm_bug_insertion.insert_bug(local_output_file_path)
-        except:
+            local_output_file_path = os.path.join("artifacts", os.path.basename(local_output_file_path))
+            bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a syntax bug that a novice is likely to write that will cause an error in the code")
+            bug_insert.insert_bug()
+            
+        except Exception as e:
             print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
+            print(e)
+            subprocess.run(["ollama", "stop", model])
             continue

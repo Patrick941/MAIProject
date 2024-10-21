@@ -14,7 +14,10 @@ class LLMBugInsertion:
     def insert_bug(self):
         with open(self.file_path, 'r') as file:
             content = file.read()
-            code_generation = code_generation.CodeGeneration("NA", "NA", self.output_file_path, "ollama", self.model, "Take this code:\n\n" + content + "\n\n Now, " + self.bug)
-            code_generation.write_temp_script()
+            if self.type == "ollama":
+                code_gen = code_generation.CodeGeneration("NA", "NA", self.output_file_path, "ollama", self.model, "Take this code:\n\n" + content + "\n\n Now, " + self.bug)
+            elif self.type == "openAI":
+                code_gen = code_generation.CodeGeneration("NA", "NA", self.output_file_path, "openAI", self.model, "Take this code:\n\n" + content + "\n\n Now, " + self.bug)
+            code_gen.write_temp_script()
         
         

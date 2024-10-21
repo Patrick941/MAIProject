@@ -44,6 +44,7 @@ class CodeGeneration:
                 if not os.path.exists("artifacts"):
                     os.makedirs("artifacts")
                 new_path = os.path.join("artifacts", os.path.basename(self.output_file_path))
+                self.output_file_path = new_path
                 os.rename(self.output_file_path, new_path)
                 print(f"\033[93mScript saved to {new_path}\033[0m")
         else:
