@@ -24,7 +24,7 @@ class CodeGeneration:
         else:
             response = response_generator.generate_response("Write a runnable non-interactive program incorporating " + self.topic + " in " + self.language)
         start_index = response.find("```")
-        end_index = response.rfind("```")
+        end_index = response.find("```", start_index + 3)
         if start_index == end_index:
             end_index = len(response)
         extracted_text = response[start_index + 3:end_index]
@@ -34,8 +34,13 @@ class CodeGeneration:
             file.write(extracted_text)
 
     def compile_script(self, keepScripts):
-        subprocess.run(["python", self.output_file_path])
-        result = subprocess.run(["python", self.output_file_path])
+        try:
+            result = subprocess.run(["python", self.output_file_path], timeout=10, capture_output=True, text=True)
+        except subprocess.TimeoutExpired:
+            print("\033[91mScript execution timed out.\033[0m")
+            return 1
+        except subprocess.CalledProcessError as e:
+            return result
         if result.returncode == 0:
             print("\033[92mScript executed successfully.\033[0m")
             if not keepScripts:
@@ -44,8 +49,12 @@ class CodeGeneration:
                 if not os.path.exists("artifacts"):
                     os.makedirs("artifacts")
                 new_path = os.path.join("artifacts", os.path.basename(self.output_file_path))
-                self.output_file_path = new_path
                 os.rename(self.output_file_path, new_path)
+                self.output_file_path = new_path
                 print(f"\033[93mScript saved to {new_path}\033[0m")
         else:
             print("\033[91mScript execution failed.\033[0m")
+        return result
+    
+    def update_path(self, new_path):
+        self.output_file_path = new_path
