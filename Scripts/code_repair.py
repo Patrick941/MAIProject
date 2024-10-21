@@ -4,11 +4,12 @@ import Scripts.openAI_classes as openAI_classes
 import Scripts.code_generation as code_generation
 
 class CodeRepair:
-    def __init__(self, file_path, type, program_input, expected_output):
+    def __init__(self, file_path, type, program_input, expected_output, model):
         self.file_path = file_path
         self.program_input = program_input
         self.expected_output = expected_output
         self.type = type
+        self.model = model
 
     def read_file(self):
         with open(self.file_path, 'r') as file:
@@ -17,7 +18,7 @@ class CodeRepair:
                 output = self.test_script()
                 if output is None:
                     break
-                code_gen = code_generation.CodeGeneration("none", "none", self.file_path, self.type, "This code:\n\n" + content + "\nProduced the following output:\n\n"  + output + "\nThe expected output was:\n\n" + self.expected_output)
+                code_gen = code_generation.CodeGeneration("none", "none", self.file_path, self.type, self.model, "This code:\n\n" + content + "\nProduced the following output:\n\n"  + output + "\nThe expected output was:\n\n" + self.expected_output)
                 code_gen.write_temp_script()
                 
                 

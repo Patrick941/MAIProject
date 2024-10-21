@@ -1,0 +1,2 @@
+#!/bin/bash
+./projectVenv/bin/python ./main.py --type "ollama" --amount 5 --save-scripts True --model "llama3.1"

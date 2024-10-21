@@ -1,7 +1,7 @@
 from langchain_ollama import OllamaLLM
 
 class ResponseGenerator:
-    def __init__(self, model='llama3.1:70b'):
+    def __init__(self, model):
         self.model = model
         self.llm = OllamaLLM(model=self.model)
     

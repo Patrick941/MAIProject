@@ -1,5 +1,6 @@
 import Scripts.code_repair as code_repair
 import Scripts.code_generation as code_generation
+import Scripts.llm_bug_insertion as llm_bug_insertion
 import subprocess
 import os
 import ast
@@ -28,25 +29,30 @@ def insert_bug(tree, output_file_path):
         
     
 
-output_file_path = "output.py"
+output_file_path = "output"
 parser = argparse.ArgumentParser()
 parser.add_argument("--type", help="Specify the type: 'ollama' or 'openAI'")
 parser.add_argument("--amount", type=int, default=1, help="Specify the number of problems to generate")
 parser.add_argument("--save-scripts", type=bool, default=False, help="Save the generated scripts")
+parser.add_argument("--model", help="Specify the model to use", default="llama3.1")
 args = parser.parse_args()
 
 type = args.type
 problemCount = args.amount
 keepScripts = args.save_scripts
+model = args.model
 
 for problem, index in enumerate(range(problemCount)):
     for attempt in range(3):
         try:
             print("\033[93mGenerating problem " + str(index) + "...\033[0m")
             local_output_file_path = output_file_path + "_" + str(index) + ".py"
-            code_generation = code_generation.CodeGeneration("Python", "loops", local_output_file_path, type)
+            code_generation = code_generation.CodeGeneration("Python", "loops", local_output_file_path, type, model)
             code_generation.write_temp_script()
             code_generation.compile_script()
+            
+            llm_bug_insertion = llm_bug_insertion.LLMBugInsertion(local_output_file_path)
+            llm_bug_insertion.insert_bug(local_output_file_path)
         except:
             print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
             continue
