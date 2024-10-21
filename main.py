@@ -50,8 +50,9 @@ for problem, index in enumerate(range(problemCount)):
             code_generation = code_generation.CodeGeneration("Python", "loops", local_output_file_path, type, model)
             code_generation.write_temp_script()
             code_generation.compile_script()
+            print("\033[92mOriginal working script compiled correctly\033[0m")
             
-            llm_bug_insertion = llm_bug_insertion.LLMBugInsertion(local_output_file_path)
+            llm_bug_insertion = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a syntax bug that a novice is likely to write that will cause an error in the code")
             llm_bug_insertion.insert_bug(local_output_file_path)
         except:
             print("\033[91mThere was an error with the generated code. Trying again...\033[0m")
