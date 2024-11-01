@@ -112,13 +112,15 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-        subprocess.run(["ollama", "stop", model])
+        if model == "ollama":
+            subprocess.run(["ollama", "stop", model])
         print("\033[92mScript execution completed successfully.\033[0m")
         for file in os.listdir():
             if file.startswith("output"):
                 os.remove(file)
     except KeyboardInterrupt:
-        subprocess.run(["ollama", "stop", model])
+        if model == "ollama":
+            subprocess.run(["ollama", "stop", model])
         for file in os.listdir():
             if file.startswith("output"):
                 os.remove(file)
