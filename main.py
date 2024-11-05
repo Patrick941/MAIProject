@@ -1,5 +1,6 @@
 import Scripts.code_repair as code_repair
 import Scripts.code_generation as code_generation
+import Scripts.code_complexity as code_complexity
 import Scripts.llm_bug_insertion as llm_bug_insertion
 import subprocess
 import os
@@ -45,6 +46,8 @@ def main():
     model = args.model
     results = {}
     output_log = open("output.log", "w")
+    output_csv = open("output.csv", "w")
+    output_csv.write("Problem Number,Cognitive Complexity,Cyclomatic complexity,Attempts needed for original code,Attempts needed for bug insertion\n")
 
     for index in range(problemCount):
         successful_script = False
@@ -55,7 +58,7 @@ def main():
             try:
                 print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                 local_output_file_path = output_file_path + "_" + str(index) + ".py"
-                code_gen = code_generation.CodeGeneration("Python", "Mean Squared Error", local_output_file_path, type, model)
+                code_gen = code_generation.CodeGeneration("Python", "High Dimensionality Arrays", local_output_file_path, type, model)
                 code_gen.write_temp_script()
                 script_result = code_gen.compile_script(keepScripts)
                 if script_result.returncode != 0:
@@ -72,7 +75,7 @@ def main():
                     if successful_bug_insert:
                         break
                     try:                        
-                        bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the calculation of the Mean Squared Error")
+                        bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the indexing of the array")
                         if bug_insert.insert_bug() != 0: continue
                         script_result = code_gen.compile_script(keepScripts)
                         if script_result == 0:
@@ -86,6 +89,11 @@ def main():
                             print("\033[92mBug inserted successfully\033[0m")
                             print("Received output: " + script_result.stdout.strip() + "\nExpected output: " + expected_output)
                             output_log.write("Problem: " + str(index) + "\nReceived output: " + script_result.stdout.strip() + "\nExpected output: " + expected_output)
+                            code_complex = code_complexity.codeComplexity(local_output_file_path)
+                            complexity_results = code_complex.get_complexity()
+                            cognitive_complexity = complexity_results['cognitive_complexity']
+                            cyclomatic_complexity = complexity_results['cyclomatic_complexity'][0].complexity
+                            output_csv.write(f"{index},{cognitive_complexity},{cyclomatic_complexity},{attempt},{bug_attempt}\n")
                             successful_bug_insert = True
                     except Exception as e:
                         print("\033[91mThere was an error inserting the bug. Trying again...\033[0m")
@@ -105,9 +113,11 @@ def main():
         print(f"Problem {key}: {value}")
 
     output_log.close()
+    output_csv.close()
     if not os.path.exists("artifacts"):
         os.makedirs("artifacts")
     os.rename("output.log", os.path.join("artifacts", "output.log"))
+    os.rename("output.csv", os.path.join("artifacts", "output.csv"))
 
 if __name__ == "__main__":
     try:
