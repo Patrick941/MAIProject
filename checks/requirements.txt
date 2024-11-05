@@ -2,3 +2,5 @@ openai
 langchain
 langchain_community
 langchain-ollama
+textdistance
+radon
