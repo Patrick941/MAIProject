@@ -74,7 +74,7 @@ def main():
                 print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                 local_output_file_path = output_file_path + "_" + str(index) + ".py"
                 if args.prompt_override is None:
-                    code_gen = code_generation.CodeGeneration(language, "Multithreading using Mutexes", local_output_file_path, type, model)
+                    code_gen = code_generation.CodeGeneration(language, "Multithreading using Mutexes", local_output_file_path, type, model, results_directory)
                 else:
                     code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory, args.prompt_override)
                 code_gen.write_temp_script()
