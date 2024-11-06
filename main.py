@@ -39,9 +39,12 @@ def main():
     parser.add_argument("--amount", type=int, default=1, help="Specify the number of problems to generate")
     parser.add_argument("--save-scripts", type=bool, default=False, help="Save the generated scripts")
     parser.add_argument("--model", help="Specify the model to use", default="llama3.1")
+    parser.add_argument("--prompt-override", type=str)
+    parser.add_argument("--bug-override", type=str)
     args = parser.parse_args()
 
     type = args.type
+    language = "Python"
     problemCount = args.amount
     keepScripts = args.save_scripts
     global model
@@ -67,7 +70,10 @@ def main():
             try:
                 print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                 local_output_file_path = output_file_path + "_" + str(index) + ".py"
-                code_gen = code_generation.CodeGeneration("Python", "Multithreading using Mutexes", local_output_file_path, type, model)
+                if args.prompt_override is None:
+                    code_gen = code_generation.CodeGeneration(language, "Multithreading using Mutexes", local_output_file_path, type, model)
+                else:
+                    code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model)
                 code_gen.write_temp_script()
                 script_result = code_gen.compile_script(keepScripts)
                 if script_result.returncode != 0:
@@ -83,8 +89,11 @@ def main():
                 for bug_attempt in range(6):
                     if successful_bug_insert:
                         break
-                    try:                        
-                        bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug to that results in an incorrect final output")
+                    try:     
+                        if arg.bug_override is None                   
+                            bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug to that results in an incorrect final output")
+                        else:
+                            bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, args.bug_override)
                         if bug_insert.insert_bug() != 0: continue
                         script_result = code_gen.compile_script(keepScripts)
                         if script_result == 0:

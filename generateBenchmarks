@@ -1,0 +1,7 @@
+#!/bin/bash
+pushd benchmarks
+benchmarks=($(ls))
+popd
+for benchmark in "${benchmark[@]}"; do
+    ./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small" --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
+done
