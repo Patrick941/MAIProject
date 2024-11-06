@@ -39,6 +39,7 @@ def main():
     parser.add_argument("--amount", type=int, default=1, help="Specify the number of problems to generate")
     parser.add_argument("--save-scripts", type=bool, default=False, help="Save the generated scripts")
     parser.add_argument("--model", help="Specify the model to use", default="llama3.1")
+    parser.add_argument("--results-directory", type=str)
     parser.add_argument("--prompt-override", type=str)
     parser.add_argument("--bug-override", type=str)
     args = parser.parse_args()
@@ -52,6 +53,8 @@ def main():
     results = {}
     output_log = open("output.log", "w")
     output_csv = open("output.csv", "w")
+    
+    results_directory = "artifacts"
     results_dict = {
         "Problem Number": [],
         "Cognitive Complexity": [],
@@ -81,7 +84,7 @@ def main():
                     continue
                 expected_output = script_result.stdout.strip()
                 print("\033[92mOriginal working script compiled correctly\033[0m")
-                local_output_file_path = os.path.join("artifacts", os.path.basename(local_output_file_path))
+                local_output_file_path = os.path.join(results_directory, os.path.basename(local_output_file_path))
                 code_gen.update_path(local_output_file_path)
                 successful_script = True
                 
@@ -134,7 +137,7 @@ def main():
                 subprocess.run(["ollama", "stop", model])
                 continue
     
-    code_compare = code_comparison.CodeComparison(problemCount)
+    code_compare = code_comparison.CodeComparison(problemCount, results_directory)
     comparison_results = code_compare.compare_code()
     for i in range(problemCount):
         results_dict["Similarity"].append(comparison_results[i])
@@ -151,10 +154,10 @@ def main():
 
     output_log.close()
     output_csv.close()
-    if not os.path.exists("artifacts"):
-        os.makedirs("artifacts")
-    os.rename("output.log", os.path.join("artifacts", "output.log"))
-    os.rename("output.csv", os.path.join("artifacts", "output.csv"))
+    if not os.path.exists(results_directory):
+        os.makedirs(results_directory)
+    os.rename("output.log", os.path.join(results_directory, "output.log"))
+    os.rename("output.csv", os.path.join(results_directory, "output.csv"))
 
 if __name__ == "__main__":
     try:

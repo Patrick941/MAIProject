@@ -1,18 +1,19 @@
 import textdistance
 
 class CodeComparison:
-    def __init__(self, problem_count):
+    def __init__(self, problem_count, results_directory):
         self.problem_count = problem_count
+        self.results_directory = results_directory
 
     def compare_code(self):
         results = [0] * self.problem_count
         for i in range(self.problem_count):
             results[i] = 0
-            file1 = "artifacts/output_" + str(i) + ".py"
+            file1 = self.results_directory + "/output_" + str(i) + ".py"
             for j in range(self.problem_count):
                 if i == j:
                     continue
-                file2 = "artifacts/output_" + str(j) + ".py"
+                file2 = self.results_directory + "/output_" + str(j) + ".py"
                 
                 # Read files
                 with open(file1, 'r') as f1, open(file2, 'r') as f2:

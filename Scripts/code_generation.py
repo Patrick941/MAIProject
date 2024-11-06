@@ -4,13 +4,14 @@ import Scripts.ollama_classes as ollama_classes
 import Scripts.openAI_classes as openAI_classes
 
 class CodeGeneration:
-    def __init__(self, language, topic, output_file_path, type, model, prompt_override=None):
+    def __init__(self, language, topic, output_file_path, type, model, prompt_override=None, results_directory):
         self.language = language
         self.topic = topic
         self.output_file_path = output_file_path
         self.type = type
         self.prompt_override = prompt_override
         self.model = model
+        self.results_directory = results_directory
 
     def write_temp_script(self):
         if self.type == "ollama":
@@ -46,9 +47,9 @@ class CodeGeneration:
             if not keepScripts:
                 os.remove(self.output_file_path)
             else:
-                if not os.path.exists("artifacts"):
-                    os.makedirs("artifacts")
-                new_path = os.path.join("artifacts", os.path.basename(self.output_file_path))
+                if not os.path.exists(self.results_directory):
+                    os.makedirs(results_directory)
+                new_path = os.path.join(results_directory, os.path.basename(self.output_file_path))
                 os.rename(self.output_file_path, new_path)
                 self.output_file_path = new_path
                 print(f"\033[93mScript saved to {new_path}\033[0m")
