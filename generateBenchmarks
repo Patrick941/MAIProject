@@ -4,5 +4,5 @@ benchmarks=($(ls -1))
 popd
 for benchmark in "${benchmarks[@]}"; do
     echo "Generating benchmarks for $benchmark"
-    ./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small" --results_directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
+    ./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
 done
