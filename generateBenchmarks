@@ -1,7 +1,9 @@
 #!/bin/bash
 pushd benchmarks
-benchmarks=($(ls))
+benchmarks=($(ls -1))
+echo "Benchmarks: ${benchmarks[@]}"
 popd
-for benchmark in "${benchmark[@]}"; do
+for benchmark in "${benchmarks[@]}"; do
+    echo "Generating benchmarks for $benchmark"
     ./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small" --results_directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
 done
