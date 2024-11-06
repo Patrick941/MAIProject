@@ -67,7 +67,7 @@ def main():
             try:
                 print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                 local_output_file_path = output_file_path + "_" + str(index) + ".py"
-                code_gen = code_generation.CodeGeneration("Python", "Djikstras Algorithm", local_output_file_path, type, model)
+                code_gen = code_generation.CodeGeneration("Python", "Multithreading using Mutexes", local_output_file_path, type, model)
                 code_gen.write_temp_script()
                 script_result = code_gen.compile_script(keepScripts)
                 if script_result.returncode != 0:
@@ -84,7 +84,7 @@ def main():
                     if successful_bug_insert:
                         break
                     try:                        
-                        bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug that stops the algorithm finding the best path")
+                        bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug to that results in an incorrect final output")
                         if bug_insert.insert_bug() != 0: continue
                         script_result = code_gen.compile_script(keepScripts)
                         if script_result == 0:
@@ -94,6 +94,9 @@ def main():
                             else:
                                 print("\033[92mBug inserted successfully\033[0m")
                                 successful_bug_insert = True
+                        elif script_result == 1:
+                            print("\033[91mScript execution timed out. Trying again...\033[0m")
+                            continue
                         else:
                             print("\033[92mBug inserted successfully\033[0m")
                             print("Received output: " + script_result.stdout.strip() + "\nExpected output: " + expected_output)
