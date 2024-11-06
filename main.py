@@ -76,7 +76,7 @@ def main():
                 if args.prompt_override is None:
                     code_gen = code_generation.CodeGeneration(language, "Multithreading using Mutexes", local_output_file_path, type, model)
                 else:
-                    code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model)
+                    code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory, args.prompt_override)
                 code_gen.write_temp_script()
                 script_result = code_gen.compile_script(keepScripts)
                 if script_result.returncode != 0:
@@ -94,9 +94,9 @@ def main():
                         break
                     try:     
                         if arg.bug_override is None:                 
-                            bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug to that results in an incorrect final output")
+                            bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, "add a bug to that results in an incorrect final output")
                         else:
-                            bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, args.bug_override)
+                            bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, args.bug_override)
                         if bug_insert.insert_bug() != 0: continue
                         script_result = code_gen.compile_script(keepScripts)
                         if script_result == 0:
