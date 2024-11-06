@@ -1,7 +1,6 @@
 #!/bin/bash
 pushd benchmarks
 benchmarks=($(ls -1))
-echo "Benchmarks: ${benchmarks[@]}"
 popd
 for benchmark in "${benchmarks[@]}"; do
     echo "Generating benchmarks for $benchmark"
