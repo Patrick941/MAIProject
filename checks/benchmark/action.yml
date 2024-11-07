@@ -24,7 +24,7 @@ runs:
 
     - name: Run main.py
       shell: bash
-      run: ./generateBenchmarks --type "${{ inputs.type }}" -- amount 1
+      run: ./generateBenchmarks --type "${{ inputs.type }}" --amount 1
 
     - name: Save artifacts
       uses: actions/upload-artifact@v3
