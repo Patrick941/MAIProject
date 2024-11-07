@@ -89,7 +89,7 @@ def main():
                 if args.prompt_override is None:
                     code_gen = code_generation.CodeGeneration(language, "Multithreading using Mutexes", local_output_file_path, type, model, results_directory)
                 else:
-                    code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory, args.prompt_override)
+                    code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory)
                 code_gen.write_temp_script()
                 script_result = code_gen.compile_script(keepScripts)
                 if script_result.returncode != 0:
