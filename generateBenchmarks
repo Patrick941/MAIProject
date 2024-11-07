@@ -1,8 +1,17 @@
 #!/bin/bash
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --type) type="$2"; shift ;;
+        --amount) amount="$2"; shift ;;
+        *) echo "Unknown parameter passed: $1"; exit 1 ;;
+    esac
+    shift
+done
+
 pushd benchmarks
 benchmarks=($(ls -1))
 popd
 for benchmark in "${benchmarks[@]}"; do
     echo "Generating benchmarks for $benchmark"
-    ./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
+    ./projectVenv/bin/python ./main.py --type $type --amount $amount --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
 done

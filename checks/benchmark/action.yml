@@ -1,0 +1,33 @@
+name: 'Benchmark Action'
+description: 'A composite action to run benchmark tasks'
+inputs:
+  type:
+    description: 'Type of the main.py execution'
+    required: true
+    default: 'openAI'
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3 
+
+    - name: Set up Python
+      uses: actions/setup-python@v4 
+      with:
+        python-version: '3.9' 
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r ./checks/requirements.txt 
+
+    - name: Run main.py
+      shell: bash
+      run: ./generateBenchmarks --type "${{ inputs.type }}" -- amount 1
+
+    - name: Save artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: scripts-upload
+        path: ./*rtifacts/

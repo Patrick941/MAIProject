@@ -1,0 +1,26 @@
+name: Benchmark Workflow
+
+on:
+  workflow_dispatch:
+  check_run:
+    types: [created, completed]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3 
+
+      - name: Set up Python
+        uses: actions/setup-python@v4 
+        with:
+          python-version: '3.9' 
+
+      - name: Run main_compile action
+        uses: ./checks/benchmark
+        with:
+          type: "openAI"
+        env: 
+          GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
