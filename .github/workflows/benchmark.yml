@@ -21,6 +21,7 @@ jobs:
       - name: Run main_compile action
         uses: ./checks/benchmark
         with:
-          type: "openAI"
+          type: "ollama"
+          model: "mistral-small"
         env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}

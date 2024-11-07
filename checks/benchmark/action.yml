@@ -5,6 +5,10 @@ inputs:
     description: 'Type of the main.py execution'
     required: true
     default: 'openAI'
+  model:
+    description: 'Model to use for the benchmark'
+    required: true
+    default: 'llama3.1'
 runs:
   using: 'composite'
   steps:
@@ -22,9 +26,15 @@ runs:
         python -m pip install --upgrade pip
         pip install -r ./checks/requirements.txt 
 
+    - name: Install Ollama
+      shell: bash
+      run: |
+        curl -fsSL https://ollama.com/install.sh | sh
+        ollama pull "${{ inputs.model }}"
+
     - name: Run main.py
       shell: bash
-      run: ./generateBenchmarks --type "${{ inputs.type }}" --amount 1 --environment "github"
+      run: ./generateBenchmarks --type "${{ inputs.type }}" --amount 1 --environment "github" --model "${{ inputs.model }}"
 
     - name: Save artifacts
       uses: actions/upload-artifact@v3

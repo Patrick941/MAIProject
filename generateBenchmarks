@@ -4,6 +4,7 @@ while [[ "$#" -gt 0 ]]; do
         --type) type="$2"; shift ;;
         --amount) amount="$2"; shift ;;
         --environment) environment="$2"; shift ;;
+        --model) model="$2"; shift ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
     esac
     shift
@@ -19,7 +20,7 @@ for benchmark in "${benchmarks[@]}"; do
         prompt_content=$(cat $benchmark/prompt.txt)
         bug_content=$(cat $benchmark/bug.txt)
         popd
-        python ./main.py --type $type --amount $amount --save-scripts True --results-directory "$benchmark"Artifacts --prompt-override "$prompt_content" --bug-override "$bug_content"
+        python ./main.py --type $type --amount $amount --save-scripts True --model $model --results-directory "$benchmark"Artifacts --prompt-override "$prompt_content" --bug-override "$bug_content"
     else
         ./projectVenv/bin/python ./main.py --type $type --amount $amount --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
     fi
