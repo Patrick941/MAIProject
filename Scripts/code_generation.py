@@ -55,6 +55,7 @@ class CodeGeneration:
                 print(f"\033[93mScript saved to {new_path}\033[0m")
         else:
             print("\033[91mScript execution failed.\033[0m")
+            print(result.stderr)
         return result
     
     def update_path(self, new_path):

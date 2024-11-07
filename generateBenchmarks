@@ -15,7 +15,7 @@ popd
 for benchmark in "${benchmarks[@]}"; do
     echo "Generating benchmarks for $benchmark"
     if [ "$environment" == "github" ]; then
-        python ./main.py --type $type --amount $amount --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
+        python ./main.py --type $type --amount $amount --save-scripts True --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
     else
         ./projectVenv/bin/python ./main.py --type $type --amount $amount --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
     fi
