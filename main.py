@@ -149,6 +149,11 @@ def main():
                 print(e)
                 subprocess.run(["ollama", "stop", model])
                 continue
+        if successful_script == False:
+            if not os.path.exists(results_directory):
+                os.makedirs(results_directory)
+            failed_output_file_path = os.path.join(results_directory, os.path.basename(local_output_file_path).replace(".py", "_failed.py"))
+            os.rename(local_output_file_path, failed_output_file_path)
     
     code_compare = code_comparison.CodeComparison(problemCount, results_directory)
     comparison_results = code_compare.compare_code()
