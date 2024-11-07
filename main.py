@@ -9,6 +9,19 @@ import ast
 import random
 import argparse
 import csv
+import sys
+
+class Unbuffered(object):
+   def __init__(self, stream):
+       self.stream = stream
+   def write(self, data):
+       self.stream.write(data)
+       self.stream.flush()
+   def writelines(self, datas):
+       self.stream.writelines(datas)
+       self.stream.flush()
+   def __getattr__(self, attr):
+       return getattr(self.stream, attr)
         
 def analyse_script(output_file_path):
     with open(output_file_path, "r") as temp_script:
@@ -161,6 +174,7 @@ def main():
 
 if __name__ == "__main__":
     try:
+        sys.stdout = Unbuffered(sys.stdout)
         main()
         if model == "ollama":
             subprocess.run(["ollama", "stop", model])
