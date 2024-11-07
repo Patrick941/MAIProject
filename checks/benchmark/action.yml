@@ -30,7 +30,7 @@ runs:
       shell: bash
       run: |
         curl -fsSL https://ollama.com/install.sh | sh
-        ollama pull "${{ inputs.model }}"
+        /usr/local/bin/ollama pull "${{ inputs.model }}"
 
     - name: Run main.py
       shell: bash
