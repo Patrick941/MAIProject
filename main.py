@@ -93,7 +93,7 @@ def main():
                     if successful_bug_insert:
                         break
                     try:     
-                        if arg.bug_override is None:                 
+                        if args.bug_override is None:                 
                             bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, "add a bug to that results in an incorrect final output")
                         else:
                             bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, args.bug_override)
