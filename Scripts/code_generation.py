@@ -48,8 +48,8 @@ class CodeGeneration:
                 os.remove(self.output_file_path)
             else:
                 if not os.path.exists(self.results_directory):
-                    os.makedirs(results_directory)
-                new_path = os.path.join(results_directory, os.path.basename(self.output_file_path))
+                    os.makedirs(self.results_directory)
+                new_path = os.path.join(self.results_directory, os.path.basename(self.output_file_path))
                 os.rename(self.output_file_path, new_path)
                 self.output_file_path = new_path
                 print(f"\033[93mScript saved to {new_path}\033[0m")
