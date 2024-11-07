@@ -31,7 +31,7 @@ runs:
       run: |
         curl -fsSL https://ollama.com/install.sh | sh
         ls -lrt /usr/local/bin/ollama
-        sudo systemctl restart ollama
+        ollama serve &
         ollama pull "${{ inputs.model }}"
 
     - name: Run main.py
