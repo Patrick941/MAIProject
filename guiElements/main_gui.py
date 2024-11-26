@@ -3,6 +3,8 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog
 import os
+import subprocess
+import sys
 
 def create_gui():
     # Set DPI Awareness
@@ -76,6 +78,33 @@ def create_gui():
             f"model: {model_value}, results_directory: {results_directory_value}, "
             f"prompt_override: {prompt_override_value}, bug_override: {bug_override_value}")
         
+        # Construct the command to run main.py with the collected arguments
+        if bug_override_entry == "" or bug_override_entry == "None":
+            command = [
+                sys.executable,  # Use the current Python interpreter
+                os.path.join(os.path.dirname(os.path.dirname(__file__)), "main.py"),
+                "--type", type_value,
+                "--amount", str(amount_value),
+                "--save-scripts", str(save_scripts_value),
+                "--model", model_value,
+                "--results-directory", results_directory_value
+            ] 
+        else:
+            command = [
+                sys.executable,  # Use the current Python interpreter
+                os.path.join(os.path.dirname(os.path.dirname(__file__)), "main.py"),
+                "--type", type_value,
+                "--amount", str(amount_value),
+                "--save-scripts", str(save_scripts_value),
+                "--model", model_value,
+                "--results-directory", results_directory_value,
+                "--prompt-override", prompt_override_value,
+                "--bug-override", bug_override_value
+            ]          
+        
+        # Run the command
+        subprocess.Popen(command)
+        
         # Destroy the window to end mainloop
         root.destroy()
 
@@ -104,7 +133,7 @@ def create_gui():
 
     ttk.Label(root, text="Results Directory:", bootstyle="secondary", font=title_font).grid(row=4, column=0, sticky="w", padx=10, pady=5)
     results_directory_entry = ttk.Entry(root, bootstyle="success")
-    current_directory = os.path.dirname(os.path.abspath(__file__))
+    current_directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     default_directory = os.path.join(current_directory, "artifacts")
     results_directory_entry.insert(0, default_directory)  # Set default value
     results_directory_entry.grid(row=4, column=1, sticky="ew", padx=(10, 5))

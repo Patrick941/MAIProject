@@ -40,7 +40,8 @@ class CodeGeneration:
         except subprocess.TimeoutExpired:
             print("\033[91mScript execution timed out.\033[0m")
             return 1
-        except subprocess.CalledProcessError as e:
+        except Exception as e:
+            result = subprocess.CompletedProcess(args=["python", self.output_file_path], returncode=1, stdout='', stderr=str(e))
             return result
         if result.returncode == 0:
             print("\033[92mScript executed successfully.\033[0m")
