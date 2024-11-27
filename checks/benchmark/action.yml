@@ -26,14 +26,6 @@ runs:
         python -m pip install --upgrade pip
         pip install -r ./checks/requirements.txt 
 
-    - name: Install Ollama
-      shell: bash
-      run: |
-        curl -fsSL https://ollama.com/install.sh | sh
-        ls -lrt /usr/local/bin/ollama
-        ollama serve &
-        ollama pull "${{ inputs.model }}"
-
     - name: Run main.py
       shell: bash
       run: ./generateBenchmarks --type "${{ inputs.type }}" --amount 1 --environment "github" --model "${{ inputs.model }}"
