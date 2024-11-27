@@ -43,5 +43,6 @@ jobs:
         with:
           type: "ollama"
           model: ${{ inputs.model }}
+          working_directory: ${{ env.UNIQUE_DIR }}
         env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
