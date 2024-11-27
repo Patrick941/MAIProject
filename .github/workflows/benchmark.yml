@@ -28,12 +28,6 @@ jobs:
       - name: Checkout repository to default directory
         uses: actions/checkout@v3
 
-      - name: Move repository to the unique directory
-        run: |
-          mv $GITHUB_WORKSPACE/* $UNIQUE_DIR/
-          echo "Moved repository to: $UNIQUE_DIR"
-          cd $UNIQUE_DIR
-
       - name: Set up Python
         uses: actions/setup-python@v4 
         with:
@@ -46,3 +40,9 @@ jobs:
           model: ${{ inputs.model }}
         env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
+
+
+      - name: Move repository to the unique directory
+        run: |
+          mv $GITHUB_WORKSPACE/* $UNIQUE_DIR/
+          echo "Moved repository to: $UNIQUE_DIR"
