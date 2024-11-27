@@ -2,12 +2,18 @@ name: Benchmark Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      model:
+        description: "The model to use for the benchmark"
+        required: true
+        default: "mistral-small"
+
   check_run:
     types: [created, completed]
 
 jobs:
   build:
-    runs-on: [self-hosted, Linux, X64] 
+    runs-on: [self-hosted, Linux, X64]
 
     steps:
       - name: Checkout repository
@@ -22,6 +28,6 @@ jobs:
         uses: ./checks/benchmark
         with:
           type: "ollama"
-          model: "mistral-small"
+          model: ${{ inputs.model }}
         env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
