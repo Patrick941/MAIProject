@@ -32,6 +32,7 @@ jobs:
         run: |
           mv $GITHUB_WORKSPACE/* $UNIQUE_DIR/
           echo "Moved repository to: $UNIQUE_DIR"
+          cd $UNIQUE_DIR
 
       - name: Set up Python
         uses: actions/setup-python@v4 
@@ -39,7 +40,9 @@ jobs:
           python-version: '3.9' 
 
       - name: Run main_compile action
-        run: |
-          $UNIQUE_DIR/checks/benchmark --type "ollama" --model "${{ inputs.model }}"
-        env:
+        uses: ./checks/benchmark
+        with:
+          type: "ollama"
+          model: ${{ inputs.model }}
+        env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
