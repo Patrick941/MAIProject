@@ -26,6 +26,8 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v3 
+        with:
+          path: ${{ env.UNIQUE_DIR }}
 
       - name: Set up Python
         uses: actions/setup-python@v4 
