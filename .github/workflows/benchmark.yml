@@ -16,19 +16,22 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
 
     steps:
-      - name: Create a unique directory
+      - name: Create a unique directory within the workspace
+        id: create-dir
         run: |
           TIMESTAMP=$(date +'%Y%m%d%H%M%S')
-          UNIQUE_DIR="${GITHUB_WORKSPACE}_${TIMESTAMP}"
+          UNIQUE_DIR="${GITHUB_WORKSPACE}_build_${TIMESTAMP}"
           mkdir -p "$UNIQUE_DIR"
           echo "UNIQUE_DIR=$UNIQUE_DIR" >> $GITHUB_ENV
           echo "Unique directory created: $UNIQUE_DIR"
-        shell: bash
 
-      - name: Checkout repository
-        uses: actions/checkout@v3 
-        with:
-          path: ${{ env.UNIQUE_DIR }}
+      - name: Checkout repository to default directory
+        uses: actions/checkout@v3
+
+      - name: Move repository to the unique directory
+        run: |
+          mv $GITHUB_WORKSPACE/* $UNIQUE_DIR/
+          echo "Moved repository to: $UNIQUE_DIR"
 
       - name: Set up Python
         uses: actions/setup-python@v4 
