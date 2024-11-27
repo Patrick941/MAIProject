@@ -39,10 +39,9 @@ jobs:
           python-version: '3.9' 
 
       - name: Run main_compile action
-        uses: ./checks/benchmark
+        uses: ${{ env.UNIQUE_DIR }}/checks/benchmark
         with:
           type: "ollama"
           model: ${{ inputs.model }}
-          working_directory: ${{ env.UNIQUE_DIR }}
         env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
