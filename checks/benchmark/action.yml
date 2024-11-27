@@ -23,8 +23,10 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
+        python -m venv venv
+        source venv/bin/activate
         python -m pip install --upgrade pip
-        pip install -r ./checks/requirements.txt 
+        pip install -r ./checks/requirements.txt
 
     - name: Run main.py
       shell: bash
