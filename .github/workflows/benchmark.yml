@@ -14,6 +14,10 @@ on:
 jobs:
   build:
     runs-on: [self-hosted, Linux, X64]
+    
+    defaults:
+      run:
+        working-directory: ${{ env.UNIQUE_DIR }}
 
     steps:
       - name: Create a unique directory within the workspace
@@ -45,4 +49,3 @@ jobs:
           model: ${{ inputs.model }}
         env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
-        working-directory: ${{ env.UNIQUE_DIR }}
