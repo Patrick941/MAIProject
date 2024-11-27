@@ -19,9 +19,10 @@ jobs:
       - name: Create a unique directory
         run: |
           TIMESTAMP=$(date +'%Y%m%d%H%M%S')
-          UNIQUE_DIR="/tmp/build_$TIMESTAMP"
+          UNIQUE_DIR="${GITHUB_WORKSPACE}_${TIMESTAMP}"
           mkdir -p "$UNIQUE_DIR"
           echo "UNIQUE_DIR=$UNIQUE_DIR" >> $GITHUB_ENV
+          echo "Unique directory created: $UNIQUE_DIR"
         shell: bash
 
       - name: Checkout repository
