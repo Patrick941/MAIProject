@@ -39,9 +39,7 @@ jobs:
           python-version: '3.9' 
 
       - name: Run main_compile action
-        uses: ${{ env.UNIQUE_DIR }}/checks/benchmark
-        with:
-          type: "ollama"
-          model: ${{ inputs.model }}
-        env: 
+        run: |
+          $UNIQUE_DIR/checks/benchmark --type "ollama" --model "${{ inputs.model }}"
+        env:
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
