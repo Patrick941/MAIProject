@@ -69,7 +69,10 @@ def main():
     output_log = open("output.log", "w")
     output_csv = open("output.csv", "w")
     
-    results_directory = "artifacts"
+    if args.results_directory is not None:
+        results_directory = args.results_directory
+    else:
+        results_directory = "artifacts"
     results_dict = {
         "Problem Number": [],
         "Cognitive Complexity": [],
