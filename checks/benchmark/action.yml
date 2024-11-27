@@ -30,7 +30,7 @@ runs:
 
     - name: Run main.py
       shell: bash
-      run: ./generateBenchmarks --type "${{ inputs.type }}" --amount 1 --environment "github" --model "${{ inputs.model }}"
+      run: ./generateBenchmarks --type "${{ inputs.type }}" --amount 10 --environment "github" --model "${{ inputs.model }}"
 
     - name: Stop model
       shell: bash
