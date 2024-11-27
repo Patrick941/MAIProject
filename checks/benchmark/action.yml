@@ -32,6 +32,10 @@ runs:
       shell: bash
       run: ./generateBenchmarks --type "${{ inputs.type }}" --amount 1 --environment "github" --model "${{ inputs.model }}"
 
+    - name: Stop model
+      shell: bash
+      run: ollama stop "${{ inputs.model }}"
+
     - name: Save artifacts
       uses: actions/upload-artifact@v3
       with:
