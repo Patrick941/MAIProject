@@ -92,7 +92,7 @@ def main():
                     print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                     local_output_file_path = output_file_path + "_" + str(index) + ".py"
                     if args.prompt_override is None:
-                        code_gen = code_generation.CodeGeneration(language, "Multithreading using Mutexes", local_output_file_path, type, model, results_directory)
+                        code_gen = code_generation.CodeGeneration(language, "Fibbonaci Sequence", local_output_file_path, type, model, results_directory)
                     else:
                         code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory)
                     code_gen.write_temp_script()
@@ -112,7 +112,7 @@ def main():
                             break
                         try:     
                             if args.bug_override is None:                 
-                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, "add a bug to that results in an incorrect final output")
+                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, "add a bug in the calculation of the fibbonaci sequence")
                             else:
                                 bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, args.bug_override)
                             if bug_insert.insert_bug() != 0: continue
@@ -173,7 +173,7 @@ def main():
     code_compare = code_comparison.CodeComparison(problemCount, results_directory)
     comparison_results = code_compare.compare_code()
     for i in range(problemCount):
-        if comparison_results[i] >  similarity_threshold:
+        if comparison_results[i] >  similarity_threshold and random.randint(1, 3) == 1:
             print(f"\033[94mProblem {i} is too similar to another problem (Similarity: {comparison_results[i]}, Threshold: {similarity_threshold}). Diversifying code...\033[0m")
             if code_diverse.diversify(i, bug_output[i]) ==  0: continue
         results_dict["Similarity"].append(comparison_results[i])

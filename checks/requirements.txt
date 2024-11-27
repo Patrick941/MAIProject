@@ -4,3 +4,4 @@ langchain_community
 langchain-ollama
 textdistance
 radon
+numpy

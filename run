@@ -1,2 +1,2 @@
 #!/bin/bash
-./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small" --skip-generation False
+./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small"
