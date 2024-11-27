@@ -29,6 +29,7 @@ jobs:
           UNIQUE_DIR="${GITHUB_WORKSPACE}_build_${{ inputs.model }}_${TIMESTAMP}"
           mkdir -p "$UNIQUE_DIR"
           echo "UNIQUE_DIR=$UNIQUE_DIR" >> $GITHUB_ENV
+          echo "::set-output name=UNIQUE_DIR::$UNIQUE_DIR"
           echo "Unique directory created: $UNIQUE_DIR"
 
       - name: Checkout repository to default directory
@@ -53,5 +54,5 @@ jobs:
     steps:
       - name: Move repository to the unique directory
         run: |
-          mv $GITHUB_WORKSPACE/* ${{ needs.build.outputs.UNIQUE_DIR }}/
           echo "Moved repository to: ${{ needs.build.outputs.UNIQUE_DIR }}"
+          mv $GITHUB_WORKSPACE/* ${{ needs.build.outputs.UNIQUE_DIR }}/
