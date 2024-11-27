@@ -45,3 +45,4 @@ jobs:
           model: ${{ inputs.model }}
         env: 
           GPT_API_KEY: ${{ secrets.GPT_API_KEY }}
+        working-directory: ${{ env.UNIQUE_DIR }}
