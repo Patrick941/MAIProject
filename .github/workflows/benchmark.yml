@@ -16,6 +16,14 @@ jobs:
     runs-on: [self-hosted, Linux, X64]
 
     steps:
+      - name: Create a unique directory
+        run: |
+          TIMESTAMP=$(date +'%Y%m%d%H%M%S')
+          UNIQUE_DIR="/tmp/build_$TIMESTAMP"
+          mkdir -p "$UNIQUE_DIR"
+          echo "UNIQUE_DIR=$UNIQUE_DIR" >> $GITHUB_ENV
+        shell: bash
+
       - name: Checkout repository
         uses: actions/checkout@v3 
 
