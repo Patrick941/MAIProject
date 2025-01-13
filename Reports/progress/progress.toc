@@ -1,0 +1,7 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{}%
+\contentsline {section}{\numberline {2}Goals and Objectives}{5}{}%
+\contentsline {section}{\numberline {3}Literature Review}{6}{}%
+\contentsline {section}{\numberline {4}Current state of the project}{7}{}%
+\contentsline {section}{\numberline {5}Project Management}{8}{}%
+\contentsline {section}{\numberline {6}Conclusion}{9}{}%
+\contentsline {section}{\numberline {7}Acknowledgements}{10}{}%
