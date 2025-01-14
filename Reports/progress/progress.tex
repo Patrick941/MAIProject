@@ -79,6 +79,9 @@ Debugging has always been a crucial part of programming but many universities do
 When novice programmers write code they will inevitably write bugs into their code. The approach they take to solve the bug though is almost always to make small changes to syntax and run the code again straight away and do not take the time to understand the problem as is highlighted in Methods and Tools for Exploring Novice Compilation Behaviour \cite{jadud2006}. This is another issue the tool helps to solve, by injecting bugs that create underlying problems it will force the student to try to understand the code.\\
 \\
 Another aspect of the debugging process that this tool aims to teach is the use of debugging tools such as python debugger. This is mentioned as one of the sub-domains of debugging in \cite{li2019}, developing the skills to use these debuggers will inevitably help the student debug in the future. However, The Debugging Mindset \cite{odell2017} disagrees and believes that the best way to teach debugging is to force the student to think about the program without any help from tools. The choice of whether to include debugging software can be used is in my opinion best left to the professor who knows what they want to teach the students with the task they are giving.\\
+\\
+As mentioned in the paper How Beginning Programmers and Code LLMs (Mis)read Each Other \cite{nguyen2024} there is a lot of potential for misunderstanding between the AI and the user, this is something particularly true for novice programmers who will have more difficulty being precise with their wording as they will not understand the problem as well. This is where there is potential for teaching students to use LLMs effectively. I hope to include an optional feature of solving the problem using an LLM that can be turned on or off by the professor depending on the difficulty of the task. A similar approach for giving students access to LLMs is discussed in Promptly: Using Prompt Problems to Teach Learners How to Effectively Utilize AI Code Generators \cite{denny2023}, where it was showed that students who were limited to only using LLMs and no ability to manually change code learned how to prompt the LLM correctly.\\
+
 
 \section{Current state of the project}
 
@@ -100,8 +103,12 @@ Currently the program is able to generate working code using an LLM, create one 
 
 
 \section{Project Management}
+\subsection{Risk Analysis}
+There is few risks in the project as it is already in a working state just is not yet in the most mature possible state. One potential risk is the inability to add the more complex bug injection using ASTs. This is a risk because as the graph above shows the LLM has some difficulties performing the bug insertion and it would greatly increase the customisability of the bugs and the runtime of the program as it would not have to retry the bug insertion as many times. 
 
-There is few risks in the project as it is already in a working state just is not yet in the most mature possible state. One potential risk is the inability to add the more complex bug injection using ASTs. This is a risk because as the graph above shows the LLM has some difficulties performing the bug insertion and it would greatly increase the customisability of the bugs and the runtime of the program as it would not have to retry the bug insertion as many times. Below is a gantt chart for the project where the workload is seperated into weeks. There final stage is optional and would create a better GUI for demonstration but the essential features are the backend features outlined in the first two phases.
+\subsection{Gantt Chart}
+Below is a gantt chart for the project where the workload is seperated into weeks. There final stage is optional and would create a better GUI for demonstration but the essential features are the backend features outlined in the first two phases. There is also a few weeks left at the end to leave space for any unexpected issues that may arise.
+
 \begin{figure}[h!]
 \centering
 \begin{ganttchart}[
@@ -145,7 +152,7 @@ There is few risks in the project as it is already in a working state just is no
 \section{Conclusion}
 
 So far a lot of progress has been made in creating a functional tool that meets the project outline of generating problematic code that students can solve to improve their skills at debugging. There is definitely room for improvement though with both the metrics used to measure the progress and the features that are yet to be implemented. There is also scope for improvement for the presentation of the tool which I hope to address with the outlined features for GUI if time permits.\\
-The tool can only do so much to address the teaching of debugging. The professor will still need to setup the tool in a way that will teach the students meaningful lessons. This is why I also hope to create a set of default prompts with the tool that can be used to generate beneficial problems quickly.
+The tool can only do so much to address the teaching of debugging. The user will still need to setup the tool in a way that will teach the students meaningful lessons. This is why I also hope to create a set of default prompts with the tool that can be used to generate beneficial problems quickly.
 
 \section{References}
 \begin{thebibliography}{9}

@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1736870977.74582 "/home/patrick/Documents/MAIProject/Reports/progress/progress.tex" "progress.pdf" "progress" 1736870978.22027 0
+["pdflatex"] 1736871693.92653 "/home/patrick/Documents/MAIProject/Reports/progress/progress.tex" "progress.pdf" "progress" 1736871694.41184 0
   "/etc/texmf/web2c/texmf.cnf" 1729962304.97619 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/patrick/Documents/MAIProject/Reports/progress/progress.tex" 1736870977.10862 13602 100bdc4228bda46f153dcd77f27873a6 ""
+  "/home/patrick/Documents/MAIProject/Reports/progress/progress.tex" 1736871693.29623 14685 7d276b31055ca0933b2f9cc931554d0e ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -128,9 +128,9 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1736791272.25479 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1736791340 8212506 40c19f6eb154d9b7919e61a25029df24 ""
   "Images/Trinity_Main_Logo.jpg" 1736791860.32925 215090 23584208db11df4b8c85b64085205202 ""
-  "progress.aux" 1736870978.18261 1546 c33b8286046168c2e69e16b5b3e0b4e2 "pdflatex"
-  "progress.tex" 1736870977.10862 13602 100bdc4228bda46f153dcd77f27873a6 ""
-  "progress.toc" 1736870978.18361 575 5700374e05c478b40abc7c0640885f38 "pdflatex"
+  "progress.aux" 1736871694.36722 1801 45a51b417631aac75281eb01663a6f57 "pdflatex"
+  "progress.tex" 1736871693.29623 14685 7d276b31055ca0933b2f9cc931554d0e ""
+  "progress.toc" 1736871694.36722 705 321c6e380db66ef54ba7011f67f8302f "pdflatex"
   (generated)
   "progress.aux"
   "progress.log"
