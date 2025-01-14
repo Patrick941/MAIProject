@@ -5,6 +5,5 @@
 \contentsline {section}{\numberline {3}Literature Review}{5}{}%
 \contentsline {section}{\numberline {4}Current state of the project}{6}{}%
 \contentsline {section}{\numberline {5}Project Management}{8}{}%
-\contentsline {section}{\numberline {6}Conclusion}{8}{}%
-\contentsline {section}{\numberline {7}Acknowledgements}{8}{}%
-\contentsline {section}{\numberline {8}References}{8}{}%
+\contentsline {section}{\numberline {6}Conclusion}{9}{}%
+\contentsline {section}{\numberline {7}References}{9}{}%

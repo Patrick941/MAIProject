@@ -3,6 +3,7 @@
 \usepackage{setspace}
 \usepackage{xcolor}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{pgfgantt}
 
 \begin{document}
 
@@ -100,12 +101,51 @@ Currently the program is able to generate working code using an LLM, create one 
 
 \section{Project Management}
 
-There is few risks in the project as it is already in a working state just is not yet in the most mature possible state. One potential risk is the inability to add the more complex bug injection using ASTs. This is a risk because as the graph above shows the LLM has some difficulties performing the bug insertion and it would greatly increase the customisability of the bugs and the runtime of the program as it would not have to retry the bug insertion as many times.\\
+There is few risks in the project as it is already in a working state just is not yet in the most mature possible state. One potential risk is the inability to add the more complex bug injection using ASTs. This is a risk because as the graph above shows the LLM has some difficulties performing the bug insertion and it would greatly increase the customisability of the bugs and the runtime of the program as it would not have to retry the bug insertion as many times. Below is a gantt chart for the project where the workload is seperated into weeks. There final stage is optional and would create a better GUI for demonstration but the essential features are the backend features outlined in the first two phases.
+\begin{figure}[h!]
+\centering
+\begin{ganttchart}[
+    y unit title=0.5cm,
+    y unit chart=0.7cm,
+    vgrid,
+    hgrid,
+    title height=1,
+    title/.style={fill=none},
+    title label font=\bfseries\footnotesize,
+    title label anchor/.style={below=-1.6ex},
+    bar/.style={fill=blue!50},
+    bar height=0.6,
+    group right shift=0,
+    group top shift=0.7,
+    group height=.3,
+    group peaks height=.2,
+    x unit=0.8cm
+]{1}{12}
+    \gantttitle{2025}{12} \\
+    \gantttitlelist{1,...,12}{1} \\
+    \ganttgroup{Necessary Improvements}{1}{2} \\
+    \ganttbar{Self Reflection}{1}{1} \\
+    \ganttbar{Code Comparison}{1}{1} \\
+    \ganttbar{More test case coverage}{2}{2} \\
+    \ganttgroup{AST Implementation}{3}{7} \\
+    \ganttbar{Insert any error}{3}{3} \\
+    \ganttbar{Reasonable syntax error}{4}{4} \\
+    \ganttbar{Underlying logic error}{5}{7} \\
+    \ganttgroup{Interactable GUI (optional)}{8}{9} \\
+    \ganttbar{Run code in GUI}{8}{8} \\
+    \ganttbar{Run debug in GUI}{8}{8} \\
+    \ganttbar{LLM sidepanel}{9}{9} \\
+    \ganttbar{Default problems + manual panel}{9}{9} \\
+\end{ganttchart}
+\caption{Gantt Chart for Project Timeline}
+\label{fig:gantt}
+\end{figure}
 
-
+\newpage
 \section{Conclusion}
 
-\section{Acknowledgements}
+So far a lot of progress has been made in creating a functional tool that meets the project outline of generating problematic code that students can solve to improve their skills at debugging. There is definitely room for improvement though with both the metrics used to measure the progress and the features that are yet to be implemented. There is also scope for improvement for the presentation of the tool which I hope to address with the outlined features for GUI if time permits.\\
+The tool can only do so much to address the teaching of debugging. The professor will still need to setup the tool in a way that will teach the students meaningful lessons. This is why I also hope to create a set of default prompts with the tool that can be used to generate beneficial problems quickly.
 
 \section{References}
 \begin{thebibliography}{9}
