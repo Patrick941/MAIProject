@@ -37,10 +37,10 @@
 \small I have completed the Online Tutorial on avoiding plagiarism `Ready Steady Write', located at http://tcd-ie.libguides.com/plagiarism/ready-steady-write.
 \vspace{0.5cm}
 
-\small I consent / do not consent to the examiner retaining a copy of the thesis beyond the examining period, should they so wish (EU GDPR May 2018).
+\small I consent to the examiner retaining a copy of the thesis beyond the examining period, should they so wish (EU GDPR May 2018).
 \vspace{0.5cm}
 
-\small I agree that this thesis will not be publicly available, but will be available to TCD staff and students in the University’s open access institutional repository on the Trinity domain only, subject to Irish Copyright Legislation and Trinity College Library conditions of use and acknowledgement.  \textbf{Please consult with your supervisor on this last item before agreeing, and delete if you do not consent}
+\small I agree that this thesis will not be publicly available, but will be available to TCD staff and students in the University’s open access institutional repository on the Trinity domain only, subject to Irish Copyright Legislation and Trinity College Library conditions of use and acknowledgement.
 \vspace{2cm}
 
 \small Signed:~Patrick Farmer\hfill Date:~\today
@@ -51,10 +51,8 @@
 \newpage
 \section{Introduction}
 
-Due to the developments in LLM capabilities over the past few years have introduced a couple of issues with the classic approach for teaching program. The first of which is the issue of plagiarism from students using AI generated code. Tasks that are often given to novice programmers can be completed within moments by chat GPT so a lot of students will choose this easier alternative.\\
-There is then on the other hand the issue that AI assisted programming will likely exist in every job in the coming years, meaning that being able to work effectively with AI is also a very valuable skill. This project aims to address both of these issues by creating a tool that can generate defective code which the student must then debug.\\
-This solves the issue of plagiarism as AI will struggle a lot more to fix broken code than it will to generate it.\\
-It also teaches the student how to debug which is the most important tool when working with AI generated code.
+Due to the developments in LLM capabilities over the past few years have introduced a couple of issues with the classic approach for teaching programming have arisen.\\
+The main issue is that AI assisted programming will likely exist in every job in the coming years, meaning that being able to work effectively with AI is also a very valuable skill. This project aims to address both of these issues by creating a tool that can generate defective code which the student must then debug.\\
 
 \section{Goals and Objectives}
 
@@ -66,25 +64,26 @@ The primary goal of this project is to create a tool that can generate code with
 
 Some more specific goals for this project are:
 \begin{itemize}
-    \item Have the tool generate varying types of programs and types of bugs so that no two students get the same problem and if the student were to run the tool a number of times they would keep getting different problems.
-    \item To the greatest extent possible prevent or detect and correct hallucinations from the model whether that be related to the intiial code creation or the bug injection.
-    \item To have the ability to generate test cases for the working code to check if the student has fixed the bug.
-    \item Attempt the bug insertion using a more complex approach using abstract syntax trees.
+    \item Have the tool generate varying types of programs and types of bugs so that it tries to not give any two students the same problem. This is done by using a comparison between the generated code and if any of the files exceed some threshold they are re-generated.
+    \item To the greatest extent possible prevent or detect and correct hallucinations from the model whether that be related to the initial code creation or the bug injection. This is done using some manual checking with compiling and syntax checking but is also done by re-querying the LLM with its own response to improve the quality of the response.
+    \item To have the ability to generate test cases for the working code to check if the student has fixed the bug. This is done by running the working code with some inputs and saving the output to provide test cases.
+    \item Attempt the bug insertion using a more controllable approach using AST.
 \end{itemize}
 
 \section{Literature Review}
 
-Debugging has always been a crucial part of programming but many universities do not actually directly teach it. This is a problem outlined in Towards a Framework for Teaching Debugging \cite{li2019}. Also as previously mentioned the need for debugging skills is much more important now that AI is becoming more prevalent in the workplace as discussed in A New Programming Exercise for the Generative AI Era \cite{denny2024}. The skill of debugging also has a number of sub-domains that need to be taught too as outlined in \cite{li2019} the key 3 are knowledge of the language, knowledge of the specific program being debugged and knowledge of how to debug. The latter is the skill that this project aims to teach.\\
+Debugging has always been a crucial part of programming but many universities do not actually directly teach it. This is a problem outlined by Li in \cite{li2019}. Also as previously mentioned the need for debugging skills is much more important now that AI is becoming more prevalent in the workplace as discussed by Denny in \cite{denny2024}. The skill of debugging also has a number of sub-domains that need to be taught too as outlined in \cite{li2019} the key 3 are knowledge of the language, knowledge of the specific program being debugged and knowledge of how to debug. The latter is the skill that this project aims to teach.\\
 \\
-When novice programmers write code they will inevitably write bugs into their code. The approach they take to solve the bug though is almost always to make small changes to syntax and run the code again straight away and do not take the time to understand the problem as is highlighted in Methods and Tools for Exploring Novice Compilation Behaviour \cite{jadud2006}. This is another issue the tool helps to solve, by injecting bugs that create underlying problems it will force the student to try to understand the code.\\
+When novice programmers write code they will inevitably write bugs into their code. The approach they take to solve the bug though is almost always to make small changes to syntax and run the code again straight away and do not take the time to understand the problem as is highlighted by Jadud in \cite{jadud2006}. This is another issue the tool helps to solve, by injecting bugs that create underlying problems it will force the student to try to understand the code.\\
 \\
-Another aspect of the debugging process that this tool aims to teach is the use of debugging tools such as python debugger. This is mentioned as one of the sub-domains of debugging in \cite{li2019}, developing the skills to use these debuggers will inevitably help the student debug in the future. However, The Debugging Mindset \cite{odell2017} disagrees and believes that the best way to teach debugging is to force the student to think about the program without any help from tools. The choice of whether to include debugging software can be used is in my opinion best left to the professor who knows what they want to teach the students with the task they are giving.\\
+Another aspect of the debugging process that this tool aims to teach is the use of debugging tools such as python debugger. This is mentioned as one of the sub-domains of debugging by Li in \cite{li2019}, developing the skills to use these debuggers will inevitably help the student debug in the future. However, Odell \cite{odell2017} disagrees and believes that the best way to teach debugging is to force the student to think about the program without any help from tools. The choice of whether to include debugging software can be used could be argued is best left to the professor who knows what they want to teach the students with the task they are giving.\\
 \\
-As mentioned in the paper How Beginning Programmers and Code LLMs (Mis)read Each Other \cite{nguyen2024} there is a lot of potential for misunderstanding between the AI and the user, this is something particularly true for novice programmers who will have more difficulty being precise with their wording as they will not understand the problem as well. This is where there is potential for teaching students to use LLMs effectively. I hope to include an optional feature of solving the problem using an LLM that can be turned on or off by the professor depending on the difficulty of the task. A similar approach for giving students access to LLMs is discussed in Promptly: Using Prompt Problems to Teach Learners How to Effectively Utilize AI Code Generators \cite{denny2023}, where it was showed that students who were limited to only using LLMs and no ability to manually change code learned how to prompt the LLM correctly.\\
+As mentioned by Nguyen in \cite{nguyen2024} there is a lot of potential for misunderstanding between the AI and the user, this is something particularly true for novice programmers who will have more difficulty being precise with their wording as they will not understand the problem as well. This is where there is potential for teaching students to use LLMs effectively. the plan is to include an optional feature of solving the problem using an LLM that can be turned on or off by the professor depending on the difficulty of the task. A similar approach for giving students access to LLMs is discussed by Denny in \cite{denny2023}, where it was showed that students who were limited to only using LLMs and no ability to manually change code learned how to prompt the LLM correctly.\\
 
 
 \section{Current state of the project}
 
+The tool currently will first generate code by querying an LLM to generate code for some problem. The code is then checked to make sure that it works and a couple of test cases are generated using the working code. A bug is then inserted into the code using the LLM again or by using an AST method. The code is run again and it makes sure that it fails the test cases now. The code and test cases are then given to the student inside the environment and the student can try to fix the code to pass the test cases. The tool will attempt to improve the output of the LLM using self-reflection, it will then try to improve the diversity by regenerating the problem if its similarity to the other problems exceeds some threshold.\\
 Through the early stages of the project it quickly became apparent that although clear progress was being made there was no metrics to measure this progress. Due to the nature of the output it is also a little difficult to measure the quality of the output. However, a couple of metrics were selected and used to measure to progress of the project and the impact of the features added. These metrics were:
 \begin{itemize}
     \item The cognitive complexity of the code generated. This was measured using the cognitive complexity metric from radon.
@@ -97,10 +96,13 @@ There is no necessary ideal for the complexity. That would depend on the target 
 \\
 \textit{It will take a while to compile all of the saved results and get a graph but I will have the graph and a short discussion before the due date (24th Jan)}\\
 \\
-There is also a pipeline setup for the benchmarking of the project that is run on a schedule via a cron job through github workflows. This allows for the project to be benchmarked regularly and the results to be stored as artifacts. The code is then run on my local machine to avoid the inevitably excessive API costs that would be incurred running the full benchmarking suite through the openAI API. There is however support for the openAI API which can be used with the flick of a switch in the command line arguments of the batch file.\\
+The issue was soon found that running the growing suit of tests for the benchmark was getting very manually intensive. For this reason there is also a pipeline setup for the benchmarking of the project that is run on a schedule via a cron job through github workflows. This allows for the project to be benchmarked regularly and the results to be stored as artifacts. The code is then run on my local machine to avoid the inevitably excessive API costs that would be incurred running the full benchmarking suite through the openAI API. There is however support for the openAI API which can be used with the flick of a switch in the command line arguments of the batch file.\\
 \\
 Currently the program is able to generate working code using an LLM, create one default test case, inject a bug into the code also using an LLM and ensure that the test case fails. It is the plan in the future to enable some more complex bug injection using Abstract Syntax Trees but that is not yet implemented, that is one of the significant goals for the second half of the year. Each query to the model will self reflect on itself to improve accuracy. There is also some more targeted manual checks such as making sure that the test case fails when the bug is inserted.
 
+\section{Ethics}
+
+The possibility of carrying out a test with real students using the tool was considering but it was instead chosen to evaluate the tool performance using desktop metrics such as those already discussed. Possible future work that might examine the impact of the tool in an academic setting may need Ethical approval but this project will not need it.
 
 \section{Project Management}
 \subsection{Risk Analysis}
@@ -143,6 +145,9 @@ Below is a gantt chart for the project where the workload is seperated into week
     \ganttbar{Run debug in GUI}{8}{8} \\
     \ganttbar{LLM sidepanel}{9}{9} \\
     \ganttbar{Default problems + manual panel}{9}{9} \\
+    \ganttgroup{Deliverables}\\
+    \ganttbar{Report}{1}{11}
+    \ganttbar{Presentation}{2}{6}
 \end{ganttchart}
 \caption{Gantt Chart for Project Timeline}
 \label{fig:gantt}
@@ -151,7 +156,7 @@ Below is a gantt chart for the project where the workload is seperated into week
 \newpage
 \section{Conclusion}
 
-So far a lot of progress has been made in creating a functional tool that meets the project outline of generating problematic code that students can solve to improve their skills at debugging. There is definitely room for improvement though with both the metrics used to measure the progress and the features that are yet to be implemented. There is also scope for improvement for the presentation of the tool which I hope to address with the outlined features for GUI if time permits.\\
+So far a lot of progress has been made in creating a functional tool that meets the project outline of generating problematic code that students can solve to improve their skills at debugging. The focus from here on out will be to improve some of the features that already exist to create a more reliable tool that can generate problems that are more beneficial for students. There is also scope for improvement for the presentation of the tool which I hope to address with the outlined features for GUI if time permits.\\
 The tool can only do so much to address the teaching of debugging. The user will still need to setup the tool in a way that will teach the students meaningful lessons. This is why I also hope to create a set of default prompts with the tool that can be used to generate beneficial problems quickly.
 
 \section{References}
