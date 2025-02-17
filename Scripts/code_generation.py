@@ -36,7 +36,7 @@ class CodeGeneration:
             extracted_text = extracted_text[7:]
         
         # Self reflect
-        response = response_generator.generate_response("Does this code:\n" + extracted_text + "\nFit this prompt well: " + prompt)
+        # response = response_generator.generate_response("Does this code:\n" + extracted_text + "\nFit this prompt well: " + prompt)
         # if "yes" not in response.lower()[:10]:
         #     print("\033[91mCode failed on self reflection\033[0m")
         #     if self.debug:
