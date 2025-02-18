@@ -98,10 +98,13 @@ def main():
                         code_gen = code_generation.CodeGeneration(language, "Fibbonaci Sequence", local_output_file_path, type, model, results_directory)
                     else:
                         code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory)
-                    code_gen.write_temp_script()
+                    return_code = code_gen.write_temp_script()
+                    if return_code == 1:
+                        print("\033[91mFailed to generate code. Trying again...\033[0m")
+                        continue
                     script_result = code_gen.compile_script(keepScripts)
                     if script_result.returncode != 0:
-                        print("\033[91mScript failed to compile. Trying again...\033[0m")
+                        print("\033[91mASelf reflection caused retry\033[0m")
                         continue
                     expected_output = script_result.stdout.strip()
                     print("\033[92mOriginal working script compiled correctly\033[0m")

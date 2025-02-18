@@ -22,8 +22,11 @@ class CodeGeneration:
             raise ValueError("Invalid type. Please specify 'ollama' or 'openAI'.")
         if self.prompt_override:
             response = response_generator.generate_response(self.prompt_override)
+            prompt = self.prompt_override
         else:
             response = response_generator.generate_response("Write a runnable non-interactive program incorporating " + self.topic + " in " + self.language)
+            prompt = "Write a runnable non-interactive program incorporating " + self.topic + " in " + self.language
+        
         start_index = response.find("```")
         end_index = response.find("```", start_index + 3)
         if start_index == end_index:
@@ -31,8 +34,14 @@ class CodeGeneration:
         extracted_text = response[start_index + 3:end_index]
         if extracted_text.startswith("Python\n") or extracted_text.startswith("python\n"):
             extracted_text = extracted_text[7:]
+            
+        response = response_generator.generate_response("Respond with just a yes or a no\nDoes this code:\n " + extracted_text + "\nFit this prompt: " + prompt)
+        if response.find("No") != -1:
+            return 1    
+        
         with open(self.output_file_path, 'w') as file:
             file.write(extracted_text)
+        return 0
 
     def compile_script(self, keepScripts):
         try:

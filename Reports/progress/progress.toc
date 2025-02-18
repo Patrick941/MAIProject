@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{}%
+\contentsline {section}{\numberline {2}Goals and Objectives}{4}{}%
+\contentsline {subsection}{\numberline {2.1}Primary Goal}{4}{}%
+\contentsline {subsection}{\numberline {2.2}Secondary Goals}{4}{}%
+\contentsline {section}{\numberline {3}Literature Review}{5}{}%
+\contentsline {section}{\numberline {4}Current state of the project}{6}{}%
+\contentsline {section}{\numberline {5}Ethics}{9}{}%
+\contentsline {section}{\numberline {6}Project Management}{10}{}%
+\contentsline {subsection}{\numberline {6.1}Risk Analysis}{10}{}%
+\contentsline {subsection}{\numberline {6.2}Gantt Chart}{10}{}%
+\contentsline {section}{\numberline {7}Conclusion}{11}{}%
+\contentsline {section}{\numberline {8}References}{12}{}%
