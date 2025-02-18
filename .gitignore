@@ -8,3 +8,10 @@ PaperSummaries.md
 */__pycache__
 .vscode
 *rtifacts
+*.aux
+*.bbl
+*.fdb_latexmk
+*.fls
+*progress.log
+*.synctex.gz
+*.toc

@@ -57,9 +57,11 @@ def main():
     parser.add_argument("--prompt-override", type=str)
     parser.add_argument("--bug-override", type=str)
     parser.add_argument("--skip-generation", type=bool, default=False)
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
     args = parser.parse_args()
 
     type = args.type
+    debug = args.debug
     language = "Python"
     problemCount = args.amount
     keepScripts = args.save_scripts
@@ -95,12 +97,17 @@ def main():
                     print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                     local_output_file_path = output_file_path + "_" + str(index) + ".py"
                     if args.prompt_override is None:
-                        code_gen = code_generation.CodeGeneration(language, "Fibbonaci Sequence", local_output_file_path, type, model, results_directory)
+                        code_gen = code_generation.CodeGeneration(language, "Linked List", local_output_file_path, type, model, results_directory, debug)
                     else:
-                        code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory)
+                        code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory, debug)
                     code_gen.write_temp_script()
                     script_result = code_gen.compile_script(keepScripts)
                     if script_result.returncode != 0:
+                        if debug:
+                            print("Failed script is:")
+                            with open(local_output_file_path, "r") as file:
+                                print(file.read())
+                            print(script_result.stderr)
                         print("\033[91mScript failed to compile. Trying again...\033[0m")
                         continue
                     expected_output = script_result.stdout.strip()
@@ -115,9 +122,9 @@ def main():
                             break
                         try:     
                             if args.bug_override is None:                 
-                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, "add a bug in the calculation of the fibbonaci sequence")
+                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the logic of the linked list",  results_directory)
                             else:
-                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, args.bug_override)
+                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, args.bug_override,  results_directory)
                             if bug_insert.insert_bug() != 0: continue
                             script_result = code_gen.compile_script(keepScripts)
                             if script_result == 0:
