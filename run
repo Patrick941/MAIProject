@@ -1,2 +1,2 @@
 #!/bin/bash
-./projectVenv/bin/python ./main.py --type "ollama" --amount 10 --save-scripts True --model "mistral-small"
+./projectVenv/bin/python ./main.py --type "ollama" --amount 3 --save-scripts True --model "deepseek-r1:14b"

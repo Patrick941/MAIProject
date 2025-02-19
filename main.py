@@ -57,6 +57,7 @@ def main():
     parser.add_argument("--prompt-override", type=str)
     parser.add_argument("--bug-override", type=str)
     parser.add_argument("--skip-generation", type=bool, default=False)
+    parser.add_argument("--test-case-count", type=int, default=1)
     args = parser.parse_args()
 
     type = args.type
@@ -100,11 +101,11 @@ def main():
                         code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory)
                     return_code = code_gen.write_temp_script()
                     if return_code == 1:
-                        print("\033[91mFailed to generate code. Trying again...\033[0m")
+                        print("\033[91mSelf reflection caused retry\033[0m")
                         continue
                     script_result = code_gen.compile_script(keepScripts)
                     if script_result.returncode != 0:
-                        print("\033[91mASelf reflection caused retry\033[0m")
+                        print("\033[91mFailed to generate code. Trying again...\033[0m")
                         continue
                     expected_output = script_result.stdout.strip()
                     print("\033[92mOriginal working script compiled correctly\033[0m")
