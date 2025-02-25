@@ -1,11 +1,17 @@
 % Debugging Problems
 % Author: Patrick Farmer Supervisor: Dr. Jonathon Dukes
 
+# Demonstration
+
+- Demonstration of tool in work
+- Show the problems it generates
+- Show an example of debugging (maybe)
+
 # LLM's
 
-- Using LLMs
 - What LLMs are good at
 - What LLMs are bad at
+- Interacting with LLM in code
 
 ---
 
@@ -32,4 +38,39 @@
 - More exposure to bugs particularly in LLMs
 
 ---
+
+# Code Architecture
+
+- Diagram of code blocks (More granular than just classes)
+
+---
+
+# Bug Insertion
+
+- How bugs are inserted
+- Common issues with insertion and workarounds implemented
+
+---
+
+# Self Checking and Improvement
+
+- How self checking is implemented
+- How the problematic responses are improved
+
+---
+
+# Performance across models
+
+- Comparison of performance across models with graph
+- Discussion of reasoning vs normal models
+
+---
+
+# Conclusion
+
+- Summary of project
+- Future work
+- Questions
+- Thank you
+
 `
