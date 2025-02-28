@@ -24,8 +24,8 @@ class CodeGeneration:
             response = response_generator.generate_response(self.prompt_override)
             prompt = self.prompt_override
         else:
-            response = response_generator.generate_response("Write a runnable non-interactive program incorporating " + self.topic + " in " + self.language)
-            prompt = "Write a runnable non-interactive program incorporating " + self.topic + " in " + self.language
+            prompt = "Write a runnable non-interactive program that takes the input file input.txt incorporating " + self.topic + " in " + self.language + " that writes output to terminal"
+            response = response_generator.generate_response(prompt)
         
         start_index = response.find("```")
         end_index = response.find("```", start_index + 3)
@@ -34,6 +34,18 @@ class CodeGeneration:
         extracted_text = response[start_index + 3:end_index]
         if extracted_text.startswith("Python\n") or extracted_text.startswith("python\n"):
             extracted_text = extracted_text[7:]
+            
+        if not self.prompt_override:
+            input_prompt = "Write the input file input.txt that will work with this code:\n" + extracted_text
+            response = response_generator.generate_response(input_prompt)
+            start_index = response.find("```")
+            end_index = response.find("```", start_index + 3)
+            if start_index == end_index:
+                end_index = len(response)
+            extracted_input = response[start_index + 3:end_index]
+            extracted_input = '\n'.join(extracted_input.split('\n')[1:])
+            with open('input.txt', 'w') as file:
+                file.write(extracted_input)
             
         response = response_generator.generate_response("Respond with just a yes or a no\nDoes this code:\n " + extracted_text + "\nFit this prompt: " + prompt)
         if response.strip().split('\n')[-1].strip().lower() == "no":

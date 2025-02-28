@@ -119,9 +119,9 @@ def main():
                             break
                         try:     
                             if args.bug_override is None:                 
-                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, "add a bug in the calculation of the fibbonaci sequence")
+                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the calculation of the fibbonaci sequence", results_directory)
                             else:
-                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, results_directory, args.bug_override)
+                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, args.bug_override, results_directory)
                             if bug_insert.insert_bug() != 0: continue
                             script_result = code_gen.compile_script(keepScripts)
                             if script_result == 0:
