@@ -61,6 +61,9 @@ def main():
     parser.add_argument("--skip-generation", type=bool, default=False)
     parser.add_argument("--test-case-count", type=int, default=1)
     args = parser.parse_args()
+    
+    if args.ast_bug:
+        print("\033[93mAST bug insertion enabled\033[0m")
 
     type = args.type
     language = "Python"
