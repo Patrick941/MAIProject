@@ -49,7 +49,7 @@ class ASTBugInsertion:
                 call_nodes = [node for node in ast.walk(tree) if isinstance(node, ast.Call)]
                 
                 for _ in range(self.bug_count):
-                    rand_num = random.randint(3, 3)
+                    rand_num = random.randint(4, 4)
                     if rand_num == 0 and binop_nodes:
                         node = random.choice(binop_nodes)
                         possible_ops = [ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Pow, ast.Mod]
@@ -76,6 +76,12 @@ class ASTBugInsertion:
                         if all_funcs:
                             random_func = random.choice(all_funcs).name
                             node.func = ast.Name(id=random_func, ctx=ast.Load())
+                    elif rand_num == 4:
+                        for node in ast.walk(tree):
+                            if isinstance(node, ast.For):
+                                if isinstance(node.iter, ast.Call) and isinstance(node.iter.func, ast.Name) and node.iter.func.id == 'range':
+                                    node.iter.args[0] = ast.Constant(value=1)
+                                    break
                     
             
             new_content = astor.to_source(tree)
