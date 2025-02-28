@@ -85,11 +85,8 @@ class ASTBugInsertion:
                     
             
             new_content = astor.to_source(tree)
-            # new_content = ast.unparse(tree)
-            print("\033[92mOriginal content:\033[0m")
-            print(content)
-            print("\033[92mNew content:\033[0m")
-            print(new_content)
+            with open(self.file_path, 'w') as file:
+                file.write(new_content)
         
         
 def main():

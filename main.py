@@ -4,6 +4,7 @@ import Scripts.code_complexity as code_complexity
 import Scripts.llm_bug_insertion as llm_bug_insertion
 import Scripts.code_comparison as code_comparison
 import Scripts.code_diversify as code_diversify
+import Scripts.ast_bug_insertion as ast_bug_insertion
 import subprocess
 import os
 import ast
@@ -55,6 +56,7 @@ def main():
     parser.add_argument("--model", help="Specify the model to use", default="llama3.1")
     parser.add_argument("--results-directory", type=str)
     parser.add_argument("--prompt-override", type=str)
+    parser.add_argument("--ast-bug", type=bool, default=False)
     parser.add_argument("--bug-override", type=str)
     parser.add_argument("--skip-generation", type=bool, default=False)
     parser.add_argument("--test-case-count", type=int, default=1)
@@ -113,50 +115,54 @@ def main():
                     code_gen.update_path(local_output_file_path)
                     successful_script = True
                     
-                    successful_bug_insert = False
-                    for bug_attempt in range(6):
-                        if successful_bug_insert:
-                            break
-                        try:     
-                            if args.bug_override is None:                 
-                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the calculation of the fibbonaci sequence", results_directory)
-                            else:
-                                bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, args.bug_override, results_directory)
-                            if bug_insert.insert_bug() != 0: continue
-                            script_result = code_gen.compile_script(keepScripts)
-                            if script_result == 0:
-                                if script_result.stdout.strip() == expected_output:    
-                                    print("\033[91mFailed to insert bug\033[0m")
+                    if args.ast_bug:
+                        bug_insert = ast_bug_insertion.ASTBugInsertion(local_output_file_path, "Semantic", 4)
+                        successful_bug_insert = True
+                    else:
+                        successful_bug_insert = False
+                        for bug_attempt in range(6):
+                            if successful_bug_insert:
+                                break
+                            try:     
+                                if args.bug_override is None:                 
+                                    bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the calculation of the fibbonaci sequence", results_directory)
+                                else:
+                                    bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, args.bug_override, results_directory)
+                                if bug_insert.insert_bug() != 0: continue
+                                script_result = code_gen.compile_script(keepScripts)
+                                if script_result == 0:
+                                    if script_result.stdout.strip() == expected_output:    
+                                        print("\033[91mFailed to insert bug\033[0m")
+                                        continue
+                                    else:
+                                        print("\033[92mBug inserted successfully\033[0m")
+                                        successful_bug_insert = True
+                                elif script_result == 1:
+                                    print("\033[91mScript execution timed out. Trying again...\033[0m")
                                     continue
                                 else:
                                     print("\033[92mBug inserted successfully\033[0m")
+                                    print("Received output: " + script_result.stdout.strip() + "\nExpected output: " + expected_output)
+                                    bug_result = script_result.stdout.strip()
+                                    output_log.write("Problem: " + str(index) + "\nReceived output: " +  bug_result + "\nExpected output: " + expected_output)
+                                    bug_output.append(bug_result)
+                                    
+                                    code_complex = code_complexity.codeComplexity(local_output_file_path)
+                                    complexity_results = code_complex.get_complexity()
+                                    cognitive_complexity = complexity_results['cognitive_complexity']
+                                    cyclomatic_complexity = complexity_results['cyclomatic_complexity'][0].complexity
+                                    results_dict["Problem Number"].append(index)
+                                    results_dict["Cognitive Complexity"].append(cognitive_complexity)
+                                    results_dict["Cyclomatic Complexity"].append(cyclomatic_complexity)
+                                    results_dict["Attempts needed for original code"].append(attempt)
+                                    results_dict["Attempts needed for bug insertion"].append(bug_attempt)
                                     successful_bug_insert = True
-                            elif script_result == 1:
-                                print("\033[91mScript execution timed out. Trying again...\033[0m")
+                            except Exception as e:
+                                print("\033[91mThere was an error inserting the bug. Trying again...\033[0m")
+                                print(e)
                                 continue
-                            else:
-                                print("\033[92mBug inserted successfully\033[0m")
-                                print("Received output: " + script_result.stdout.strip() + "\nExpected output: " + expected_output)
-                                bug_result = script_result.stdout.strip()
-                                output_log.write("Problem: " + str(index) + "\nReceived output: " +  bug_result + "\nExpected output: " + expected_output)
-                                bug_output.append(bug_result)
-                                
-                                code_complex = code_complexity.codeComplexity(local_output_file_path)
-                                complexity_results = code_complex.get_complexity()
-                                cognitive_complexity = complexity_results['cognitive_complexity']
-                                cyclomatic_complexity = complexity_results['cyclomatic_complexity'][0].complexity
-                                results_dict["Problem Number"].append(index)
-                                results_dict["Cognitive Complexity"].append(cognitive_complexity)
-                                results_dict["Cyclomatic Complexity"].append(cyclomatic_complexity)
-                                results_dict["Attempts needed for original code"].append(attempt)
-                                results_dict["Attempts needed for bug insertion"].append(bug_attempt)
-                                successful_bug_insert = True
-                        except Exception as e:
-                            print("\033[91mThere was an error inserting the bug. Trying again...\033[0m")
-                            print(e)
-                            continue
-                    if not successful_bug_insert:
-                        successful_script = False                
+                        if not successful_bug_insert:
+                            successful_script = False                
                     
                     
                 except Exception as e:
