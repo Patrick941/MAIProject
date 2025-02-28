@@ -2,6 +2,7 @@ import subprocess
 import os
 import ast
 import random
+import astor
 
 class ASTBugInsertion:
     def __init__(self, file_path, bug_type, bug_count):
@@ -44,31 +45,41 @@ class ASTBugInsertion:
                                 break
                             
             if self.bug_type == "Semantic":
-                for i in range(self.bug_count):
-                    rand_num = random.randint(0, 5)
-                    if rand_num == 0:
+                binop_nodes = [node for node in ast.walk(tree) if isinstance(node, ast.BinOp)]
+                call_nodes = [node for node in ast.walk(tree) if isinstance(node, ast.Call)]
+                
+                for _ in range(self.bug_count):
+                    rand_num = random.randint(3, 3)
+                    if rand_num == 0 and binop_nodes:
+                        node = random.choice(binop_nodes)
+                        possible_ops = [ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Pow, ast.Mod]
+                        current_op = type(node.op)
+                        new_op = random.choice([op for op in possible_ops if op != current_op])
+                        node.op = new_op()
+                    elif rand_num == 1 and call_nodes:
+                        node = random.choice(call_nodes)
+                        if node.args and random.choice([True, False]):
+                            node.args.pop(random.randrange(len(node.args)))
+                        else:
+                            all_vars = [n for n in ast.walk(tree) if isinstance(n, ast.Name)]
+                            if all_vars:
+                                random_var = random.choice(all_vars).id
+                                node.args.append(ast.Name(id=random_var, ctx=ast.Load()))
+                    elif rand_num == 2:
                         for node in ast.walk(tree):
-                            if isinstance(node, ast.BinOp):
-                                possible_ops = [ast.Add(), ast.Sub(), ast.Mult(), ast.Div(), ast.FloorDiv(), ast.Pow(), ast.Mod()]
-                                current_op = type(node.op)
-                                new_op = random.choice([op for op in possible_ops if type(op) != current_op])
-                                node.op = new_op
+                            if isinstance(node, ast.Constant) and isinstance(node.value, int) and node.value in [0, 1]:
+                                node.value = 1 - node.value
                                 break
-                            elif rand_num == 1:
-                                for node in ast.walk(tree):
-                                    if isinstance(node, ast.Call):
-                                        if node.args and random.choice([True, False]):
-                                            node.args.pop(random.randrange(len(node.args)))
-                                        else:
-                                            node.args.append(ast.Constant(value="temp"))
-                                        break
-                            
-                            
-                
+                    elif rand_num == 3 and call_nodes:
+                        node = random.choice(call_nodes)
+                        all_funcs = [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.lineno < node.lineno]
+                        if all_funcs:
+                            random_func = random.choice(all_funcs).name
+                            node.func = ast.Name(id=random_func, ctx=ast.Load())
                     
-                
-
-            new_content = ast.unparse(tree)
+            
+            new_content = astor.to_source(tree)
+            # new_content = ast.unparse(tree)
             print("\033[92mOriginal content:\033[0m")
             print(content)
             print("\033[92mNew content:\033[0m")
