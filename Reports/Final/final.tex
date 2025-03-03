@@ -142,8 +142,18 @@ This works perfectly well for interacting with the LLM like a chat bot but like 
 The process for using the OpenAI GPT API is a bit simpler since there is no setup but has a few more steps in the code for the protection of the API key. Due to this code being on a github repo and automated testing being done using github workflows there is a couple different environments that all need access to the API key. For the github workflow runner the key was stored as a secret and then passed to the code as an environment variable. For the local machine the key was stored in a file which was excluded from git commits using the .gitignore file. One this has been handled the interaction is very similar. The parameters, prompt and API key are passed to the constructor and then a function is called to get the response from the LLM.
 
 \subsection{Code generation}
-\subsubsection{Self Reflection}
-\subsubsection{Self Improvement}
+
+The code generation class is the first class called in the pipeline and is also the only class that interacts directly with the LLM. The class is called with the model type, file_path and a number of different switches to enable different modes, the prompt is then adapted and phrase in a way that the code produced will always exect an input file called input.txt. The LLM is then called to generate the code and also generate the input.txt file. Both of these responses are then parsed and written to their respective files. The code is then run from a subprocess which will check if the code compiles and runs correctly. If the code does not compile or run correctly the function will return and error and the parent function will handle it. If it works correctly the function will return the response with the given input.txt which is used to determine later whether the bug inserter has worked correctly. Due to the input being in the format of a separate file it is very easy for multple input.txt files to be generated and used as multiple different test cases. 
+There is also an option for a prompt to be passed to the class which will override the original prompt. This is how the LLM bug insertion is able to interact with the LLM without creating duplicate logic. 
+
+\subsubsection{Self Reflection \& Improvement}
+
+As the project progressed it was clear that the local LLMs were having a lot of difficulty producing the correct code. This was very uncommmon with the openAI modules but to solve this self reflection and imrpovement was implemented in the code. 
+
+As it became impossible to feed the LLMs more information in training a new technique emerged when developers would get the LLM to 'think' about their response. This is done by re-querying the LLM after it returns a response and asking it if the response it gave fits the original prompt. This process is called self reflection which is good for filtering out bad responses. Another similar method is called self improvement which is where the LLM is asked to improve on its response. This will attempt to fix bad responses and also attempt to improve already acceptable responses.
+
+The issue that was noticed with this method was a significant increase in the runtime of the project. However it also meant that smaller modeuls could be used and provide better performance. It is not clear which method would be likely to yield a better response but the performance will be compared and discussed in the testing and evaluation section.
+
 \subsection{Test case generation}
 \subsection{Bug Insertion}
 \subsubsection{LLM Bug Insertion}
