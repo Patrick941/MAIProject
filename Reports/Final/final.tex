@@ -156,6 +156,9 @@ The issue that was noticed with this method was a significant increase in the ru
 
 \subsection{Bug Insertion}
 \subsubsection{LLM Bug Insertion}
+
+The first method for bug insertion that was used was the LLM bug inserter. This method is very simple as it uses the same function as the code generation step but with a switch to override the prompt. This will mean it can then very easily run the same test cases and check if the code now fails or produces the wrong output. If the result is the same as before it will be assumed that the bug was either not inserted or does not necessarily change the output. This was a simple addition as there was little additional code to be written but it was also quite unreliable. Although it was in theory completing a much smaller task than the code generation step, it saw a lot more issues with the LLMs hallucinating and providing incorrect responses. This was likely due to the task was a bit less intuitive as there is a lot less information to go on when inserting a bug than when generating code, and as a result less information in the training data and therefore less accurate responses in this case.
+
 \subsubsection{AST Bug Insertion}
 
 \section{Testing and Evaluation}
