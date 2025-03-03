@@ -118,8 +118,11 @@ Using an LLM as discussed above is very easy. You simply give the LLM the prompt
 \section{Design and Implementation}
 
 \subsection{Design Overview}
+\includegraphics[width=1.2\linewidth]{Images/Design.png}
 
-\includegraphics[width=\linewidth]{Images/Design.png}
+The above diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type and code topic. It will then produce functional code based on the topic mentioned. It will also ensure that the code is functional by compiling and checking for errors. 
+
+The bug inserter will then take this working code and insert a bug into it, this is done by either the use of the LLM again or by using inspecting and altering the AST in the code. It will then check if the code now fails or produces the wrong output as it should do. This is only done for the LLM however as the AST bug inserter is not liable the same reliability issues of the LLM. This altered code is then written back out to the file overwriting the original code. The code evaluator will then take this code and run the diversity and complexity metrics on it before writing this to the csv.
 
 \subsection{Ollama}
 \subsection{OpenAI GPT API}
