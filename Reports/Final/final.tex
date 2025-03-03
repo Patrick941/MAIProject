@@ -124,8 +124,23 @@ The above diagram shows a pipeline diagram of the code. There is three main bloc
 
 The bug inserter will then take this working code and insert a bug into it, this is done by either the use of the LLM again or by using inspecting and altering the AST in the code. It will then check if the code now fails or produces the wrong output as it should do. This is only done for the LLM however as the AST bug inserter is not liable the same reliability issues of the LLM. This altered code is then written back out to the file overwriting the original code. The code evaluator will then take this code and run the diversity and complexity metrics on it before writing this to the csv.
 
-\subsection{Ollama}
-\subsection{OpenAI GPT API}
+\subsection{Tools}
+\subsubsection{Ollama}
+
+The first of the two major tools that was used in this project is ollama. This is a tool that facilitates easy interaction with LLMs running on a local machine. This tool allows for the usage of almost all popular models. This tool was downloaded by cloning the ollama repository from github and running the install script. Further models could then easily be pulled and run from command line using the following commands.
+
+\begin{verbatim}
+ollama pull <model>
+ollama run <model>
+<Interaction with LLM>
+\end{verbatim}
+
+This works perfectly well for interacting with the LLM like a chat bot but like this through some shell scripting language such as bash would not be the ideal solution. Fortunately the ollama API is much better suited to this task. The constructor for the class is called with some intialising hyperparameters and then a prompt can simple be passes to using the invoke method which returns the response from the LLM. This was then wrapped in a class for easy use in the project.
+
+\subsubsection{OpenAI GPT API}
+
+The process for using the OpenAI GPT API is a bit simpler since there is no setup but has a few more steps in the code for the protection of the API key. Due to this code being on a github repo and automated testing being done using github workflows there is a couple different environments that all need access to the API key. For the github workflow runner the key was stored as a secret and then passed to the code as an environment variable. For the local machine the key was stored in a file which was excluded from git commits using the .gitignore file. One this has been handled the interaction is very similar. The parameters, prompt and API key are passed to the constructor and then a function is called to get the response from the LLM.
+
 \subsection{Code generation}
 \subsubsection{Self Reflection}
 \subsubsection{Self Improvement}
