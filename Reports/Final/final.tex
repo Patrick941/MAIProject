@@ -148,13 +148,12 @@ There is also an option for a prompt to be passed to the class which will overri
 
 \subsubsection{Self Reflection \& Improvement}
 
-As the project progressed it was clear that the local LLMs were having a lot of difficulty producing the correct code. This was very uncommmon with the openAI modules but to solve this self reflection and imrpovement was implemented in the code. 
+As the project progressed it was clear that the local LLMs were having a lot of difficulty producing the correct code. This was very uncommmon with the openAI modules but to solve this self reflection and improvement was implemented in the code. 
 
 As it became impossible to feed the LLMs more information in training a new technique emerged when developers would get the LLM to 'think' about their response. This is done by re-querying the LLM after it returns a response and asking it if the response it gave fits the original prompt. This process is called self reflection which is good for filtering out bad responses. Another similar method is called self improvement which is where the LLM is asked to improve on its response. This will attempt to fix bad responses and also attempt to improve already acceptable responses.
 
 The issue that was noticed with this method was a significant increase in the runtime of the project. However it also meant that smaller modeuls could be used and provide better performance. It is not clear which method would be likely to yield a better response but the performance will be compared and discussed in the testing and evaluation section.
 
-\subsection{Test case generation}
 \subsection{Bug Insertion}
 \subsubsection{LLM Bug Insertion}
 \subsubsection{AST Bug Insertion}
