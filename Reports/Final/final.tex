@@ -118,7 +118,7 @@ Using an LLM as discussed above is very easy. You simply give the LLM the prompt
 \section{Design and Implementation}
 
 \subsection{Design Overview}
-\includegraphics[width=1.2\linewidth]{Images/Design.png}
+\includegraphics[width=\linewidth]{Images/Design.png}
 
 The above diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type and code topic. It will then produce functional code based on the topic mentioned. It will also ensure that the code is functional by compiling and checking for errors. 
 
@@ -143,7 +143,7 @@ The process for using the OpenAI GPT API is a bit simpler since there is no setu
 
 \subsection{Code generation}
 
-The code generation class is the first class called in the pipeline and is also the only class that interacts directly with the LLM. The class is called with the model type, file_path and a number of different switches to enable different modes, the prompt is then adapted and phrase in a way that the code produced will always exect an input file called input.txt. The LLM is then called to generate the code and also generate the input.txt file. Both of these responses are then parsed and written to their respective files. The code is then run from a subprocess which will check if the code compiles and runs correctly. If the code does not compile or run correctly the function will return and error and the parent function will handle it. If it works correctly the function will return the response with the given input.txt which is used to determine later whether the bug inserter has worked correctly. Due to the input being in the format of a separate file it is very easy for multple input.txt files to be generated and used as multiple different test cases. 
+The code generation class is the first class called in the pipeline and is also the only class that interacts directly with the LLM. The class is called with the model type, file\_path and a number of different switches to enable different modes, the prompt is then adapted and phrased in a way that the code produced will always expect an input file called \texttt{input.txt}. The LLM is then called to generate the code and also generate the \texttt{input.txt} file. Both of these responses are then parsed and written to their respective files. The code is then run from a subprocess which will check if the code compiles and runs correctly. If the code does not compile or run correctly the function will return an error and the parent function will handle it. If it works correctly the function will return the response with the given \texttt{input.txt} which is used to determine later whether the bug inserter has worked correctly. Due to the input being in the format of a separate file it is very easy for multiple \texttt{input.txt} files to be generated and used as multiple different test cases. 
 There is also an option for a prompt to be passed to the class which will override the original prompt. This is how the LLM bug insertion is able to interact with the LLM without creating duplicate logic. 
 
 \subsubsection{Self Reflection \& Improvement}
