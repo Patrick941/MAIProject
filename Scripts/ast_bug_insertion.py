@@ -49,7 +49,7 @@ class ASTBugInsertion:
                 call_nodes = [node for node in ast.walk(tree) if isinstance(node, ast.Call)]
                 
                 for _ in range(self.bug_count):
-                    rand_num = random.randint(4, 4)
+                    rand_num = random.randint(0, 4)
                     if rand_num == 0 and binop_nodes:
                         node = random.choice(binop_nodes)
                         possible_ops = [ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Pow, ast.Mod]
