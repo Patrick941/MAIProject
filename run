@@ -1,2 +1,3 @@
 #!/bin/bash
-./projectVenv/bin/python ./main.py --type "ollama" --amount 3 --save-scripts True --model "deepseek-r1:14b" --debug
+./projectVenv/bin/python ./main.py --type "ollama" --amount 3 --save-scripts True --model "deepseek-r1:14b" --ast-bug True
+
