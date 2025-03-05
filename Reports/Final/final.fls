@@ -223,6 +223,11 @@ INPUT ./Images/Design.png
 INPUT ./Images/Design.png
 INPUT ./Images/Design.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT ./Images/Benchmark.png
+INPUT ./Images/Benchmark.png
+INPUT ./Images/Benchmark.png
+INPUT ./Images/Benchmark.png
+INPUT ./Images/Benchmark.png
 INPUT final.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb

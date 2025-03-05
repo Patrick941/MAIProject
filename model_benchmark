@@ -1,0 +1,49 @@
+#!/bin/bash
+
+rm -rf artifacts
+mkdir artifacts
+touch artifacts/model_benchmark.csv
+
+run_count=2
+
+models=(
+    "deepseek-r1:14b"
+    "deepseek-r1:32b"
+    "qwen2.5:32b"
+    "mistral-small:latest"
+    "llama3.1:latest"
+)
+
+for model in "${models[@]}"; do
+    start_time=$(date +%s)
+
+    ./projectVenv/bin/python ./main.py --type "ollama" --amount $run_count --save-scripts True --model "$model" --ast-bug True
+
+    end_time=$(date +%s)
+    runtime=$((end_time - start_time))
+
+    echo "$model,$runtime,"ast"" >> artifacts/model_benchmark.csv
+
+    if [ -f artifacts/output.csv ]; then
+        tail -n 1 artifacts/output.csv >> artifacts/model_benchmark.csv
+    fi
+
+done
+
+
+for model in "${models[@]}"; do
+    start_time=$(date +%s)
+
+    ./projectVenv/bin/python ./main.py --type "ollama" --amount $run_count --save-scripts True --model "$model"
+
+    end_time=$(date +%s)
+    runtime=$((end_time - start_time))
+
+    echo "$model,$runtime,"LLM"" >> artifacts/model_benchmark.csv
+
+    if [ -f artifacts/output.csv ]; then
+        tail -n 1 artifacts/output.csv >> artifacts/model_benchmark.csv
+    fi
+
+done
+

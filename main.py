@@ -30,20 +30,6 @@ def analyse_script(output_file_path):
         code = temp_script.read()
         tree = ast.parse(code)
         return tree
-    
-def insert_bug(tree, output_file_path):
-    nodes = [node for node in ast.walk(tree) if isinstance(node, ast.Expr) and isinstance(node.value, ast.Num)]
-    if not nodes:
-        print("\033[91mNo suitable node found to insert a bug.\033[0m")
-        return
-    node = random.choice(nodes)
-    node.value = ast.BinOp(left=node.value, op=ast.Add(), right=ast.Constant(value=1))
-    new_script = ast.unparse(tree)
-    original_script = open(output_file_path, "r").read()
-    if new_script == original_script:
-        print("\033[92mNo bug inserted.\033[0m")
-    print("\033[92mOriginal script:\n\033[0m" + original_script)
-    print("\033[91mNew script:\n\033[0m" + new_script)
         
 model = "none"
 
@@ -123,7 +109,19 @@ def main():
 
                     if args.ast_bug:
                         bug_insert = ast_bug_insertion.ASTBugInsertion(local_output_file_path, "Semantic", 4)
+                        bug_insert.insert_bug()
+                        code_complex = code_complexity.codeComplexity(local_output_file_path)
+                        complexity_results = code_complex.get_complexity()
+                        cognitive_complexity = complexity_results['cognitive_complexity']
+                        cyclomatic_complexity = complexity_results['cyclomatic_complexity'][0].complexity
+                        
                         successful_bug_insert = True
+                        results_dict["Problem Number"].append(index)
+                        results_dict["Cognitive Complexity"].append(cognitive_complexity)
+                        results_dict["Cyclomatic Complexity"].append(cyclomatic_complexity)
+                        results_dict["Attempts needed for original code"].append(attempt)
+                        results_dict["Attempts needed for bug insertion"].append(0)
+                        
                     else:
                         successful_bug_insert = False
                         for bug_attempt in range(6):
@@ -204,6 +202,10 @@ def main():
         
         writer.writeheader()
         writer.writerows([dict(zip(fieldnames, row)) for row in zip(*results_dict.values())])
+        
+        averages = {key: sum(value) / len(value) if value else 0 for key, value in results_dict.items() if key != "Problem Number"}
+        averages["Problem Number"] = "Average"
+        writer.writerow(averages)
     
     for key, value in results.items():
         print(f"Problem {key}: {value}")

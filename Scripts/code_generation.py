@@ -50,6 +50,10 @@ class CodeGeneration:
         response = response_generator.generate_response("Respond with just a yes or a no\nDoes this code:\n " + extracted_text + "\nFit this prompt: " + prompt)
         if response.strip().split('\n')[-1].strip().lower() == "no":
             return 1    
+        else:
+            with open(self.output_file_path, 'w') as file:
+                file.write(extracted_text)
+            return 0
         
         # Self reflect
         # response = response_generator.generate_response("Does this code:\n" + extracted_text + "\nFit this prompt well: " + prompt)
