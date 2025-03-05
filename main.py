@@ -60,12 +60,14 @@ def main():
     parser.add_argument("--bug-override", type=str)
     parser.add_argument("--skip-generation", type=bool, default=False)
     parser.add_argument("--test-case-count", type=int, default=1)
+    parser.add_argument("--debug", action="store_true", help="Enable debug mode")
     args = parser.parse_args()
     
     if args.ast_bug:
         print("\033[93mAST bug insertion enabled\033[0m")
 
     type = args.type
+    debug = args.debug
     language = "Python"
     problemCount = args.amount
     keepScripts = args.save_scripts
@@ -101,7 +103,7 @@ def main():
                     print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                     local_output_file_path = output_file_path + "_" + str(index) + ".py"
                     if args.prompt_override is None:
-                        code_gen = code_generation.CodeGeneration(language, "Fibbonaci Sequence", local_output_file_path, type, model, results_directory)
+                        code_gen = code_generation.CodeGeneration(language, "Linked List", local_output_file_path, type, model, results_directory, debug)
                     else:
                         code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory)
                     return_code = code_gen.write_temp_script()
@@ -111,13 +113,14 @@ def main():
                     script_result = code_gen.compile_script(keepScripts)
                     if script_result.returncode != 0:
                         print("\033[91mFailed to generate code. Trying again...\033[0m")
+
                         continue
                     expected_output = script_result.stdout.strip()
                     print("\033[92mOriginal working script compiled correctly\033[0m")
                     local_output_file_path = os.path.join(results_directory, os.path.basename(local_output_file_path))
                     code_gen.update_path(local_output_file_path)
                     successful_script = True
-                    
+
                     if args.ast_bug:
                         bug_insert = ast_bug_insertion.ASTBugInsertion(local_output_file_path, "Semantic", 4)
                         successful_bug_insert = True

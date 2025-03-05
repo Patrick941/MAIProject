@@ -6,7 +6,7 @@ on:
       model:
         description: "The model to use for the benchmark"
         required: true
-        default: "qwen2.5-coder:32b"
+        default: "qwen2.5:32b"
 
   check_run:
     types: [created, completed]

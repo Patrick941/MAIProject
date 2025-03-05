@@ -17,11 +17,12 @@ class LLMBugInsertion:
             content = file.read()
             line_count = len(content.splitlines())
             if self.type == "ollama":
-                code_gen = code_generation.CodeGeneration("NA", "NA", self.file_path, "ollama", self.model, self.results_directory, "Take this code:\n\n" + content + "\n\n Now, " + self.bug)
+                code_gen = code_generation.CodeGeneration("NA", "NA", self.file_path, "ollama", self.model, self.results_directory, False, "Take this code:\n\n" + content + "\n\n Now, " + self.bug)
             elif self.type == "openAI":
                 code_gen = code_generation.CodeGeneration("NA", "NA", self.file_path, "openAI", self.model, self.results_directory, "Take this code:\n\n" + content + "\n\n Now rewrite the full code and, " + self.bug)
             code_gen.write_temp_script()
-            new_line_count = len(open(self.file_path, 'r').read().splitlines())
+            new_content = open(self.file_path, 'r').read()
+            new_line_count = len(new_content.splitlines())
             if new_line_count > line_count * 1.3 or new_line_count < line_count * 0.7:
                 with open(self.file_path, 'w') as file:
                     file.write(content)
