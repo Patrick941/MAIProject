@@ -185,8 +185,15 @@ The smallest possible test is to just run the main.py file. This will simply tak
 
 The first layer on top of this is a model benchmark. This will loop through a set of models that each run the main.py script with the same parameters. This will show which model is able to create the best results and do this is an acceptable time frame. The selection of models chosen was the 32 billion parameter qwen model, the deepseek model built on top of these, the 14b parameter deepseek model, the mistral small model and the 7b llama3.1 model. The larger models were expected to perform better and slower than the smaller models. However this was not entirely consistent as will be discussed in the results section.
 
+The second layer on top is very simple it will run the models first with abstract syntax tree bug insertion and secondly with LLM bug insertion. This will show the metrics of each method across a number of models. The results of this will be discussed in the results section.
+
+The final layer is a loop that will run the second layer benchmark with a number of topics. This will show the metrics of each method across a number of models and a number of topics. There is little difference in the results when comparing against different topics but it is an important test to run in case some models are better at generating code for some topics than others.
+
 \subsection{Metrics}
 \subsubsection{Code Complexity}
+
+The code complexity score is calculated using the radon python library. The cyclomatic complexity is calculated for each file using the cc visit function which takes the code in text format as an argument and will return a complexity score. The same is done for the cognitive complexity. In the output csv for each run the cognitive and cyclomatic complexity of each problem is given but for the higher layer tests only the average of the complexities is shown.
+
 \subsubsection{Code Diversity}
 \subsubsection{Attempt Count}
 \subsubsection{Run Time}
