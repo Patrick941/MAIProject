@@ -177,15 +177,21 @@ There were however a few issues with the github workflow. The first issue was th
 
 \subsection{Benchmark Test Suite}
 
-The decision to not evaluate this project with user feedback meant that desktop metrics were created to review the performance of the tool for a given set of parameters. The metrics that were chosen were code complexity, code diversity, attempt count and run time. The code complexity metric was chosen as it is a good indicator of how difficult the code is to debug. The code diversity metric was chosen as it indicates how useful the tool would be for either a teacher who wants to generate a different problem for each student or a student who wants to generate a couple of different problems for themselves. The attempt count metric was chosen too, this is the amount of times the LLM had to be re-prompted because it produced an incorrect or unexpected output, this was mainly a good metric to compare against different models and also to compare the self relection and improvement methods. The final metric was run time, this was chosen as it shows how viable a given model is, this metric along with the rest will be used to weigh up the benefit of run time against the quality of the output.
+The decision to not evaluate this project with user feedback meant that desktop metrics were created to review the performance of the tool for a given set of parameters. The metrics that were chosen were code complexity, code diversity, attempt count and run time. The code complexity metric was chosen as it is a good indicator of how difficult the code is to debug. The code diversity metric was chosen as it indicates how useful the tool would be for either a teacher who wants to generate a different problem for each student or a student who wants to generate a couple of different problems for themselves. The attempt count metric was chosen too, this is the amount of times the LLM had to be re-prompted because it produced an incorrect or unexpected output, this was mainly a good metric to compare against different models and also to compare the self relection and improvement methods. The final metric was run time, this was chosen as it shows how viable a given model is, this metric along with the rest will be used to weigh up the benefit of run time against the quality of the output. Below is a diagram showing the different layers of testing that can be done on the project.
 
 \includegraphics[width=\linewidth]{Images/Benchmark.png}
+
+The smallest possible test is to just run the main.py file. This will simply take a default topic which was set to be the fibbonaci sequence and generate problematic code for this topic. This was the test run when implementing new features and solving the bugs that were inevitably added with the new features. This would of course be much faster than the other tests as it is only one iteration of the script being run.
+
+The first layer on top of this is a model benchmark. This will loop through a set of models that each run the main.py script with the same parameters. This will show which model is able to create the best results and do this is an acceptable time frame. The selection of models chosen was the 32 billion parameter qwen model, the deepseek model built on top of these, the 14b parameter deepseek model, the mistral small model and the 7b llama3.1 model. The larger models were expected to perform better and slower than the smaller models. However this was not entirely consistent as will be discussed in the results section.
 
 \subsection{Metrics}
 \subsubsection{Code Complexity}
 \subsubsection{Code Diversity}
 \subsubsection{Attempt Count}
 \subsubsection{Run Time}
+
+\section{Results}
 
 
 \section{Conclusion}

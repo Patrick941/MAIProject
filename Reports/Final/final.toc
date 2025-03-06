@@ -28,5 +28,6 @@
 \contentsline {subsubsection}{\numberline {5.3.2}Code Diversity}{17}{}%
 \contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{17}{}%
 \contentsline {subsubsection}{\numberline {5.3.4}Run Time}{17}{}%
-\contentsline {section}{\numberline {6}Conclusion}{17}{}%
-\contentsline {section}{\numberline {7}References}{18}{}%
+\contentsline {section}{\numberline {6}Results}{17}{}%
+\contentsline {section}{\numberline {7}Conclusion}{17}{}%
+\contentsline {section}{\numberline {8}References}{18}{}%
