@@ -22,11 +22,11 @@
 \contentsline {subsubsection}{\numberline {4.4.2}AST Bug Insertion}{14}{}%
 \contentsline {section}{\numberline {5}Testing and Evaluation}{15}{}%
 \contentsline {subsection}{\numberline {5.1}Environments}{15}{}%
-\contentsline {subsection}{\numberline {5.2}Benchmark Test Suite}{15}{}%
-\contentsline {subsection}{\numberline {5.3}Metrics}{16}{}%
-\contentsline {subsubsection}{\numberline {5.3.1}Code Complexity}{16}{}%
-\contentsline {subsubsection}{\numberline {5.3.2}Code Diversity}{16}{}%
-\contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{16}{}%
-\contentsline {subsubsection}{\numberline {5.3.4}Run Time}{16}{}%
-\contentsline {section}{\numberline {6}Conclusion}{16}{}%
-\contentsline {section}{\numberline {7}References}{17}{}%
+\contentsline {subsection}{\numberline {5.2}Benchmark Test Suite}{16}{}%
+\contentsline {subsection}{\numberline {5.3}Metrics}{17}{}%
+\contentsline {subsubsection}{\numberline {5.3.1}Code Complexity}{17}{}%
+\contentsline {subsubsection}{\numberline {5.3.2}Code Diversity}{17}{}%
+\contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{17}{}%
+\contentsline {subsubsection}{\numberline {5.3.4}Run Time}{17}{}%
+\contentsline {section}{\numberline {6}Conclusion}{17}{}%
+\contentsline {section}{\numberline {7}References}{18}{}%

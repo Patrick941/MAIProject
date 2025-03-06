@@ -4,7 +4,7 @@ rm -rf artifacts
 mkdir artifacts
 touch artifacts/model_benchmark.csv
 
-run_count=2
+run_count=4
 
 models=(
     "deepseek-r1:14b"
