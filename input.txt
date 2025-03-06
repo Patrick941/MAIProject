@@ -1,5 +1,11 @@
-5
-10
-3
-7
-2
+add 10
+add 20
+remove 10
+print
+remove 20
+print
+add 30
+add 40
+print
+remove 40
+print
