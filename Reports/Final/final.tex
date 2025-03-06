@@ -195,7 +195,13 @@ The final layer is a loop that will run the second layer benchmark with a number
 The code complexity score is calculated using the radon python library. The cyclomatic complexity is calculated for each file using the cc visit function which takes the code in text format as an argument and will return a complexity score. The same is done for the cognitive complexity. In the output csv for each run the cognitive and cyclomatic complexity of each problem is given but for the higher layer tests only the average of the complexities is shown.
 
 \subsubsection{Code Diversity}
+
+The code diversity score is calculated individually for each file. For each file it will compare it one by one to each of the other files, the results are then averaged to get the diversity of the file. The diversity is calculated one by one in this method because the levenstein distance function in the text distance python library only supports one to one comparison. If the diversity for a given file is below some threshold the code diversify class is used to reprompt the LLM with the code and a prompt to create a more unique program.
+
 \subsubsection{Attempt Count}
+
+The attempt count metric is split up into two sections. There is the code generation attempt count which will give the amount of times that the LLM had to be reprompted in order to create the code. This is generally very low and the majority of models will generate the original code with the first response most of the time. The second attempt count is the bug insertion attempt count. This is only relevant for the LLM bug insertion, it will often require 2 or 3 reprompts of the LLM until it will produce the desired code in the correct format. This metric is important as it will indicate if a model is too simple for the task being given.
+
 \subsubsection{Run Time}
 
 \section{Results}
