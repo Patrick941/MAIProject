@@ -29,5 +29,6 @@
 \contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{18}{}%
 \contentsline {subsubsection}{\numberline {5.3.4}Run Time}{19}{}%
 \contentsline {section}{\numberline {6}Results}{19}{}%
-\contentsline {section}{\numberline {7}Conclusion}{19}{}%
-\contentsline {section}{\numberline {8}References}{20}{}%
+\contentsline {subsection}{\numberline {6.1}Model Benchmark}{19}{}%
+\contentsline {section}{\numberline {7}Conclusion}{20}{}%
+\contentsline {section}{\numberline {8}References}{21}{}%
