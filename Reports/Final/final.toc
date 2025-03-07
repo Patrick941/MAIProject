@@ -30,6 +30,6 @@
 \contentsline {subsubsection}{\numberline {5.3.4}Run Time}{20}{}%
 \contentsline {section}{\numberline {6}Results and Discussion}{21}{}%
 \contentsline {subsection}{\numberline {6.1}Model Benchmark}{21}{}%
-\contentsline {subsection}{\numberline {6.2}Topic Benchmark}{21}{}%
-\contentsline {section}{\numberline {7}Conclusion}{22}{}%
-\contentsline {section}{\numberline {8}References}{23}{}%
+\contentsline {subsection}{\numberline {6.2}Topic Benchmark}{23}{}%
+\contentsline {section}{\numberline {7}Conclusion}{24}{}%
+\contentsline {section}{\numberline {8}References}{25}{}%

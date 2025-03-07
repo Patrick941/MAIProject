@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1741366606.47778 "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" "final.pdf" "final" 1741366606.98102 0
+["pdflatex"] 1741369488.72695 "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" "final.pdf" "final" 1741369489.22205 0
   "/etc/texmf/web2c/texmf.cnf" 1729962304.97619 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" 1741366605.80001 28547 a11c72e4ceab01ca00b179489243f0f5 ""
+  "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" 1741369488.57496 31351 25b6dbb27faa12661fe064fa21ddc62f ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -128,13 +128,13 @@
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1736791272.25479 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1736791340 8212506 40c19f6eb154d9b7919e61a25029df24 ""
   "Images/Benchmark.png" 1741181949.7761 25220 f9a50952fc6948fb2b86391827cdcee5 ""
-  "Images/Complexity_Comparison.png" 1741366528.03899 50653 8854624267a99d8f44f6434fbea54f56 ""
+  "Images/Complexity_Comparison.png" 1741368604.97223 58152 2ffe4dc8971c5d24565af201d492896a ""
   "Images/Design.png" 1741179442.51205 103026 3d22f4c6ef4fccf229f8de451fa6a181 ""
-  "Images/Model_Comparison.png" 1741366527.95099 45296 755d07b57f801f6f6d5383c29d62ba66 ""
+  "Images/Model_Comparison.png" 1741368604.87223 41694 ae37234138bfa830d50d7f1dda76db3a ""
   "Images/Trinity_Main_Logo.jpg" 1741179442.51405 215090 23584208db11df4b8c85b64085205202 ""
-  "final.aux" 1741366606.94299 4336 6185e753214de605c3ed6147dcafcc58 "pdflatex"
-  "final.tex" 1741366605.80001 28547 a11c72e4ceab01ca00b179489243f0f5 ""
-  "final.toc" 1741366606.94299 2361 e6b42d29ad8ff22ba05ba1b756240f9b "pdflatex"
+  "final.aux" 1741369489.18695 4336 9e8e906e27d001b5c656e7a9a89bcecd "pdflatex"
+  "final.tex" 1741369488.57496 31351 25b6dbb27faa12661fe064fa21ddc62f ""
+  "final.toc" 1741369489.18795 2361 09aa43c7461fca8f9656a852838930c7 "pdflatex"
   (generated)
   "final.aux"
   "final.log"
