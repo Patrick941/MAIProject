@@ -67,3 +67,44 @@ ax.legend()
 
 plt.tight_layout()
 plt.savefig('Images/Model_Comparison.png')
+
+# Prepare data for complexity scores plotting
+cognitive_complexity = []
+cyclomatic_complexity = []
+labels = []
+for model, bug_type in combinations:
+    for row in data:
+        if row[0] == model and row[2] == bug_type:
+            cognitive_complexity.append(row[3])
+            cyclomatic_complexity.append(row[4])
+            labels.append(f"{model}\n{bug_type}")
+            break
+
+# Sort the data by labels
+sorted_data = sorted(zip(labels, cognitive_complexity, cyclomatic_complexity), key=lambda x: x[0])
+labels, cognitive_complexity, cyclomatic_complexity = zip(*sorted_data)
+
+# Scale complexity scores to fit the range
+max_cognitive_complexity = max(cognitive_complexity)
+max_cyclomatic_complexity = max(cyclomatic_complexity)
+scaled_cognitive_complexity = [score * (max_cognitive_complexity / max_cognitive_complexity) for score in cognitive_complexity]
+scaled_cyclomatic_complexity = [score * (max_cognitive_complexity / max_cyclomatic_complexity) for score in cyclomatic_complexity]
+
+# Create bar chart for complexity scores
+fig, ax = plt.subplots(figsize=(12, 6))
+
+bar_width = 0.35
+index = np.arange(len(labels))
+
+bar1 = ax.bar(index, scaled_cognitive_complexity, bar_width, label='Cognitive Complexity (scaled)', color='lightblue')
+bar2 = ax.bar(index + bar_width, scaled_cyclomatic_complexity, bar_width, label='Cyclomatic Complexity (scaled)', color='lightcoral')
+
+ax.set_xlabel('Model and Bug Type')
+ax.set_ylabel('Complexity Scores (scaled)')
+ax.set_title('Model and Bug Insertion Complexity Comparison')
+ax.set_xticks(index + bar_width / 2)
+ax.set_xticklabels(labels, rotation=45, ha='right')
+ax.legend()
+
+plt.tight_layout()
+plt.savefig('Images/Complexity_Comparison.png')

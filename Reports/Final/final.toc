@@ -1,34 +1,35 @@
 \contentsline {section}{\numberline {1}Acronyms}{5}{}%
-\contentsline {section}{\numberline {2}Introduction}{5}{}%
-\contentsline {subsection}{\numberline {2.1}Context}{5}{}%
-\contentsline {subsection}{\numberline {2.2}Aims}{5}{}%
-\contentsline {subsection}{\numberline {2.3}Evaluation Metrics}{6}{}%
-\contentsline {subsection}{\numberline {2.4}Structure of the Dissertation}{6}{}%
-\contentsline {section}{\numberline {3}Background}{7}{}%
-\contentsline {subsection}{\numberline {3.1}Literature Review}{7}{}%
-\contentsline {subsection}{\numberline {3.2}Summary of LLMs}{8}{}%
-\contentsline {subsubsection}{\numberline {3.2.1}How LLMs work}{8}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}Using LLMs}{8}{}%
-\contentsline {subsubsection}{\numberline {3.2.3}Evaluation of LLMs}{9}{}%
-\contentsline {section}{\numberline {4}Design and Implementation}{10}{}%
-\contentsline {subsection}{\numberline {4.1}Design Overview}{10}{}%
-\contentsline {subsection}{\numberline {4.2}Tools}{11}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}Ollama}{11}{}%
-\contentsline {subsubsection}{\numberline {4.2.2}OpenAI GPT API}{11}{}%
-\contentsline {subsection}{\numberline {4.3}Code generation}{12}{}%
-\contentsline {subsubsection}{\numberline {4.3.1}Self Reflection \& Improvement}{12}{}%
-\contentsline {subsection}{\numberline {4.4}Bug Insertion}{13}{}%
-\contentsline {subsubsection}{\numberline {4.4.1}LLM Bug Insertion}{13}{}%
-\contentsline {subsubsection}{\numberline {4.4.2}AST Bug Insertion}{14}{}%
-\contentsline {section}{\numberline {5}Evaluation Methods}{15}{}%
-\contentsline {subsection}{\numberline {5.1}Environments}{15}{}%
-\contentsline {subsection}{\numberline {5.2}Benchmark Test Suite}{16}{}%
-\contentsline {subsection}{\numberline {5.3}Metrics}{17}{}%
-\contentsline {subsubsection}{\numberline {5.3.1}Code Complexity}{17}{}%
-\contentsline {subsubsection}{\numberline {5.3.2}Code Diversity}{18}{}%
-\contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{18}{}%
-\contentsline {subsubsection}{\numberline {5.3.4}Run Time}{19}{}%
-\contentsline {section}{\numberline {6}Results}{19}{}%
-\contentsline {subsection}{\numberline {6.1}Model Benchmark}{19}{}%
-\contentsline {section}{\numberline {7}Conclusion}{20}{}%
-\contentsline {section}{\numberline {8}References}{21}{}%
+\contentsline {section}{\numberline {2}Introduction}{6}{}%
+\contentsline {subsection}{\numberline {2.1}Context}{6}{}%
+\contentsline {subsection}{\numberline {2.2}Aims}{6}{}%
+\contentsline {subsection}{\numberline {2.3}Evaluation Metrics}{7}{}%
+\contentsline {subsection}{\numberline {2.4}Structure of the Dissertation}{7}{}%
+\contentsline {section}{\numberline {3}Background}{8}{}%
+\contentsline {subsection}{\numberline {3.1}Literature Review}{8}{}%
+\contentsline {subsection}{\numberline {3.2}Summary of LLMs}{9}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}How LLMs work}{9}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}Using LLMs}{9}{}%
+\contentsline {subsubsection}{\numberline {3.2.3}Evaluation of LLMs}{10}{}%
+\contentsline {section}{\numberline {4}Design and Implementation}{11}{}%
+\contentsline {subsection}{\numberline {4.1}Design Overview}{11}{}%
+\contentsline {subsection}{\numberline {4.2}Tools}{12}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}Ollama}{12}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}OpenAI GPT API}{12}{}%
+\contentsline {subsection}{\numberline {4.3}Code generation}{13}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Self Reflection \& Improvement}{13}{}%
+\contentsline {subsection}{\numberline {4.4}Bug Insertion}{14}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}LLM Bug Insertion}{14}{}%
+\contentsline {subsubsection}{\numberline {4.4.2}AST Bug Insertion}{15}{}%
+\contentsline {section}{\numberline {5}Evaluation Methods}{16}{}%
+\contentsline {subsection}{\numberline {5.1}Environments}{16}{}%
+\contentsline {subsection}{\numberline {5.2}Benchmark Test Suite}{17}{}%
+\contentsline {subsection}{\numberline {5.3}Metrics}{18}{}%
+\contentsline {subsubsection}{\numberline {5.3.1}Code Complexity}{18}{}%
+\contentsline {subsubsection}{\numberline {5.3.2}Code Diversity}{19}{}%
+\contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{19}{}%
+\contentsline {subsubsection}{\numberline {5.3.4}Run Time}{20}{}%
+\contentsline {section}{\numberline {6}Results and Discussion}{21}{}%
+\contentsline {subsection}{\numberline {6.1}Model Benchmark}{21}{}%
+\contentsline {subsection}{\numberline {6.2}Topic Benchmark}{21}{}%
+\contentsline {section}{\numberline {7}Conclusion}{22}{}%
+\contentsline {section}{\numberline {8}References}{23}{}%

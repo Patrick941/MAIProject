@@ -214,8 +214,8 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm
 OUTPUT final.toc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./Images/Design.png
 INPUT ./Images/Design.png
@@ -228,6 +228,16 @@ INPUT ./Images/Benchmark.png
 INPUT ./Images/Benchmark.png
 INPUT ./Images/Benchmark.png
 INPUT ./Images/Benchmark.png
+INPUT ./Images/Model_Comparison.png
+INPUT ./Images/Model_Comparison.png
+INPUT ./Images/Model_Comparison.png
+INPUT ./Images/Model_Comparison.png
+INPUT ./Images/Model_Comparison.png
+INPUT ./Images/Complexity_Comparison.png
+INPUT ./Images/Complexity_Comparison.png
+INPUT ./Images/Complexity_Comparison.png
+INPUT ./Images/Complexity_Comparison.png
+INPUT ./Images/Complexity_Comparison.png
 INPUT final.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb

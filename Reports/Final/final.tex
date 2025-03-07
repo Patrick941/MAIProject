@@ -58,7 +58,7 @@
     \item API - Application Programming Interface
     \item GPT - Generative Pre-trained Transformer
 \end{itemize}
-
+\newpage
 \section{Introduction}
 
 \subsection{Context}
@@ -88,7 +88,7 @@ The design and implementation will show how the code is structured and will give
 The testing and evaluation section will show the testing that was done on the project and the results of that testing. It will also discuss the metrics used in testing, why they were chosen and how they were calculated.
 
 The conclusion will summarise the project and discuss the future of the project.
-
+\newpage
 \section{Background}
 
 \subsection{Literature Review}
@@ -114,7 +114,7 @@ For interacting with an LLM you will generally use an API. This tool uses two di
 
 Using an LLM as discussed above is very easy. You simply give the LLM the prompt and read the output. However, there are some difficulties especially with the local LLM. Although the reponses were generally good, they could not simply be taken to be in the expected format. LLMs often provide a response not in the desired format, for that reason there is a lot of code which is used to clean up and parse the response from the LLM. This also leads to the issue of sometimes the LLM will hallucinate and provide an incorrect response, this is the reason for the implementation of self reflection and improvement in the code generation which will be discussed further in the design and implementation section. However, the simple and very significant benefit of using an LLM is that it can generate code with very little effort which makes it the only option for the generation of code for this project.
 
-
+\newpage
 \section{Design and Implementation}
 
 \subsection{Design Overview}
@@ -165,7 +165,7 @@ The second method for bug insertion was the AST bug inserter. This method was mu
 
 The semantic bug type provides a much more useful and complex bug. It will walk through the AST and will insert a number of different bugs, there is 5 bug types. The first is a sign bug which will change the sign of a number or operator between two values, this will likely cause some indexing errors and some miscalculations of the result. The second bug either removes an argument from a function call or adds a new argument. It randomly decides whether to remove an existing argument or add a new one from the available variables in the code, this will break function calls and the developer will have to understand both the parent and child function to fix the bug. The third bug type will flip the value of a 1 or 0 to the opposite. This is likely to cause some off by one errors and also some indexing errors. The fourth bug is changing the name of the function called to another function defined in the code, this is not the most complex bug but will force the developer to atleast get a shalow understanding of the functions to solve it. The final bug type alters the range for a for loop and causes, this will cause indexing errors, off by one errors and also some miscalculations of the result.
 
-
+\newpage
 \section{Evaluation Methods}
 
 This will discus the testing of the project which will show the improvement of the project over time. This will also include an evalution of the final state of the project.
@@ -205,35 +205,29 @@ The attempt count metric is split up into two sections. There is the code genera
 \subsubsection{Run Time}
 
 The run time metric is very simply the length of time it takes a given run of main.py to complete. This metric is counted in seconds as the time taken to query an LLM and for it to respond can often take 5-200 seconds with the models selected. Seconds will give the most appropriate level of detail for this metric. Of course a larger run time is bad and a lower run time is good.
-
-\section{Results}
+\newpage
+\section{Results and Discussion}
 
 \subsection{Model Benchmark}
 
+From the result of the model benchmark script the below graph was generate which compares the time taken, attempts taken and diversity score for each model with both LLM bug insertion and AST bug insertion. 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{Images/Model_Comparison.png}
+\label{fig:Model_Benchmark}
+\end{figure}
 
-\begin{verbatim}
-deepseek-r1:14b,336,ast
-Average,42.09500770126638,8.25,0.25,0.0,1.264786867842822
-deepseek-r1:32b,738,ast
-Average,39.561042934660655,9.75,0.0,0.0,1.5353389955086514
-qwen2.5:32b,421,ast
-Average,39.561042934660655,9.75,0.0,0.0,1.5353389955086514
-mistral-small:latest,250,ast
-Average,54.62526813534531,3.25,1.25,0.0,1.7186293958428065
-llama3.1:latest,34,ast
-Average,54.02561821697138,3.0,0.0,0.0,1.7857982596621405
-deepseek-r1:14b,4006,LLM
-Average,54.02561821697138,3.0,0.0,0.0,1.7857982596621405
-deepseek-r1:32b,2498,LLM
-Average,60.86216199882549,7.25,0.0,1.0,1.1279884324021796
-qwen2.5:32b,211,LLM
-Average,60.86216199882549,7.25,0.0,1.0,1.1279884324021796
-mistral-small:latest,626,LLM
-Average,64.06474075720814,3.25,1.0,1.5,1.7237238178905767
-llama3.1:latest,119,LLM
-Average,66.32118077873075,2.75,0.25,2.25,1.339051358485823
-\end{verbatim}
+Another graph from these results was generated that compares the cylomatic and cognitive complexity of the code generated by each model.
+\begin{figure}[h!]
+\centering
+\includegraphics[width=\linewidth]{Images/Complexity_Comparison.png}
+\label{fig:Complexity_Benchmark}
+\end{figure}
 
+\subsection{Topic Benchmark}
+
+
+\newpage
 \section{Conclusion}
 
 This will briefly summarise the project and discuss the future of the project.
