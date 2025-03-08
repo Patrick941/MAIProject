@@ -19,26 +19,26 @@ def generate_graphs(data, category):
     sorted_data = sorted(zip(labels, times, attempts), key=lambda x: x[0])
     labels, times, attempts = zip(*sorted_data)
 
-    max_time = max(times)
-    max_attempts = max(attempts)
-    scaled_attempts = [attempt * (max_time / max_attempts) for attempt in attempts]
-
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax1 = plt.subplots(figsize=(14, 8))
 
     bar_width = 0.3
     index = np.arange(len(labels))
 
-    ax.bar(index, times, bar_width, label='Time', color='skyblue')
-    ax.bar(index + bar_width, scaled_attempts, bar_width, label='Attempts (scaled)', color='lightgreen')
+    ax1.bar(index, times, bar_width, label='Time (s)', color='skyblue')
+    ax1.set_xlabel('Model and Bug Type')
+    ax1.set_ylabel('Time (s)')
+    ax1.tick_params(axis='y')
 
-    ax.set_xlabel('Model and Bug Type')
-    ax.set_ylabel('Values')
-    ax.set_title('Model and Bug Insertion Comparison')
-    ax.set_xticks(index + bar_width / 2)
-    ax.set_xticklabels(labels, rotation=45, ha='right')
-    ax.legend()
+    ax2 = ax1.twinx()
+    ax2.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
+    ax2.set_ylabel('Attempts')
+    ax2.tick_params(axis='y')
 
-    plt.tight_layout()
+    ax1.set_xticks(index + bar_width / 2)
+    ax1.set_xticklabels(labels, rotation=45, ha='right')
+
+    fig.tight_layout()
+    plt.title('Model and Bug Insertion Comparison', pad=20)
     plt.savefig(f'Images/Model_Comparison_{category}.png')
 
     cognitive_complexity = []
@@ -57,30 +57,32 @@ def generate_graphs(data, category):
     sorted_data = sorted(zip(labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores), key=lambda x: x[0])
     labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores = zip(*sorted_data)
 
-    max_cognitive_complexity = max(cognitive_complexity)
-    max_cyclomatic_complexity = max(cyclomatic_complexity)
-    max_inverse_similarity_scores = max(inverse_similarity_scores)
-    scaled_cognitive_complexity = [score * (max_cognitive_complexity / max_cognitive_complexity) for score in cognitive_complexity]
-    scaled_cyclomatic_complexity = [score * (max_cognitive_complexity / max_cyclomatic_complexity) for score in cyclomatic_complexity]
-    scaled_inverse_similarity_scores = [score * (max_cognitive_complexity / max_inverse_similarity_scores) for score in inverse_similarity_scores]
-
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax1 = plt.subplots(figsize=(14, 8))
 
     bar_width = 0.2
     index = np.arange(len(labels))
 
-    ax.bar(index, scaled_cognitive_complexity, bar_width, label='Cognitive Complexity (scaled)', color='lightblue')
-    ax.bar(index + bar_width, scaled_cyclomatic_complexity, bar_width, label='Cyclomatic Complexity (scaled)', color='lightcoral')
-    ax.bar(index + 2 * bar_width, scaled_inverse_similarity_scores, bar_width, label='Diversity Score (scaled)', color='lightgreen')
+    ax1.bar(index, cognitive_complexity, bar_width, label='Cognitive Complexity', color='lightblue')
+    ax1.set_xlabel('Model and Bug Type')
+    ax1.set_ylabel('Cognitive Complexity')
+    ax1.tick_params(axis='y')
 
-    ax.set_xlabel('Model and Bug Type')
-    ax.set_ylabel('Complexity Scores and Diversity Score (scaled)')
-    ax.set_title('Model and Bug Insertion Complexity and Diversity Comparison')
-    ax.set_xticks(index + bar_width)
-    ax.set_xticklabels(labels, rotation=45, ha='right')
-    ax.legend()
+    ax2 = ax1.twinx()
+    ax2.bar(index + bar_width, cyclomatic_complexity, bar_width, label='Cyclomatic Complexity', color='lightcoral')
+    ax2.set_ylabel('Cyclomatic Complexity')
+    ax2.tick_params(axis='y')
 
-    plt.tight_layout()
+    ax3 = ax1.twinx()
+    ax3.spines['right'].set_position(('outward', 60))
+    ax3.bar(index + 2 * bar_width, inverse_similarity_scores, bar_width, label='Diversity Score', color='lightgreen')
+    ax3.set_ylabel('Diversity Score')
+    ax3.tick_params(axis='y')
+
+    ax1.set_xticks(index + bar_width)
+    ax1.set_xticklabels(labels, rotation=45, ha='right')
+
+    fig.tight_layout()
+    plt.title('Model and Bug Insertion Complexity and Diversity Comparison', pad=20)
     plt.savefig(f'Images/Complexity_Comparison_{category}.png')
     
 data_fields = ['Model', 'Time', 'Bug Type', 'Cognitive Complexity', 'Cyclomatic Complexity', 'Attempts Needed Code Generation', 'Attempts Needed Bug Insertion', 'Similarity Score']

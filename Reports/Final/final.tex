@@ -272,6 +272,8 @@ The next topic that was tested was the Djikstra algorithm. From the broad phrasi
 \label{fig:Complexity_Comparison_Djikstra}
 \end{figure}
 
+Much like above these graphs too follow the same trend across models but the scale is different again. There runtime and attempts required are both much higher than the baseline. this is due to the task being more complex, this is clearly only the case in the LLM bug insertion as there is no increase in attempts for the AST bug insertion, from this we can take that the LLM bug insertion becomes much less feasible for larger more complex code while the AST bug insertion will perform consistently in any setting. From the second graph we also see the expected increase in complexity and diversity from the baseline.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Linked_Lists.png}
