@@ -14,22 +14,22 @@
 \contentsline {subsection}{\numberline {4.1}Design Overview}{11}{}%
 \contentsline {subsection}{\numberline {4.2}Tools}{12}{}%
 \contentsline {subsubsection}{\numberline {4.2.1}Ollama}{12}{}%
-\contentsline {subsubsection}{\numberline {4.2.2}OpenAI GPT API}{12}{}%
+\contentsline {subsubsection}{\numberline {4.2.2}OpenAI GPT API}{13}{}%
 \contentsline {subsection}{\numberline {4.3}Code generation}{13}{}%
-\contentsline {subsubsection}{\numberline {4.3.1}Self Reflection \& Improvement}{13}{}%
-\contentsline {subsection}{\numberline {4.4}Bug Insertion}{14}{}%
-\contentsline {subsubsection}{\numberline {4.4.1}LLM Bug Insertion}{14}{}%
+\contentsline {subsubsection}{\numberline {4.3.1}Self Reflection \& Improvement}{14}{}%
+\contentsline {subsection}{\numberline {4.4}Bug Insertion}{15}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}LLM Bug Insertion}{15}{}%
 \contentsline {subsubsection}{\numberline {4.4.2}AST Bug Insertion}{15}{}%
-\contentsline {section}{\numberline {5}Evaluation Methods}{16}{}%
-\contentsline {subsection}{\numberline {5.1}Environments}{16}{}%
-\contentsline {subsection}{\numberline {5.2}Benchmark Test Suite}{17}{}%
-\contentsline {subsection}{\numberline {5.3}Metrics}{18}{}%
-\contentsline {subsubsection}{\numberline {5.3.1}Code Complexity}{18}{}%
-\contentsline {subsubsection}{\numberline {5.3.2}Code Diversity}{19}{}%
-\contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{19}{}%
-\contentsline {subsubsection}{\numberline {5.3.4}Run Time}{20}{}%
-\contentsline {section}{\numberline {6}Results and Discussion}{21}{}%
-\contentsline {subsection}{\numberline {6.1}Model Benchmark}{21}{}%
-\contentsline {subsection}{\numberline {6.2}Topic Benchmark}{23}{}%
-\contentsline {section}{\numberline {7}Conclusion}{24}{}%
-\contentsline {section}{\numberline {8}References}{25}{}%
+\contentsline {section}{\numberline {5}Evaluation Methods}{17}{}%
+\contentsline {subsection}{\numberline {5.1}Environments}{17}{}%
+\contentsline {subsection}{\numberline {5.2}Benchmark Test Suite}{18}{}%
+\contentsline {subsection}{\numberline {5.3}Metrics}{19}{}%
+\contentsline {subsubsection}{\numberline {5.3.1}Code Complexity}{19}{}%
+\contentsline {subsubsection}{\numberline {5.3.2}Code Diversity}{20}{}%
+\contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{20}{}%
+\contentsline {subsubsection}{\numberline {5.3.4}Run Time}{21}{}%
+\contentsline {section}{\numberline {6}Results and Discussion}{22}{}%
+\contentsline {subsection}{\numberline {6.1}Model Benchmark}{22}{}%
+\contentsline {subsection}{\numberline {6.2}Topic Benchmark}{24}{}%
+\contentsline {section}{\numberline {7}Conclusion}{25}{}%
+\contentsline {section}{\numberline {8}References}{26}{}%

@@ -217,11 +217,11 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT ./Images/Design.png
-INPUT ./Images/Design.png
-INPUT ./Images/Design.png
-INPUT ./Images/Design.png
-INPUT ./Images/Design.png
+INPUT ./Images/Tall_design.png
+INPUT ./Images/Tall_design.png
+INPUT ./Images/Tall_design.png
+INPUT ./Images/Tall_design.png
+INPUT ./Images/Tall_design.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./Images/Benchmark.png
 INPUT ./Images/Benchmark.png
