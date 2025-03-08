@@ -24,13 +24,13 @@ def generate_graphs(data, category):
     bar_width = 0.3
     index = np.arange(len(labels))
 
-    ax1.bar(index, times, bar_width, label='Time (s)', color='skyblue')
+    bar1 = ax1.bar(index, times, bar_width, label='Time (s)', color='skyblue')
     ax1.set_xlabel('Model and Bug Type')
     ax1.set_ylabel('Time (s)')
     ax1.tick_params(axis='y')
 
     ax2 = ax1.twinx()
-    ax2.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
+    bar2 = ax2.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
     ax2.set_ylabel('Attempts')
     ax2.tick_params(axis='y')
 
@@ -39,6 +39,7 @@ def generate_graphs(data, category):
 
     fig.tight_layout()
     plt.title('Model and Bug Insertion Comparison', pad=20)
+    fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax1.transAxes)
     plt.savefig(f'Images/Model_Comparison_{category}.png')
 
     cognitive_complexity = []
@@ -62,19 +63,19 @@ def generate_graphs(data, category):
     bar_width = 0.2
     index = np.arange(len(labels))
 
-    ax1.bar(index, cognitive_complexity, bar_width, label='Cognitive Complexity', color='lightblue')
+    bar1 = ax1.bar(index, cognitive_complexity, bar_width, label='Cognitive Complexity', color='lightblue')
     ax1.set_xlabel('Model and Bug Type')
     ax1.set_ylabel('Cognitive Complexity')
     ax1.tick_params(axis='y')
 
     ax2 = ax1.twinx()
-    ax2.bar(index + bar_width, cyclomatic_complexity, bar_width, label='Cyclomatic Complexity', color='lightcoral')
+    bar2 = ax2.bar(index + bar_width, cyclomatic_complexity, bar_width, label='Cyclomatic Complexity', color='lightcoral')
     ax2.set_ylabel('Cyclomatic Complexity')
     ax2.tick_params(axis='y')
 
     ax3 = ax1.twinx()
     ax3.spines['right'].set_position(('outward', 60))
-    ax3.bar(index + 2 * bar_width, inverse_similarity_scores, bar_width, label='Diversity Score', color='lightgreen')
+    bar3 = ax3.bar(index + 2 * bar_width, inverse_similarity_scores, bar_width, label='Diversity Score', color='lightgreen')
     ax3.set_ylabel('Diversity Score')
     ax3.tick_params(axis='y')
 
@@ -83,6 +84,7 @@ def generate_graphs(data, category):
 
     fig.tight_layout()
     plt.title('Model and Bug Insertion Complexity and Diversity Comparison', pad=20)
+    fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax1.transAxes)
     plt.savefig(f'Images/Complexity_Comparison_{category}.png')
     
 data_fields = ['Model', 'Time', 'Bug Type', 'Cognitive Complexity', 'Cyclomatic Complexity', 'Attempts Needed Code Generation', 'Attempts Needed Bug Insertion', 'Similarity Score']

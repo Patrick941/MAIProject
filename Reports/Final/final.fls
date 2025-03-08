@@ -268,11 +268,6 @@ INPUT ./Images/Model_Comparison_Linked_Lists.png
 INPUT ./Images/Model_Comparison_Linked_Lists.png
 INPUT ./Images/Model_Comparison_Linked_Lists.png
 INPUT ./Images/Model_Comparison_Linked_Lists.png
-INPUT ./Images/Model_Comparison_Threads.png
-INPUT ./Images/Model_Comparison_Threads.png
-INPUT ./Images/Model_Comparison_Threads.png
-INPUT ./Images/Model_Comparison_Threads.png
-INPUT ./Images/Model_Comparison_Threads.png
 INPUT ./Images/Complexity_Comparison_Linked_Lists.png
 INPUT ./Images/Complexity_Comparison_Linked_Lists.png
 INPUT ./Images/Complexity_Comparison_Linked_Lists.png
@@ -283,6 +278,11 @@ INPUT ./Images/Complexity_Comparison_Threads.png
 INPUT ./Images/Complexity_Comparison_Threads.png
 INPUT ./Images/Complexity_Comparison_Threads.png
 INPUT ./Images/Complexity_Comparison_Threads.png
+INPUT ./Images/Model_Comparison_Threads.png
+INPUT ./Images/Model_Comparison_Threads.png
+INPUT ./Images/Model_Comparison_Threads.png
+INPUT ./Images/Model_Comparison_Threads.png
+INPUT ./Images/Model_Comparison_Threads.png
 INPUT final.aux
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
