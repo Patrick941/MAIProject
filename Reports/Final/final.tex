@@ -118,7 +118,10 @@ Using an LLM as discussed above is very easy. You simply give the LLM the prompt
 \section{Design and Implementation}
 
 \subsection{Design Overview}
-\includegraphics[width=\linewidth]{Images/Tall_design.png}
+\includegraphics[width=\linewidth]{Images/Tall_design_1.png}
+
+\newpage
+\includegraphics[width=\linewidth]{Images/Tall_design_2.png}
 
 The above diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type and code topic. It will then produce functional code based on the topic mentioned. It will also ensure that the code is functional by compiling and checking for errors. 
 
@@ -233,9 +236,9 @@ We can see that the LLM bug insertion method tends to have a higher cognitive co
 
 \subsection{Topic Benchmark}
 
-Some topics alter prompts to be more specfic mention in graph
+The results of the Models with different bug insertion methods above were run for one topic. The same test was run a number more times with different topics and bug prompts. Some topics will have more or less scope for creativity and complexity which might provide an interesting comparison between the bug insertion methods under different circumstances.
 
-The graphs generated are shown below:
+The first topic that was tested was Arrays. This is a very simple topic which tests how the models and methods performed with a more constrained topic.
 
 \begin{figure}[h!]
 \centering
@@ -246,9 +249,27 @@ The graphs generated are shown below:
 
 \begin{figure}[h!]
 \centering
+\includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Arrays.png}
+\caption{Complexity Comparison Arrays}
+\label{fig:Complexity_Comparison_Arrays}
+\end{figure}
+
+The results of both graphs in this case are very similar to that of the baseline. They follow the exact same trend but the scale is different. The results of the array topic take longer to generate, take more retries and provide more complex code, the diversity however is not improved from the baseline.
+
+The next topic that was tested was the Djikstra algorithm. From the broad phrasing of the topic we can expect to see more meaningful results in this case.
+
+\begin{figure}[h!]
+\centering
 \includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Djikstra.png}
 \caption{Model Comparison Djikstra}
 \label{fig:Model_Comparison_Djikstra}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Djikstra.png}
+\caption{Complexity Comparison Djikstra}
+\label{fig:Complexity_Comparison_Djikstra}
 \end{figure}
 
 \begin{figure}[h!]
@@ -265,19 +286,9 @@ The graphs generated are shown below:
 \label{fig:Model_Comparison_Threads}
 \end{figure}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Arrays.png}
-\caption{Complexity Comparison Arrays}
-\label{fig:Complexity_Comparison_Arrays}
-\end{figure}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Djikstra.png}
-\caption{Complexity Comparison Djikstra}
-\label{fig:Complexity_Comparison_Djikstra}
-\end{figure}
+
+
 
 \begin{figure}[h!]
 \centering

@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1741456589.74018 "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" "final.pdf" "final" 1741456590.53368 0
+["pdflatex"] 1741457813.31928 "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" "final.pdf" "final" 1741457814.19781 0
   "/etc/texmf/web2c/texmf.cnf" 1729962304.97619 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" 1741456588.75491 33098 090052e1ba8196983e97d0a291e1c132 ""
+  "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" 1741457812.2524 34045 cc5f4e58125ed93558a4f7968bee8f33 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -138,11 +138,12 @@
   "Images/Model_Comparison_Fibbonaci.png" 1741371314.10313 41694 ae37234138bfa830d50d7f1dda76db3a ""
   "Images/Model_Comparison_Linked_Lists.png" 1741371314.64413 41694 7ca8efe7b5b7159e16f91470a149fe3c ""
   "Images/Model_Comparison_Threads.png" 1741371314.82813 42618 bd2da3f8c2c8e62d76a0e7167e0c44eb ""
-  "Images/Tall_design.png" 1741456487.56818 34128 2ee8b0e1cee8362e3381ce7dfb03680b ""
+  "Images/Tall_design_1.png" 1741456733.79509 63240 cc878c08414445a3127e49aa95aa9af8 ""
+  "Images/Tall_design_2.png" 1741456766.55068 107175 0aface95bc6d65a6f63dcd5139dc35ec ""
   "Images/Trinity_Main_Logo.jpg" 1741179442.51405 215090 23584208db11df4b8c85b64085205202 ""
-  "final.aux" 1741456590.49189 5860 d0e8417b00d4e11eac5f26584a10c977 "pdflatex"
-  "final.tex" 1741456588.75491 33098 090052e1ba8196983e97d0a291e1c132 ""
-  "final.toc" 1741456590.49189 2361 f09a4dae1e0c397eaa1575bdcf2549ce "pdflatex"
+  "final.aux" 1741457814.15738 5860 861725d7f810b1adb9e137e19c519e2d "pdflatex"
+  "final.tex" 1741457812.2524 34045 cc5f4e58125ed93558a4f7968bee8f33 ""
+  "final.toc" 1741457814.15738 2361 e2352b9c0d15baa813c383009353e044 "pdflatex"
   (generated)
   "final.aux"
   "final.log"
