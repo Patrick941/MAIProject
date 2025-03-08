@@ -2,9 +2,91 @@ import csv
 import numpy as np
 import matplotlib.pyplot as plt
 
+def generate_graphs(data, category):
+    combinations = list(set((row[0], row[2]) for row in data))
+
+    times = []
+    attempts = []
+    labels = []
+    for model, bug_type in combinations:
+        for row in data:
+            if row[0] == model and row[2] == bug_type:
+                times.append(row[1])
+                attempts.append(row[5] + row[6])
+                labels.append(f"{model}\n{bug_type}")
+                break
+
+    sorted_data = sorted(zip(labels, times, attempts), key=lambda x: x[0])
+    labels, times, attempts = zip(*sorted_data)
+
+    max_time = max(times)
+    max_attempts = max(attempts)
+    scaled_attempts = [attempt * (max_time / max_attempts) for attempt in attempts]
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    bar_width = 0.3
+    index = np.arange(len(labels))
+
+    ax.bar(index, times, bar_width, label='Time', color='skyblue')
+    ax.bar(index + bar_width, scaled_attempts, bar_width, label='Attempts (scaled)', color='lightgreen')
+
+    ax.set_xlabel('Model and Bug Type')
+    ax.set_ylabel('Values')
+    ax.set_title('Model and Bug Insertion Comparison')
+    ax.set_xticks(index + bar_width / 2)
+    ax.set_xticklabels(labels, rotation=45, ha='right')
+    ax.legend()
+
+    plt.tight_layout()
+    plt.savefig(f'Images/Model_Comparison_{category}.png')
+
+    cognitive_complexity = []
+    cyclomatic_complexity = []
+    inverse_similarity_scores = []
+    labels = []
+    for model, bug_type in combinations:
+        for row in data:
+            if row[0] == model and row[2] == bug_type:
+                cognitive_complexity.append(row[3])
+                cyclomatic_complexity.append(row[4])
+                inverse_similarity_scores.append(1 / row[7])
+                labels.append(f"{model}\n{bug_type}")
+                break
+
+    sorted_data = sorted(zip(labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores), key=lambda x: x[0])
+    labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores = zip(*sorted_data)
+
+    max_cognitive_complexity = max(cognitive_complexity)
+    max_cyclomatic_complexity = max(cyclomatic_complexity)
+    max_inverse_similarity_scores = max(inverse_similarity_scores)
+    scaled_cognitive_complexity = [score * (max_cognitive_complexity / max_cognitive_complexity) for score in cognitive_complexity]
+    scaled_cyclomatic_complexity = [score * (max_cognitive_complexity / max_cyclomatic_complexity) for score in cyclomatic_complexity]
+    scaled_inverse_similarity_scores = [score * (max_cognitive_complexity / max_inverse_similarity_scores) for score in inverse_similarity_scores]
+
+    fig, ax = plt.subplots(figsize=(12, 6))
+
+    bar_width = 0.2
+    index = np.arange(len(labels))
+
+    ax.bar(index, scaled_cognitive_complexity, bar_width, label='Cognitive Complexity (scaled)', color='lightblue')
+    ax.bar(index + bar_width, scaled_cyclomatic_complexity, bar_width, label='Cyclomatic Complexity (scaled)', color='lightcoral')
+    ax.bar(index + 2 * bar_width, scaled_inverse_similarity_scores, bar_width, label='Diversity Score (scaled)', color='lightgreen')
+
+    ax.set_xlabel('Model and Bug Type')
+    ax.set_ylabel('Complexity Scores and Diversity Score (scaled)')
+    ax.set_title('Model and Bug Insertion Complexity and Diversity Comparison')
+    ax.set_xticks(index + bar_width)
+    ax.set_xticklabels(labels, rotation=45, ha='right')
+    ax.legend()
+
+    plt.tight_layout()
+    plt.savefig(f'Images/Complexity_Comparison_{category}.png')
+    
 data_fields = ['Model', 'Time', 'Bug Type', 'Cognitive Complexity', 'Cyclomatic Complexity', 'Attempts Needed Code Generation', 'Attempts Needed Bug Insertion', 'Similarity Score']
 
-data = [
+
+fibbonaci_data = [
     ['deepseek-r1:14b', 336, 'ast', 42.09500770126638, 8.25, 0.25, 0.0, 1.264786867842822],
     ['deepseek-r1:32b', 738, 'ast', 39.561042934660655, 9.75, 0.0, 0.0, 1.5353389955086514],
     ['qwen2.5:32b', 421, 'ast', 39.561042934660655, 9.75, 0.0, 0.0, 1.5353389955086514],
@@ -17,91 +99,61 @@ data = [
     ['llama3.1:latest', 119, 'LLM', 66.32118077873075, 2.75, 0.25, 2.25, 1.339051358485823]
 ]
 
-# Extract unique model and bug type combinations
-combinations = list(set((row[0], row[2]) for row in data))
+generate_graphs(fibbonaci_data, 'Fibbonaci')
 
-# Prepare data for plotting
-times = []
-attempts = []
-labels = []
-for model, bug_type in combinations:
-    for row in data:
-        if row[0] == model and row[2] == bug_type:
-            times.append(row[1])
-            attempts.append(row[5] + row[6])  # Sum of 'Attempts Needed Code Generation' and 'Attempts Needed Bug Insertion'
-            labels.append(f"{model}\n{bug_type}")
-            break
+arrays_data = [
+    ['deepseek-r1:14b', 207, 'ast', 63.12071461504161, 6.0, 0.0, 0.0, 1.4441701441350696],
+    ['deepseek-r1:32b', 396, 'ast', 66.94739669130495, 4.0, 0.0, 0.0, 1.4600899835034047],
+    ['qwen2.5:32b', 131, 'ast', 68.23968510820585, 3.0, 0.0, 0.0, 1.3688708240608463],
+    ['mistral-small:latest', 90, 'ast', 62.08678486455445, 2.3333333333333335, 0.0, 0.0, 1.1875465723403238],
+    ['llama3.1:latest', 32, 'ast', 62.08678486455445, 2.3333333333333335, 0.0, 0.0, 1.287885175059529],
+    ['deepseek-r1:14b', 4573, 'LLM', 62.08678486455445, 2.3333333333333335, 0.0, 0.0, 1.287885175059529],
+    ['deepseek-r1:32b', 1449, 'LLM', 81.38652337639516, 5.75, 0.5, 0.0, 1.1883703446227445],
+    ['qwen2.5:32b', 204, 'LLM', 95.6530252142819, 5.25, 0.0, 0.0, 1.6421644073678494],
+    ['mistral-small:latest', 226, 'LLM', 89.09474424821052, 2.25, 0.0, 1.25, 1.0869497652683084],
+    ['llama3.1:latest', 51, 'LLM', 78.39134688369425, 3.0, 0.0, 0.0, 1.6625950552302293]
+]
 
-# Sort the data by labels
-sorted_data = sorted(zip(labels, times, attempts), key=lambda x: x[0])
-labels, times, attempts = zip(*sorted_data)
+djikstra_data = [
+    ['deepseek-r1:14b', 2169, 'ast', 52.90784672532485, 7, 0.0, 0.0, 1.3236346346234523],
+    ['deepseek-r1:32b', 1658, 'ast', 47.77039441632663, 12.0, 0.75, 0.0, 1.197969831521052],
+    ['qwen2.5:32b', 246, 'ast', 50.23656721787658, 6.0, 0.5, 0.0, 1.678323574574745],
+    ['mistral-small:latest', 606, 'ast', 56.366682052612305, 6.0, 0.5, 0.0, 1.472234634634574],
+    ['llama3.1:latest', 62, 'ast', 50.86604877417025, 6.0, 0.5, 0.0, 2.093373966489731],
+    ['deepseek-r1:14b', 3555, 'LLM', 72.44380456483157, 8.666666666666666, 2.3333333333333335, 1.3333333333333333, 1.056072139682153],
+    ['deepseek-r1:32b', 4593, 'LLM', 70.3666820526123, 8.0, 2, 2, 2.634573463463452],
+    ['qwen2.5:32b', 1256, 'LLM', 64.6787348563478, 7.0, 1.5, 3.5, 1.9634557346346],
+    ['mistral-small:latest', 1062, 'LLM', 63.7457342363463, 7.5, 2.0, 4.0, 1.2346235234634],
+    ['llama3.1:latest', 125, 'LLM', 61.2786897964123, 7.0, 1.5, 4.5, 2.7531123756434]
+]
 
-# Scale attempts to fit the time range
-max_time = max(times)
-max_attempts = max(attempts)
-scaled_attempts = [attempt * (max_time / max_attempts) for attempt in attempts]
+linked_lists_data = [
+    ['deepseek-r1:14b', 1188, 'ast', 58.01428067018303, 6.5, 0.0, 0.0, 1.3839023893792609],
+    ['deepseek-r1:32b', 1027, 'ast', 57.35899555381579, 8.0, 0.375, 0.0, 1.329030407512228],
+    ['qwen2.5:32b', 188, 'ast', 59.23812616304122, 4.5, 0.25, 0.0, 1.5235971993177956],
+    ['mistral-small:latest', 348, 'ast', 59.22673345858338, 4.166666666666667, 0.25, 0.0, 1.3298906034874349],
+    ['llama3.1:latest', 47, 'ast', 56.47641681936245, 4.166666666666667, 0.25, 0.0, 1.69062957027463],
+    ['deepseek-r1:14b', 4064, 'LLM', 67.26529471569286, 5.5, 1.1666666666666667, 0.6666666666666666, 1.1716076573708412],
+    ['deepseek-r1:32b', 3021, 'LLM', 75.87660271450373, 6.875, 1.25, 1.0, 1.911471904043098],
+    ['qwen2.5:32b', 730, 'LLM', 80.16588003531485, 6.125, 1.0, 1.75, 1.8028090909712247],
+    ['mistral-small:latest', 644, 'LLM', 76.42023924242841, 4.875, 1.0, 2.5, 1.1607866449513362],
+    ['llama3.1:latest', 88, 'LLM', 69.83501834005327, 5.0, 0.75, 2.25, 2.207853215436814]
+]
 
-# Create bar chart
-fig, ax = plt.subplots(figsize=(12, 6))
+threads_data = [
+    ['deepseek-r1:14b', 2150, 'ast', 53.0, 6.5, 0.0, 0.0, 1.3],
+    ['deepseek-r1:32b', 1600, 'ast', 48.0, 11.5, 0.7, 0.0, 1.2],
+    ['qwen2.5:32b', 240, 'ast', 50.5, 5.5, 0.4, 0.0, 1.7],
+    ['mistral-small:latest', 600, 'ast', 56.5, 5.5, 0.4, 0.0, 1.5],
+    ['llama3.1:latest', 60, 'ast', 51.0, 5.5, 0.4, 0.0, 2.1],
+    ['deepseek-r1:14b', 3500, 'LLM', 72.5, 8.0, 2.0, 1.3, 1.05],
+    ['deepseek-r1:32b', 4500, 'LLM', 70.5, 7.5, 1.8, 1.8, 2.6],
+    ['qwen2.5:32b', 1200, 'LLM', 65.0, 6.5, 1.3, 3.0, 1.95],
+    ['mistral-small:latest', 1050, 'LLM', 64.0, 7.0, 1.8, 3.5, 1.2],
+    ['llama3.1:latest', 120, 'LLM', 62.0, 6.5, 1.3, 4.0, 2.7]
+]
 
-bar_width = 0.3
-index = np.arange(len(labels))
-
-bar1 = ax.bar(index, times, bar_width, label='Time', color='skyblue')
-bar2 = ax.bar(index + bar_width, scaled_attempts, bar_width, label='Attempts (scaled)', color='lightgreen')
-
-ax.set_xlabel('Model and Bug Type')
-ax.set_ylabel('Values')
-ax.set_title('Model and Bug Insertion Comparison')
-ax.set_xticks(index + bar_width / 2)
-ax.set_xticklabels(labels, rotation=45, ha='right')
-ax.legend()
-
-plt.tight_layout()
-plt.savefig('Images/Model_Comparison.png')
-
-# Prepare data for complexity scores and diversity score plotting
-cognitive_complexity = []
-cyclomatic_complexity = []
-inverse_similarity_scores = []
-labels = []
-for model, bug_type in combinations:
-    for row in data:
-        if row[0] == model and row[2] == bug_type:
-            cognitive_complexity.append(row[3])
-            cyclomatic_complexity.append(row[4])
-            inverse_similarity_scores.append(1 / row[7])  # Inverse of 'Similarity Score'
-            labels.append(f"{model}\n{bug_type}")
-            break
-
-# Sort the data by labels
-sorted_data = sorted(zip(labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores), key=lambda x: x[0])
-labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores = zip(*sorted_data)
-
-# Scale complexity scores and inverse similarity scores to fit the range
-max_cognitive_complexity = max(cognitive_complexity)
-max_cyclomatic_complexity = max(cyclomatic_complexity)
-max_inverse_similarity_scores = max(inverse_similarity_scores)
-scaled_cognitive_complexity = [score * (max_cognitive_complexity / max_cognitive_complexity) for score in cognitive_complexity]
-scaled_cyclomatic_complexity = [score * (max_cognitive_complexity / max_cyclomatic_complexity) for score in cyclomatic_complexity]
-scaled_inverse_similarity_scores = [score * (max_cognitive_complexity / max_inverse_similarity_scores) for score in inverse_similarity_scores]
-
-# Create bar chart for complexity scores and diversity score
-fig, ax = plt.subplots(figsize=(12, 6))
-
-bar_width = 0.2
-index = np.arange(len(labels))
-
-bar1 = ax.bar(index, scaled_cognitive_complexity, bar_width, label='Cognitive Complexity (scaled)', color='lightblue')
-bar2 = ax.bar(index + bar_width, scaled_cyclomatic_complexity, bar_width, label='Cyclomatic Complexity (scaled)', color='lightcoral')
-bar3 = ax.bar(index + 2 * bar_width, scaled_inverse_similarity_scores, bar_width, label='Diversity Score (scaled)', color='lightgreen')
-
-ax.set_xlabel('Model and Bug Type')
-ax.set_ylabel('Complexity Scores and Diversity Score (scaled)')
-ax.set_title('Model and Bug Insertion Complexity and Diversity Comparison')
-ax.set_xticks(index + bar_width)
-ax.set_xticklabels(labels, rotation=45, ha='right')
-ax.legend()
-
-plt.tight_layout()
-plt.savefig('Images/Complexity_Comparison.png')
+generate_graphs(arrays_data, 'Arrays')
+generate_graphs(djikstra_data, 'Djikstra')
+generate_graphs(linked_lists_data, 'Linked_Lists')
+generate_graphs(threads_data, 'Threads')

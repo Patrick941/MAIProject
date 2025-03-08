@@ -4,7 +4,7 @@ import Scripts.ollama_classes as ollama_classes
 import Scripts.openAI_classes as openAI_classes
 
 class CodeGeneration:
-    def __init__(self, language, topic, output_file_path, type, model, results_directory, debug, prompt_override=None):
+    def __init__(self, language, topic, output_file_path, type, model, results_directory, debug=False, prompt_override=None):
         self.language = language
         self.topic = topic
         self.output_file_path = output_file_path

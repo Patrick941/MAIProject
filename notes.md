@@ -18,4 +18,4 @@ Try rotate the daigram to vertical to fit in the
 * Make name or description of what it does consistent. SHould be the name of what it does (action)
 * Give different output to each
 * Multi arrows for some boxes to indicate multiple inputs and outputs
-* Add an additional box to indicate a future use of the output for bug insertyer
+* Add an additional box to indicate a future use of the output for bug inserter

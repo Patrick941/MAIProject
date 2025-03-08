@@ -20,8 +20,8 @@ for benchmark in "${benchmarks[@]}"; do
         prompt_content=$(cat $benchmark/prompt.txt)
         bug_content=$(cat $benchmark/bug.txt)
         popd
-        python ./main.py --type $type --amount $amount --save-scripts True --model $model --results-directory "$benchmark"Artifacts --prompt-override "$prompt_content" --bug-override "$bug_content"
+        python ./main.py --type $type --amount $amount --save-scripts True --model $model --results-directory "$benchmark"Artifacts --prompt-override "$prompt_content" --bug-override "$bug_content" --ast-bug True
     else
-        ./projectVenv/bin/python ./main.py --type $type --amount $amount --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt
+        ./projectVenv/bin/python ./main.py --type $type --amount $amount --save-scripts True --model "mistral-small" --results-directory "$benchmark"Artifacts --prompt-override $benchmark/prompt.txt --bug-override $benchmark/bug.txt  --ast-bug True
     fi
 done

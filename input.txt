@@ -1,10 +1,48 @@
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+import heapq
+
+def main():
+    import sys
+    input = sys.stdin.read().split()
+    ptr = 0
+    n = int(input[ptr])
+    ptr +=1
+    
+    graph = [[] for _ in range(n)]
+    
+    for i in range(n):
+        while ptr < len(input) and input[ptr] == '':
+            ptr +=1
+        if ptr >= len(input):
+            break
+        num_edges = 0
+        while ptr + num_edges*2 <= len(input):
+            if input[ptr + num_edges*2 -1] == '':
+                break
+            neighbor = int(input[ptr + num_edges*2])
+            weight = int(input[ptr + num_edges*2 +1])
+            graph[i].append( (neighbor, weight) )
+            num_edges +=1
+        ptr += 2*num_edges
+    
+    start_node = int(input[-1])
+    
+    # Dijkstra's algorithm
+    INF = float('inf')
+    dist = [INF] * n
+    dist[start_node] = 0
+    heap = []
+    heapq.heappush(heap, (0, start_node))
+    
+    while heap:
+        current_dist, u = heapq.heappop(heap)
+        if current_dist > dist[u]:
+            continue
+        for v, w in graph[u]:
+            if dist[v] > dist[u] + w:
+                dist[v] = dist[u] + w
+                heapq.heappush(heap, (dist[v], v))
+    
+    print(' '.join(map(str, dist)))
+
+if __name__ == "__main__":
+    main()

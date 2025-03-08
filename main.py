@@ -89,7 +89,7 @@ def main():
                     print("\033[93mGenerating problem " + str(index) + "...\033[0m")
                     local_output_file_path = output_file_path + "_" + str(index) + ".py"
                     if args.prompt_override is None:
-                        code_gen = code_generation.CodeGeneration(language, "Linked List", local_output_file_path, type, model, results_directory, debug)
+                        code_gen = code_generation.CodeGeneration(language, "Djikstra's Algorithm", local_output_file_path, type, model, results_directory, debug)
                     else:
                         code_gen = code_generation.CodeGeneration(language, args.prompt_override, local_output_file_path, type, model, results_directory)
                     return_code = code_gen.write_temp_script()
@@ -129,7 +129,7 @@ def main():
                                 break
                             try:     
                                 if args.bug_override is None:                 
-                                    bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the calculation of the fibbonaci sequence", results_directory)
+                                    bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, model, "add a bug in the djikstra algorithm implementation", results_directory)
                                 else:
                                     bug_insert = llm_bug_insertion.LLMBugInsertion(local_output_file_path, type, args.bug_override, results_directory)
                                 if bug_insert.insert_bug() != 0: continue
