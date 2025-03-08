@@ -308,6 +308,8 @@ The multi-threading topic had very similar results to djikstra as both have high
 
 \subsection{Hyperparameter Tuning}
 
+From all of the above testing a lot of data for model performance was collected. There has been no testing for the optimal hyperparameters for these models though. This will only be done for the best performing model in the previous examples. There is clear best model but considering the trade off between run time, reliability (attempts needed) and diversity the qwen2.5:32b model gives reliable, high quality results and does not take too excessive a quantity of time like the deepseek models. For that reason the hyperparameter-tuning will be performed on the qwen2.5:32b model using AST bug insertion. The parameters that will be tuned are the temperature, the max tokens, the top p and the top k. The temperature controls the amount of randomness in the output, the max tokens controls the maximum length of the output, the top p controls the probability of the output token being selected and the top k controls the number of tokens that are considered for the output. The tuning will be done using a grid search approach where the model will be run with a large set of possible combination of hyperparameters and the results will be compared. 
+
 
 \newpage
 \section{Conclusion}

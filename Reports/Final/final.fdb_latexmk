@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1741461370.61293 "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" "final.pdf" "final" 1741461371.60859 0
+["pdflatex"] 1741461850.21604 "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" "final.pdf" "final" 1741461851.22184 0
   "/etc/texmf/web2c/texmf.cnf" 1729962304.97619 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" 1741461369.40922 35527 dc2dfdf817a78822951b976672b33073 ""
+  "/home/patrick/Documents/MAIProject/Reports/Final/final.tex" 1741461850.05341 36680 e3c86b756a707ad70a997a6961a596d0 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm" 1136768653 1536 02c06700a42be0f5a28664c7273f82e7 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -141,9 +141,9 @@
   "Images/Tall_design_1.png" 1741456733.79509 63240 cc878c08414445a3127e49aa95aa9af8 ""
   "Images/Tall_design_2.png" 1741456766.55068 107175 0aface95bc6d65a6f63dcd5139dc35ec ""
   "Images/Trinity_Main_Logo.jpg" 1741179442.51405 215090 23584208db11df4b8c85b64085205202 ""
-  "final.aux" 1741461371.5672 5975 f96df1d2f700a46554255dc5f8b1d3b7 "pdflatex"
-  "final.tex" 1741461369.40922 35527 dc2dfdf817a78822951b976672b33073 ""
-  "final.toc" 1741461371.5682 2435 7da8b34f1af3a54c77ce391f8758d8f3 "pdflatex"
+  "final.aux" 1741461851.1804 5975 f96df1d2f700a46554255dc5f8b1d3b7 "pdflatex"
+  "final.tex" 1741461850.05341 36680 e3c86b756a707ad70a997a6961a596d0 ""
+  "final.toc" 1741461851.1814 2435 7da8b34f1af3a54c77ce391f8758d8f3 "pdflatex"
   (generated)
   "final.aux"
   "final.log"
