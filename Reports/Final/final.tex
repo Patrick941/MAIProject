@@ -288,7 +288,14 @@ Much like above these graphs too follow the same trend across models but the sca
 \label{fig:Complexity_Comparison_Linked_Lists}
 \end{figure}
 
+The linked lists topic had performance between the baseline and the djikstra topic. The runtime and attempts required were comfortably higher than the baseline but not quite as high as djikstra, particularly for the attempts required. The complexity and diversity scores were very similar to the baseline and were not increased significantly. 
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Threads.png}
+\caption{Model Comparison Threads}
+\label{fig:Model_Comparison_Threads}
+\end{figure}
 
 \begin{figure}[h!]
 \centering
@@ -297,12 +304,7 @@ Much like above these graphs too follow the same trend across models but the sca
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Threads.png}
-\caption{Model Comparison Threads}
-\label{fig:Model_Comparison_Threads}
-\end{figure}
+The multi-threading topic had very similar results to djikstra as both have high levels of nesting and subsequent complexity. However where it does differ is the diversity score, the multi-threading does not see nearly as diverse results as djikstra. Examing the output code this appears to be because each case of multi-threading defaulted to the same few fundamental examples of a deadlock while the djikstra topic had no clear bug to insert and so the results were much more varied.
 
 \subsection{Hyperparameter Tuning}
 
