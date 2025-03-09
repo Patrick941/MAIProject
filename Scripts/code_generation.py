@@ -4,7 +4,7 @@ import Scripts.ollama_classes as ollama_classes
 import Scripts.openAI_classes as openAI_classes
 
 class CodeGeneration:
-    def __init__(self, language, topic, output_file_path, type, model, results_directory, debug=False, prompt_override=None):
+    def __init__(self, language, topic, output_file_path, type, model, results_directory, debug=False, prompt_override=None, hyperparameters=None):
         self.language = language
         self.topic = topic
         self.output_file_path = output_file_path
@@ -13,10 +13,14 @@ class CodeGeneration:
         self.model = model
         self.results_directory = results_directory
         self.debug = debug
+        self.hyperparameters = hyperparameters
 
     def write_temp_script(self):
         if self.type == "ollama":
-            response_generator = ollama_classes.ResponseGenerator(self.model)
+            if self.hyperparameters:
+                response_generator = ollama_classes.ResponseGenerator(self.model, temperature=self.hyperparameters[0], max_tokens=self.hyperparameters[1], top_p=self.hyperparameters[2], top_k=self.hyperparameters[3])
+            else:
+                response_generator = ollama_classes.ResponseGenerator(self.model)
         elif self.type == "openAI":
             response_generator = openAI_classes.ResponseGenerator()
         else:

@@ -1,5 +1,7 @@
 import csv
 import numpy as np
+from statistics import mean
+from collections import defaultdict
 import matplotlib.pyplot as plt
 
 def generate_graphs(data, category):
@@ -161,3 +163,100 @@ generate_graphs(arrays_data, 'Arrays')
 generate_graphs(djikstra_data, 'Djikstra')
 generate_graphs(linked_lists_data, 'Linked_Lists')
 generate_graphs(threads_data, 'Threads')
+
+with open('./hyperparameter_tuning.csv', newline='') as f:
+    reader = csv.DictReader(f)
+    hyperparam_data = []
+    for row in reader:
+        hyperparam_data.append({
+            'temperature': float(row['temperature']),
+            'max_tokens': int(row['max_tokens']),
+            'top_k': int(row['top_k']),
+            'top_p': float(row['top_p']),
+            'runtime': int(row['runtime']),
+            'cognitive_complexity': float(row['cognitive_complexity']),
+            'cyclomatic_complexity': float(row['cyclomatic_complexity']),
+            'code_generation_attempts': float(row['code_generation_attempts']),
+            'bug_insertion_attempts': float(row['bug_insertion_attempts']),
+            'similarity_score': float(row['similarity_score'])
+        })
+        
+        
+
+def generate_hyperparameter_graphs(hyperparam_data):
+    import matplotlib.pyplot as plt
+
+    # Add derived fields
+    for row in hyperparam_data:
+        row['combined_attempts'] = row['code_generation_attempts'] + row['bug_insertion_attempts']
+        row['diversity_score'] = 1 / row['similarity_score'] if row['similarity_score'] else float('inf')
+
+    params = ['temperature', 'max_tokens', 'top_k', 'top_p']
+
+    for p in params:
+        # Group data by hyperparameter value
+        grouped = defaultdict(list)
+        for row in hyperparam_data:
+            grouped[row[p]].append(row)
+
+        # Prepare data for runtime vs attempts
+        labels, runtimes, attempts = [], [], []
+        for val in sorted(grouped.keys()):
+            entries = grouped[val]
+            labels.append(str(val))
+            runtimes.append(mean(e['runtime'] for e in entries))
+            attempts.append(mean(e['combined_attempts'] for e in entries))
+
+        # Prepare data for complexities and diversity
+        cog_comp, cyc_comp, div_score = [], [], []
+        for val in sorted(grouped.keys()):
+            entries = grouped[val]
+            cog_comp.append(mean(e['cognitive_complexity'] for e in entries))
+            cyc_comp.append(mean(e['cyclomatic_complexity'] for e in entries))
+            div_score.append(mean(e['diversity_score'] for e in entries))
+
+        # Create a single figure with two subplots
+        fig, (ax_top, ax_bottom) = plt.subplots(2, 1, figsize=(14, 12))
+
+        # First subplot: runtime vs attempts
+        bar_width = 0.3
+        index = np.arange(len(labels))
+        bar1 = ax_top.bar(index, runtimes, bar_width, label='Runtime', color='skyblue')
+        ax_top.set_xlabel(p)
+        ax_top.set_ylabel('Runtime (s)')
+        ax_top.tick_params(axis='y')
+        ax_top.set_xticks(index + bar_width / 2)
+        ax_top.set_xticklabels(labels, rotation=45, ha='right')
+
+        ax_top_twin = ax_top.twinx()
+        bar2 = ax_top_twin.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
+        ax_top_twin.set_ylabel('Attempts')
+        ax_top_twin.tick_params(axis='y')
+
+        # Second subplot: cognitive, cyclomatic, diversity (3 y-axes)
+        bar_width = 0.2
+        index = np.arange(len(labels))
+        bar1 = ax_bottom.bar(index, cog_comp, bar_width, label='Cognitive Complexity', color='lightblue')
+        ax_bottom.set_xlabel(p)
+        ax_bottom.set_ylabel('Cognitive Complexity')
+        ax_bottom.tick_params(axis='y')
+        ax_bottom.set_xticks(index + bar_width)
+        ax_bottom.set_xticklabels(labels, rotation=45, ha='right')
+
+        ax_bottom2 = ax_bottom.twinx()
+        bar2 = ax_bottom2.bar(index + bar_width, cyc_comp, bar_width, label='Cyclomatic Complexity', color='lightcoral')
+        ax_bottom2.set_ylabel('Cyclomatic Complexity')
+        ax_bottom2.tick_params(axis='y')
+
+        ax_bottom3 = ax_bottom.twinx()
+        ax_bottom3.spines['right'].set_position(('outward', 60))
+        bar3 = ax_bottom3.bar(index + 2 * bar_width, div_score, bar_width, label='Diversity Score', color='lightgreen')
+        ax_bottom3.set_ylabel('Diversity Score')
+        ax_bottom3.tick_params(axis='y')
+
+        fig.tight_layout()
+        fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax_bottom.transAxes)
+        plt.savefig(f'Images/Hyperparam_{p}_Comparison.png')
+        plt.close()
+        
+generate_hyperparameter_graphs(hyperparam_data)
