@@ -163,27 +163,9 @@ generate_graphs(arrays_data, 'Arrays')
 generate_graphs(djikstra_data, 'Djikstra')
 generate_graphs(linked_lists_data, 'Linked_Lists')
 generate_graphs(threads_data, 'Threads')
+   
 
-with open('./hyperparameter_tuning.csv', newline='') as f:
-    reader = csv.DictReader(f)
-    hyperparam_data = []
-    for row in reader:
-        hyperparam_data.append({
-            'temperature': float(row['temperature']),
-            'max_tokens': int(row['max_tokens']),
-            'top_k': int(row['top_k']),
-            'top_p': float(row['top_p']),
-            'runtime': int(row['runtime']),
-            'cognitive_complexity': float(row['cognitive_complexity']),
-            'cyclomatic_complexity': float(row['cyclomatic_complexity']),
-            'code_generation_attempts': float(row['code_generation_attempts']),
-            'bug_insertion_attempts': float(row['bug_insertion_attempts']),
-            'similarity_score': float(row['similarity_score'])
-        })
-        
-        
-
-def generate_hyperparameter_graphs(hyperparam_data):
+def generate_hyperparameter_graphs(hyperparam_data, param_name):
     import matplotlib.pyplot as plt
 
     # Add derived fields
@@ -191,72 +173,143 @@ def generate_hyperparameter_graphs(hyperparam_data):
         row['combined_attempts'] = row['code_generation_attempts'] + row['bug_insertion_attempts']
         row['diversity_score'] = 1 / row['similarity_score'] if row['similarity_score'] else float('inf')
 
-    params = ['temperature', 'max_tokens', 'top_k', 'top_p']
+    # Group data by hyperparameter value
+    grouped = defaultdict(list)
+    for row in hyperparam_data:
+        grouped[row[param_name]].append(row)
 
-    for p in params:
-        # Group data by hyperparameter value
-        grouped = defaultdict(list)
-        for row in hyperparam_data:
-            grouped[row[p]].append(row)
+    # Prepare data for runtime vs attempts
+    labels, runtimes, attempts = [], [], []
+    for val in sorted(grouped.keys()):
+        entries = grouped[val]
+        labels.append(str(val))
+        runtimes.append(mean(e['runtime'] for e in entries))
+        attempts.append(mean(e['combined_attempts'] for e in entries))
 
-        # Prepare data for runtime vs attempts
-        labels, runtimes, attempts = [], [], []
-        for val in sorted(grouped.keys()):
-            entries = grouped[val]
-            labels.append(str(val))
-            runtimes.append(mean(e['runtime'] for e in entries))
-            attempts.append(mean(e['combined_attempts'] for e in entries))
+    # Prepare data for complexities and diversity
+    cog_comp, cyc_comp, div_score = [], [], []
+    for val in sorted(grouped.keys()):
+        entries = grouped[val]
+        cog_comp.append(mean(e['cognitive_complexity'] for e in entries))
+        cyc_comp.append(mean(e['cyclomatic_complexity'] for e in entries))
+        div_score.append(mean(e['diversity_score'] for e in entries))
 
-        # Prepare data for complexities and diversity
-        cog_comp, cyc_comp, div_score = [], [], []
-        for val in sorted(grouped.keys()):
-            entries = grouped[val]
-            cog_comp.append(mean(e['cognitive_complexity'] for e in entries))
-            cyc_comp.append(mean(e['cyclomatic_complexity'] for e in entries))
-            div_score.append(mean(e['diversity_score'] for e in entries))
+    # Create a single figure with two subplots
+    fig, (ax_top, ax_bottom) = plt.subplots(2, 1, figsize=(14, 12))
 
-        # Create a single figure with two subplots
-        fig, (ax_top, ax_bottom) = plt.subplots(2, 1, figsize=(14, 12))
+    # First subplot: runtime vs attempts
+    bar_width = 0.3
+    index = np.arange(len(labels))
+    bar1 = ax_top.bar(index, runtimes, bar_width, label='Runtime', color='skyblue')
+    ax_top.set_xlabel(param_name)
+    ax_top.set_ylabel('Runtime (s)')
+    ax_top.tick_params(axis='y')
+    ax_top.set_xticks(index + bar_width / 2)
+    ax_top.set_xticklabels(labels, rotation=45, ha='right')
 
-        # First subplot: runtime vs attempts
-        bar_width = 0.3
-        index = np.arange(len(labels))
-        bar1 = ax_top.bar(index, runtimes, bar_width, label='Runtime', color='skyblue')
-        ax_top.set_xlabel(p)
-        ax_top.set_ylabel('Runtime (s)')
-        ax_top.tick_params(axis='y')
-        ax_top.set_xticks(index + bar_width / 2)
-        ax_top.set_xticklabels(labels, rotation=45, ha='right')
+    ax_top_twin = ax_top.twinx()
+    bar2 = ax_top_twin.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
+    ax_top_twin.set_ylabel('Attempts')
+    ax_top_twin.tick_params(axis='y')
 
-        ax_top_twin = ax_top.twinx()
-        bar2 = ax_top_twin.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
-        ax_top_twin.set_ylabel('Attempts')
-        ax_top_twin.tick_params(axis='y')
+    # Second subplot: cognitive, cyclomatic, diversity (3 y-axes)
+    bar_width = 0.2
+    index = np.arange(len(labels))
+    bar1 = ax_bottom.bar(index, cog_comp, bar_width, label='Cognitive Complexity', color='lightblue')
+    ax_bottom.set_xlabel(param_name)
+    ax_bottom.set_ylabel('Cognitive Complexity')
+    ax_bottom.tick_params(axis='y')
+    ax_bottom.set_xticks(index + bar_width)
+    ax_bottom.set_xticklabels(labels, rotation=45, ha='right')
 
-        # Second subplot: cognitive, cyclomatic, diversity (3 y-axes)
-        bar_width = 0.2
-        index = np.arange(len(labels))
-        bar1 = ax_bottom.bar(index, cog_comp, bar_width, label='Cognitive Complexity', color='lightblue')
-        ax_bottom.set_xlabel(p)
-        ax_bottom.set_ylabel('Cognitive Complexity')
-        ax_bottom.tick_params(axis='y')
-        ax_bottom.set_xticks(index + bar_width)
-        ax_bottom.set_xticklabels(labels, rotation=45, ha='right')
+    ax_bottom2 = ax_bottom.twinx()
+    bar2 = ax_bottom2.bar(index + bar_width, cyc_comp, bar_width, label='Cyclomatic Complexity', color='lightcoral')
+    ax_bottom2.set_ylabel('Cyclomatic Complexity')
+    ax_bottom2.tick_params(axis='y')
 
-        ax_bottom2 = ax_bottom.twinx()
-        bar2 = ax_bottom2.bar(index + bar_width, cyc_comp, bar_width, label='Cyclomatic Complexity', color='lightcoral')
-        ax_bottom2.set_ylabel('Cyclomatic Complexity')
-        ax_bottom2.tick_params(axis='y')
+    ax_bottom3 = ax_bottom.twinx()
+    ax_bottom3.spines['right'].set_position(('outward', 60))
+    bar3 = ax_bottom3.bar(index + 2 * bar_width, div_score, bar_width, label='Diversity Score', color='lightgreen')
+    ax_bottom3.set_ylabel('Diversity Score')
+    ax_bottom3.tick_params(axis='y')
 
-        ax_bottom3 = ax_bottom.twinx()
-        ax_bottom3.spines['right'].set_position(('outward', 60))
-        bar3 = ax_bottom3.bar(index + 2 * bar_width, div_score, bar_width, label='Diversity Score', color='lightgreen')
-        ax_bottom3.set_ylabel('Diversity Score')
-        ax_bottom3.tick_params(axis='y')
-
-        fig.tight_layout()
-        fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax_bottom.transAxes)
-        plt.savefig(f'Images/Hyperparam_{p}_Comparison.png')
-        plt.close()
+    fig.tight_layout()
+    fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax_bottom.transAxes)
+    plt.savefig(f'Images/Hyperparam_{param_name}_Comparison.png')
+    plt.close()
         
-generate_hyperparameter_graphs(hyperparam_data)
+temperature_data = [
+    {'temperature': 0.001, 'runtime': 194, 'cognitive_complexity': 56.54932628534889, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9655366098262044},
+    {'temperature': 0.002, 'runtime': 307, 'cognitive_complexity': 56.54932628534889, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9655366098262044},
+    {'temperature': 0.004, 'runtime': 260, 'cognitive_complexity': 55.70768474447835, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.4652825970800487},
+    {'temperature': 0.008, 'runtime': 151, 'cognitive_complexity': 56.87723560340458, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7248935626527073},
+    {'temperature': 0.016, 'runtime': 158, 'cognitive_complexity': 65.25870537984157, 'cyclomatic_complexity': 2.75, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.4698105141180549},
+    {'temperature': 0.032, 'runtime': 230, 'cognitive_complexity': 58.85449466848282, 'cyclomatic_complexity': 3.0, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.5569735674717782},
+    {'temperature': 0.064, 'runtime': 331, 'cognitive_complexity': 66.1475483007262, 'cyclomatic_complexity': 2.75, 'code_generation_attempts': 1.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.4483874678958113},
+    {'temperature': 0.128, 'runtime': 164, 'cognitive_complexity': 56.34794856180849, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.332241565584618},
+    {'temperature': 0.256, 'runtime': 116, 'cognitive_complexity': 55.42147105947762, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.1457167569377433},
+    {'temperature': 0.512, 'runtime': 193, 'cognitive_complexity': 58.41115138255944, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.2660534386737279},
+    {'temperature': 1.024, 'runtime': 129, 'cognitive_complexity': 55.788091836026, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.906223444704691},
+    {'temperature': 2.048, 'runtime': 184, 'cognitive_complexity': 61.884398244165844, 'cyclomatic_complexity': 4.5, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6355270900238865},
+    {'temperature': 4.096, 'runtime': 133, 'cognitive_complexity': 61.884398244165844, 'cyclomatic_complexity': 4.5, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6355270900238865},
+    {'temperature': 8.192, 'runtime': 284, 'cognitive_complexity': 56.959005255632704, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 1.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9839866872651846},
+    {'temperature': 16.384, 'runtime': 233, 'cognitive_complexity': 56.959005255632704, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 1.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9839866872651846},
+    {'temperature': 32.768, 'runtime': 129, 'cognitive_complexity': 56.959005255632704, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 1.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9839866872651846},
+    {'temperature': 65.536, 'runtime': 233, 'cognitive_complexity': 58.544563417254615, 'cyclomatic_complexity': 3.75, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6079502324501929}
+]
+
+max_tokens_data = [
+    {'max_tokens': 10, 'runtime': 325, 'cognitive_complexity': 55.28328923131547, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.0935738210261317},
+    {'max_tokens': 16, 'runtime': 301, 'cognitive_complexity': 54.69337315286633, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9840382636472813},
+    {'max_tokens': 26, 'runtime': 190, 'cognitive_complexity': 55.65977558309831, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7562192023459997},
+    {'max_tokens': 41, 'runtime': 183, 'cognitive_complexity': 55.967453877175004, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.32090576730472},
+    {'max_tokens': 66, 'runtime': 205, 'cognitive_complexity': 55.967453877175004, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.32090576730472},
+    {'max_tokens': 105, 'runtime': 271, 'cognitive_complexity': 55.967453877175004, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.32090576730472},
+    {'max_tokens': 168, 'runtime': 161, 'cognitive_complexity': 55.432413858433684, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3129142055371195},
+    {'max_tokens': 268, 'runtime': 148, 'cognitive_complexity': 55.61829975715055, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.5678363503457144},
+    {'max_tokens': 429, 'runtime': 246, 'cognitive_complexity': 55.66814970960912, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.075705709488241},
+    {'max_tokens': 687, 'runtime': 237, 'cognitive_complexity': 56.98767029000747, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3750930813315745},
+    {'max_tokens': 1100, 'runtime': 263, 'cognitive_complexity': 56.98767029000747, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3750930813315745},
+    {'max_tokens': 1759, 'runtime': 217, 'cognitive_complexity': 62.693951104790926, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.437570938329928},
+    {'max_tokens': 2815, 'runtime': 211, 'cognitive_complexity': 55.27052278838247, 'cyclomatic_complexity': 4.5, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.77230705799445},
+    {'max_tokens': 4504, 'runtime': 233, 'cognitive_complexity': 57.1439778075115, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.8764360888057423}
+]
+
+top_k_data = [
+    {'top_k': 0.1, 'runtime': 183, 'cognitive_complexity': 55.02544136765656, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3671094425561172},
+    {'top_k': 0.16, 'runtime': 152, 'cognitive_complexity': 55.77950202121008, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.030381469911927},
+    {'top_k': 0.256, 'runtime': 348, 'cognitive_complexity': 56.46397671949799, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 2.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.175614841914799},
+    {'top_k': 0.4096, 'runtime': 237, 'cognitive_complexity': 55.803827000448685, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.251778937000031},
+    {'top_k': 0.65536, 'runtime': 234, 'cognitive_complexity': 56.851192411748556, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.4601721072455083},
+    {'top_k': 1.04858, 'runtime': 170, 'cognitive_complexity': 56.22205279470599, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7068162631064085},
+    {'top_k': 1.67772, 'runtime': 191, 'cognitive_complexity': 52.42027895524751, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7039905113718674},
+    {'top_k': 2.68435, 'runtime': 266, 'cognitive_complexity': 63.568420757108775, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 1.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.5904552293442689},
+    {'top_k': 4.29497, 'runtime': 205, 'cognitive_complexity': 55.923586625531755, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.010288120262616},
+    {'top_k': 6.87195, 'runtime': 296, 'cognitive_complexity': 57.55140030595501, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 1.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7741031992795009},
+    {'top_k': 10.9951, 'runtime': 224, 'cognitive_complexity': 63.71908106510007, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3593937951957746},
+    {'top_k': 17.5922, 'runtime': 187, 'cognitive_complexity': 56.27357209594703, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6375992874079066},
+    {'top_k': 28.1475, 'runtime': 355, 'cognitive_complexity': 55.410236116069555, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 2.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.012715683450701}
+]
+
+top_p_data = [
+    {'top_p': 0.001, 'runtime': 212, 'cognitive_complexity': 56.005276841311996, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7546708442469705},
+    {'top_p': 0.002, 'runtime': 189, 'cognitive_complexity': 56.11041699146665, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.405864784085643},
+    {'top_p': 0.004, 'runtime': 150, 'cognitive_complexity': 55.92969441534511, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.642505630290381},
+    {'top_p': 0.008, 'runtime': 137, 'cognitive_complexity': 56.044294440493985, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.2766595426026328},
+    {'top_p': 0.016, 'runtime': 143, 'cognitive_complexity': 55.57252460701413, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.420754164558442},
+    {'top_p': 0.032, 'runtime': 242, 'cognitive_complexity': 57.791619354925814, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7390576759132372},
+    {'top_p': 0.064, 'runtime': 238, 'cognitive_complexity': 55.771836449338366, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.5399142080108108},
+    {'top_p': 0.128, 'runtime': 148, 'cognitive_complexity': 55.531972950533856, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.0333354394389334},
+    {'top_p': 0.256, 'runtime': 244, 'cognitive_complexity': 55.434654585056265, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.89173182006249},
+    {'top_p': 0.512, 'runtime': 260, 'cognitive_complexity': 55.434654585056265, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.89173182006249},
+    {'top_p': 1.024, 'runtime': 330, 'cognitive_complexity': 55.85048570298173, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 2.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.1701105552425495},
+    {'top_p': 2.048, 'runtime': 211, 'cognitive_complexity': 56.27689605927727, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.1082465782597657},
+    {'top_p': 4.096, 'runtime': 254, 'cognitive_complexity': 55.225569742495665, 'cyclomatic_complexity': 2.75, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.5110658972771867},
+    {'top_p': 8.192, 'runtime': 125, 'cognitive_complexity': 55.074116480058265, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.1625989813569095},
+    {'top_p': 16.384, 'runtime': 153, 'cognitive_complexity': 55.282235454219624, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.075476685804299}
+]       
+ 
+generate_hyperparameter_graphs(temperature_data, 'temperature')
+generate_hyperparameter_graphs(max_tokens_data, 'max_tokens')
+generate_hyperparameter_graphs(top_k_data, 'top_k')
+generate_hyperparameter_graphs(top_p_data, 'top_p')
