@@ -358,7 +358,12 @@ The multi-threading topic had very similar results to djikstra as both have high
 \newpage
 \section{Conclusion}
 
-This will briefly summarise the project and discuss the future of the project.
+This project managed to achieve its goals of first creating a tool that is able to generate problems for students with customisable topic, bug type and partially customisable language. The project also investigated the performance of bug insertion using a LLM compared to a more targeted approach using Abstract Syntax Trees. A variety of metrics were implemented to compare the performance of the model with different parameters given. An extensive test suite was created to compare the program with different models, different bug insertion types, different topics and different hyperparameters for the model. The results of these tests showed that the AST bug insertion method was faster and more reliable than the LLM approach. However, the AST bug insertion method cannot provide the same customisability to the end user as the LLM bug insertion method.\\
+\\
+Some future work to expand upon this project could include two parts. The first to develop an interactive frontend that a user could then interact with whether that user be a student or a professor. There is also the potential to then collect user feedback of the tool as although the metrics give a good idea of the quality of the code they only attempt to recreate the opinions of a developer. Another potential piece of future work which would definitely be less important is inspired by the poor consistency of the LLM bug insertion method. This could be improved upon by fine-tuning a model for bug insertion, this could provide a perfect balance of the two methods provided where it could have the adaptability and customisability of the LLM method but the reliability of the AST method.\\
+\\
+In conclusion it is possible to generate useable problems to teach novice programmers how to debug using an LLM to generate the original code and then inserting bugs in a couple of methods.
+
 
 \newpage
 \begin{thebibliography}{9}

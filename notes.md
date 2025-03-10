@@ -1,6 +1,6 @@
 16:9
 Debugging importance first
-Why programs fail : a guide to systematic debugging / Andreas Zeller.    
+
 Talk about prior similar non LLM work
 Talk about reason for not testing on people
 Prompt engineering slide
@@ -19,3 +19,6 @@ Try rotate the daigram to vertical to fit in the
 * Give different output to each
 * Multi arrows for some boxes to indicate multiple inputs and outputs
 * Add an additional box to indicate a future use of the output for bug inserter
+
+
+Why programs fail : a guide to systematic debugging / Andreas Zeller.    
