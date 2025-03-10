@@ -217,6 +217,47 @@ The run time metric is very simply the length of time it takes a given run of ma
 \newpage
 \section{Results and Discussion}
 
+\subsection{Hyperparameter Tuning}
+
+From all of the above testing a lot of data for model performance was collected. There has been no testing for the optimal hyperparameters for these models though. This will only be done for the best performing model in the previous examples. There is clear best model but considering the trade off between run time, reliability (attempts needed) and diversity the qwen2.5:32b model gives reliable, high quality results and does not take too excessive a quantity of time like the deepseek models. For that reason the hyperparameter-tuning will be performed on the qwen2.5:32b model using AST bug insertion. The parameters that will be tuned are the temperature, the max tokens, the top p and the top k. The temperature controls the amount of randomness in the output, the max tokens controls the maximum length of the output, the top p controls the probability of the output token being selected and the top k controls the number of tokens that are considered for the output. The tuning will be done using a grid search approach where the model will be run with a large set of possible combination of hyperparameters and the results will be compared. Each bar of each graph has the average results of the program with the current hyperparameter at the given value. The graphs for the hyperparameter tuning for each hyperparameter are shown below:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth]{Images/Hyperparam_temperature_Comparison.png}
+\caption{Complexity Comparison Threads}
+\label{fig:Complexity_Comparison_Threads}
+\end{figure}
+
+As mentioned above temperature is the amount of randomness in the output. From this we might expect to see that the attempts required and resultant run time is a bit higher with a higher temperature. We would also expect to see a higher diversity score at higher temperatures. We can see in the first chart that once the temperature reaches approximately 8 the accuracy does begin to fall. We do not however see the expected results for diversity, this is likely because the topic is quite constrained and the bug insertion is done using the AST bug insertion which is not affected by temperature. For this hyperparmeter there does not appear to be a clear best value but good results are seen at approximately 0.25 so this will be the value chosen.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth]{Images/Hyperparam_max_tokens_Comparison.png}
+\caption{Complexity Comparison Threads}
+\label{fig:Complexity_Comparison_Threads}
+\end{figure}
+
+The max tokens hyperparameter is the maximum length of the output. For this we would expect to see very poor results while the max tokens is very low as the code will be cut off before it is complete. We would not expect to see much difference in the second graph as the diversity and complexity of the code should not be affected by the max token count. In the first graph we do see what we expect. Initially there is very poor results as the code is not able to be generated with the given max tokens. However, once the max tokens reaches an acceptable threshold the results get much better as most responses do not get cut off. This then slowly improves as the max tokens increases and the few longer responses begin to not be cut off either. Suprisingly though we do see a sudden significant increase in the attempts and run count after 400 tokens. We know from the increase in both the attempt count and the runtime that this is due to failed responses and not an increase in response time from the LLM. It could be due to the LLM beginning to ramble and providing lower quality responses as the max tokens increases. The increase in diversity in the second graph provides some evidence for this as the responses are becoming more varied. Taking this the hyperparameter for this will be set to 300 to get the best length support for responses without a loss of accuracy.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth]{Images/Hyperparam_top_k_Comparison.png}
+\caption{Complexity Comparison Threads}
+\label{fig:Complexity_Comparison_Threads}
+\end{figure}
+
+When the model is predicting the next token it will assign possibilities to all tokens. The top k hyperparameter will limit the number of tokens that are considered for the output to the top k. This has a similar affect to temperature. A decrease in accuracy as top k increases can be observed, once it goes above 3 we can see that the average attempts and runtimes begins to increase. The diversity score however, does not appear to be affected so for this hyperparameter it will be best to keep it at 1 or 2.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.8\linewidth]{Images/Hyperparam_top_p_Comparison.png}
+\caption{Complexity Comparison Threads}
+\label{fig:Complexity_Comparison_Threads}
+\end{figure}
+
+Similarly to top k the top p hyperparameter will limit the number of tokens that are considered. However, the top p will limit the tokens to that percentage of probabilities. That is, for a top p of 0.3 and if the first token has 0.2 probability and the second token has 0.1 probability these will be the only tokens considered. Opposite effects to that of top k are seen here. The lower the top p the more constrained the output is and this would lead one to this the responses would be more likely to be successful which would lead to shorter runtimes and less attempts needed. Though here we see high runtimes and retry counts with a low p. Once we get beyond the initial few values we see an increase in the accuracy of the responses which appears to hit a best accuracy at a top p of 0.15 - 0.3. The diversity score much like the top k is not affected by the top p. For this hyperparameter the value chosen will be 0.2.
+
+
 \subsection{Model Benchmark}
 
 From the result of the model benchmark script the below graph was generate which compares the time taken, attempts taken and diversity score for each model with both LLM bug insertion and AST bug insertion.
@@ -312,45 +353,6 @@ The linked lists topic had performance between the baseline and the djikstra top
 
 The multi-threading topic had very similar results to djikstra as both have high levels of nesting and subsequent complexity. However where it does differ is the diversity score, the multi-threading does not see nearly as diverse results as djikstra. Examing the output code this appears to be because each case of multi-threading defaulted to the same few fundamental examples of a deadlock while the djikstra topic had no clear bug to insert and so the results were much more varied.
 
-\subsection{Hyperparameter Tuning}
-
-From all of the above testing a lot of data for model performance was collected. There has been no testing for the optimal hyperparameters for these models though. This will only be done for the best performing model in the previous examples. There is clear best model but considering the trade off between run time, reliability (attempts needed) and diversity the qwen2.5:32b model gives reliable, high quality results and does not take too excessive a quantity of time like the deepseek models. For that reason the hyperparameter-tuning will be performed on the qwen2.5:32b model using AST bug insertion. The parameters that will be tuned are the temperature, the max tokens, the top p and the top k. The temperature controls the amount of randomness in the output, the max tokens controls the maximum length of the output, the top p controls the probability of the output token being selected and the top k controls the number of tokens that are considered for the output. The tuning will be done using a grid search approach where the model will be run with a large set of possible combination of hyperparameters and the results will be compared. Each bar of each graph has the average results of the program with the current hyperparameter at the given value. The graphs for the hyperparameter tuning for each hyperparameter are shown below:
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_temperature_Comparison.png}
-\caption{Complexity Comparison Threads}
-\label{fig:Complexity_Comparison_Threads}
-\end{figure}
-
-As mentioned above temperature is the amount of randomness in the output. From this we might expect to see that the attempts required and resultant run time is a bit higher with a higher temperature. We would also expect to see a higher diversity score at higher temperatures. We can see in the first chart that once the temperature reaches approximately 8 the accuracy does begin to fall. We do not however see the expected results for diversity, this is likely because the topic is quite constrained and the bug insertion is done using the AST bug insertion which is not affected by temperature.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_max_tokens_Comparison.png}
-\caption{Complexity Comparison Threads}
-\label{fig:Complexity_Comparison_Threads}
-\end{figure}
-
-The max tokens hyperparameter is the maximum length of the output. For this we would expect to see very poor results while the max tokens is very low as the code will be cut off before it is complete. We would not expect to see much difference in the second graph as the diversity and complexity of the code should not be affected by the max token count. In the first graph we do see what we expect. Initially there is very poor results as the code is not able to be generated with the given max tokens. However, once the max tokens reaches an acceptable threshold the results get much better as most responses do not get cut off. This then slowly improves as the max tokens increases and the few longer responses begin to not be cut off either. Suprisingly though we do see a sudden significant increase in the attempts and run count after 400 tokens. We know from the increase in both the attempt count and the runtime that this is due to failed responses and not an increase in response time from the LLM. It could be due to the LLM beginning to ramble and providing lower quality responses as the max tokens increases. The increase in diversity in the second graph provides some evidence for this as the responses are becoming more varied.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_top_k_Comparison.png}
-\caption{Complexity Comparison Threads}
-\label{fig:Complexity_Comparison_Threads}
-\end{figure}
-
-When the model is predicting the next token it will assign possibilities to all tokens. The top k hyperparameter will limit the number of tokens that are considered for the output to the top k. This has a similar affect to temperature.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_top_p_Comparison.png}
-\caption{Complexity Comparison Threads}
-\label{fig:Complexity_Comparison_Threads}
-\end{figure}
-
-Similarly to top k the top p hyperparameter will limit the number of tokens that are considered. However, the top p will limit the tokens to that percentage of probabilities. That is, for a top p of 0.3 and if the first token has 0.2 probability and the second token has 0.1 probability these will be the only tokens considered.
 
 
 \newpage

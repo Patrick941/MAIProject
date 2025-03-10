@@ -29,8 +29,8 @@
 \contentsline {subsubsection}{\numberline {5.3.3}Attempt Count}{22}{}%
 \contentsline {subsubsection}{\numberline {5.3.4}Run Time}{23}{}%
 \contentsline {section}{\numberline {6}Results and Discussion}{24}{}%
-\contentsline {subsection}{\numberline {6.1}Model Benchmark}{24}{}%
-\contentsline {subsection}{\numberline {6.2}Topic Benchmark}{26}{}%
-\contentsline {subsection}{\numberline {6.3}Hyperparameter Tuning}{31}{}%
-\contentsline {section}{\numberline {7}Conclusion}{35}{}%
-\contentsline {section}{\numberline {8}References}{36}{}%
+\contentsline {subsection}{\numberline {6.1}Hyperparameter Tuning}{24}{}%
+\contentsline {subsection}{\numberline {6.2}Model Benchmark}{28}{}%
+\contentsline {subsection}{\numberline {6.3}Topic Benchmark}{31}{}%
+\contentsline {section}{\numberline {7}Conclusion}{36}{}%
+\contentsline {section}{\numberline {8}References}{37}{}%
