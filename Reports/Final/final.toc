@@ -32,5 +32,5 @@
 \contentsline {subsection}{\numberline {6.1}Model Benchmark}{24}{}%
 \contentsline {subsection}{\numberline {6.2}Topic Benchmark}{26}{}%
 \contentsline {subsection}{\numberline {6.3}Hyperparameter Tuning}{31}{}%
-\contentsline {section}{\numberline {7}Conclusion}{34}{}%
-\contentsline {section}{\numberline {8}References}{35}{}%
+\contentsline {section}{\numberline {7}Conclusion}{35}{}%
+\contentsline {section}{\numberline {8}References}{36}{}%

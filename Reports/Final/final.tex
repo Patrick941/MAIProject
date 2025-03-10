@@ -341,12 +341,16 @@ The max tokens hyperparameter is the maximum length of the output. For this we w
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
 
+When the model is predicting the next token it will assign possibilities to all tokens. The top k hyperparameter will limit the number of tokens that are considered for the output to the top k. This has a similar affect to temperature.
+
 \begin{figure}[h!]
 \centering
 \includegraphics[width=0.8\linewidth]{Images/Hyperparam_top_p_Comparison.png}
 \caption{Complexity Comparison Threads}
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
+
+Similarly to top k the top p hyperparameter will limit the number of tokens that are considered. However, the top p will limit the tokens to that percentage of probabilities. That is, for a top p of 0.3 and if the first token has 0.2 probability and the second token has 0.1 probability these will be the only tokens considered.
 
 
 \newpage
