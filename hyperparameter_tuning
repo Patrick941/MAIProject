@@ -16,27 +16,27 @@ top_ks=$(awk 'BEGIN{for(i=1;i<=200;i*=1.6)print i}')
 top_ps=$(awk 'BEGIN{for(i=0.001;i<=2;i*=2)print i}')
 
 
-## Loop through temperature
-## for temperature in $temperatures; do
-##     start_time=$(date +%s)
-##     hyperparameters="$temperature,$default_max_tokens,$default_top_k,$default_top_p"
-##     ./projectVenv/bin/python ./main.py --type "ollama" --amount $run_count --save-scripts True --model "qwen2.5:32b" --ast-bug True --hyperparameters "$hyperparameters"
-##     end_time=$(date +%s)
-##     runtime=$((end_time - start_time))
-##     echo "$hyperparameters,$runtime" >> artifacts/hyperparameter_tuning.csv
-##     tail -n 1 artifacts/output.csv >> artifacts/hyperparameter_tuning.csv
-## done
-## 
-## # Loop through max_tokens
-## for max_token in $max_tokens; do
-##     start_time=$(date +%s)
-##     hyperparameters="$default_temperature,$max_token,$default_top_k,$default_top_p"
-##     ./projectVenv/bin/python ./main.py --type "ollama" --amount $run_count --save-scripts True --model "qwen2.5:32b" --ast-bug True --hyperparameters "$hyperparameters"
-##     end_time=$(date +%s)
-##     runtime=$((end_time - start_time))
-##     echo "$hyperparameters,$runtime" >> artifacts/hyperparameter_tuning.csv
-##     tail -n 1 artifacts/output.csv >> artifacts/hyperparameter_tuning.csv
-## done
+# Loop through temperature
+for temperature in $temperatures; do
+    start_time=$(date +%s)
+    hyperparameters="$temperature,$default_max_tokens,$default_top_k,$default_top_p"
+    ./projectVenv/bin/python ./main.py --type "ollama" --amount $run_count --save-scripts True --model "qwen2.5:32b" --ast-bug True --hyperparameters "$hyperparameters"
+    end_time=$(date +%s)
+    runtime=$((end_time - start_time))
+    echo "$hyperparameters,$runtime" >> artifacts/hyperparameter_tuning.csv
+    tail -n 1 artifacts/output.csv >> artifacts/hyperparameter_tuning.csv
+done
+
+# Loop through max_tokens
+for max_token in $max_tokens; do
+    start_time=$(date +%s)
+    hyperparameters="$default_temperature,$max_token,$default_top_k,$default_top_p"
+    ./projectVenv/bin/python ./main.py --type "ollama" --amount $run_count --save-scripts True --model "qwen2.5:32b" --ast-bug True --hyperparameters "$hyperparameters"
+    end_time=$(date +%s)
+    runtime=$((end_time - start_time))
+    echo "$hyperparameters,$runtime" >> artifacts/hyperparameter_tuning.csv
+    tail -n 1 artifacts/output.csv >> artifacts/hyperparameter_tuning.csv
+done
 
 # Loop through top_k
 for top_k in $top_ks; do

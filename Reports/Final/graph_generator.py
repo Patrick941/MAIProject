@@ -276,38 +276,33 @@ max_tokens_data = [
 ]
 
 top_k_data = [
-    {'top_k': 0.1, 'runtime': 183, 'cognitive_complexity': 55.02544136765656, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3671094425561172},
-    {'top_k': 0.16, 'runtime': 152, 'cognitive_complexity': 55.77950202121008, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.030381469911927},
-    {'top_k': 0.256, 'runtime': 348, 'cognitive_complexity': 56.46397671949799, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 2.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.175614841914799},
-    {'top_k': 0.4096, 'runtime': 237, 'cognitive_complexity': 55.803827000448685, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.251778937000031},
-    {'top_k': 0.65536, 'runtime': 234, 'cognitive_complexity': 56.851192411748556, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.4601721072455083},
-    {'top_k': 1.04858, 'runtime': 170, 'cognitive_complexity': 56.22205279470599, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7068162631064085},
-    {'top_k': 1.67772, 'runtime': 191, 'cognitive_complexity': 52.42027895524751, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7039905113718674},
-    {'top_k': 2.68435, 'runtime': 266, 'cognitive_complexity': 63.568420757108775, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 1.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.5904552293442689},
-    {'top_k': 4.29497, 'runtime': 205, 'cognitive_complexity': 55.923586625531755, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.010288120262616},
-    {'top_k': 6.87195, 'runtime': 296, 'cognitive_complexity': 57.55140030595501, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 1.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7741031992795009},
-    {'top_k': 10.9951, 'runtime': 224, 'cognitive_complexity': 63.71908106510007, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3593937951957746},
-    {'top_k': 17.5922, 'runtime': 187, 'cognitive_complexity': 56.27357209594703, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6375992874079066},
-    {'top_k': 28.1475, 'runtime': 355, 'cognitive_complexity': 55.410236116069555, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 2.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.012715683450701}
+    {'top_k': 1.0, 'runtime': 193, 'cognitive_complexity': 55.070839960357304, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3237073998418383},
+    {'top_k': 1.6, 'runtime': 122, 'cognitive_complexity': 56.635919111462684, 'cyclomatic_complexity': 4.5, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.8652211935877359},
+    {'top_k': 2.56, 'runtime': 152, 'cognitive_complexity': 55.67874553703072, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.686279123866499},
+    {'top_k': 4.096, 'runtime': 218, 'cognitive_complexity': 55.79706973180615, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.503582527983327},
+    {'top_k': 6.5536, 'runtime': 299, 'cognitive_complexity': 57.836859818741004, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.6666666666666666, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6300998611106432},
+    {'top_k': 10.4858, 'runtime': 151, 'cognitive_complexity': 54.963199305700236, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.3373514709454153},
+    {'top_k': 16.7772, 'runtime': 283, 'cognitive_complexity': 54.54287042206297, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 1.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.4865061838227875},
+    {'top_k': 26.8435, 'runtime': 248, 'cognitive_complexity': 55.89924865373773, 'cyclomatic_complexity': 4.5, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9394356693121126},
+    {'top_k': 42.9497, 'runtime': 236, 'cognitive_complexity': 62.341790791800065, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.462288144293308},
+    {'top_k': 68.7195, 'runtime': 178, 'cognitive_complexity': 56.6919126809029, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6967758122207817},
+    {'top_k': 109.951, 'runtime': 186, 'cognitive_complexity': 60.83360108645301, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6670235179191089},
+    {'top_k': 175.922, 'runtime': 203, 'cognitive_complexity': 55.31129609344306, 'cyclomatic_complexity': 3.5, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.575781886025387}
 ]
 
 top_p_data = [
-    {'top_p': 0.001, 'runtime': 212, 'cognitive_complexity': 56.005276841311996, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7546708442469705},
-    {'top_p': 0.002, 'runtime': 189, 'cognitive_complexity': 56.11041699146665, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.405864784085643},
-    {'top_p': 0.004, 'runtime': 150, 'cognitive_complexity': 55.92969441534511, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.642505630290381},
-    {'top_p': 0.008, 'runtime': 137, 'cognitive_complexity': 56.044294440493985, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.2766595426026328},
-    {'top_p': 0.016, 'runtime': 143, 'cognitive_complexity': 55.57252460701413, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.420754164558442},
-    {'top_p': 0.032, 'runtime': 242, 'cognitive_complexity': 57.791619354925814, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7390576759132372},
-    {'top_p': 0.064, 'runtime': 238, 'cognitive_complexity': 55.771836449338366, 'cyclomatic_complexity': 4.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.5399142080108108},
-    {'top_p': 0.128, 'runtime': 148, 'cognitive_complexity': 55.531972950533856, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.0333354394389334},
-    {'top_p': 0.256, 'runtime': 244, 'cognitive_complexity': 55.434654585056265, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.89173182006249},
-    {'top_p': 0.512, 'runtime': 260, 'cognitive_complexity': 55.434654585056265, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.89173182006249},
-    {'top_p': 1.024, 'runtime': 330, 'cognitive_complexity': 55.85048570298173, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 2.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.1701105552425495},
-    {'top_p': 2.048, 'runtime': 211, 'cognitive_complexity': 56.27689605927727, 'cyclomatic_complexity': 4.75, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.1082465782597657},
-    {'top_p': 4.096, 'runtime': 254, 'cognitive_complexity': 55.225569742495665, 'cyclomatic_complexity': 2.75, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.5110658972771867},
-    {'top_p': 8.192, 'runtime': 125, 'cognitive_complexity': 55.074116480058265, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.1625989813569095},
-    {'top_p': 16.384, 'runtime': 153, 'cognitive_complexity': 55.282235454219624, 'cyclomatic_complexity': 5.0, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 2.075476685804299}
-]       
+    {'top_p': 0.001, 'runtime': 312, 'cognitive_complexity': 58.33483347195039, 'cyclomatic_complexity': 2.75, 'code_generation_attempts': 1.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.4414429424568778},
+    {'top_p': 0.002, 'runtime': 205, 'cognitive_complexity': 56.07032549735663, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7775778685059993},
+    {'top_p': 0.004, 'runtime': 309, 'cognitive_complexity': 57.59276266999938, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 1.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.699097380926292},
+    {'top_p': 0.008, 'runtime': 228, 'cognitive_complexity': 57.77916724415455, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6136477879283522},
+    {'top_p': 0.016, 'runtime': 125, 'cognitive_complexity': 56.676443630174646, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.860808011889075},
+    {'top_p': 0.032, 'runtime': 165, 'cognitive_complexity': 56.76777146453086, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.8204340177672664},
+    {'top_p': 0.064, 'runtime': 267, 'cognitive_complexity': 55.54866257762259, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 1.25, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7429051830176832},
+    {'top_p': 0.128, 'runtime': 185, 'cognitive_complexity': 55.27059176870601, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.8341035494389755},
+    {'top_p': 0.256, 'runtime': 208, 'cognitive_complexity': 58.91581601923888, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 0.75, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.4879672974215494},
+    {'top_p': 0.512, 'runtime': 248, 'cognitive_complexity': 56.47640035729147, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 1.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.7286575147913046},
+    {'top_p': 1.024, 'runtime': 131, 'cognitive_complexity': 55.73666053969563, 'cyclomatic_complexity': 3.25, 'code_generation_attempts': 0.0, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.6383440033904262}
+]
  
 generate_hyperparameter_graphs(temperature_data, 'temperature')
 generate_hyperparameter_graphs(max_tokens_data, 'max_tokens')
