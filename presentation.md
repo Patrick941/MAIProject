@@ -10,7 +10,9 @@
 # LLM's
 
 - What LLMs are good at
+  - Writing human-like code
 - What LLMs are bad at
+  - Creating bugs intentionally
 - Interacting with LLM in code
 
 ---
