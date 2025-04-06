@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.4.4)  4 APR 2025 22:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.4.4)  6 APR 2025 15:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -445,219 +445,219 @@ LaTeX Font Info:    External font `cmex7' loaded for size
 \openout4 = `final.toc'.
 
  [4] [5{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 137--150
+Underfull \hbox (badness 10000) in paragraph at lines 141--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--150
+Underfull \hbox (badness 10000) in paragraph at lines 141--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--150
+Underfull \hbox (badness 10000) in paragraph at lines 141--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--150
+Underfull \hbox (badness 10000) in paragraph at lines 141--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--150
+Underfull \hbox (badness 10000) in paragraph at lines 141--154
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 137--150
+Underfull \hbox (badness 10000) in paragraph at lines 141--154
 
  []
 
-[10] [11] [12] [13]
-<Images/Tall_design_1.png, id=54, 798.985pt x 1085.05376pt>
+[10] [11] [12] [13] [14]
+<Images/Tall_design_1.png, id=57, 798.985pt x 1085.05376pt>
 File: Images/Tall_design_1.png Graphic file (type png)
 <use Images/Tall_design_1.png>
-Package pdftex.def Info: Images/Tall_design_1.png  used on input line 168.
+Package pdftex.def Info: Images/Tall_design_1.png  used on input line 174.
 (pdftex.def)             Requested size: 433.62pt x 588.86737pt.
 
 Overfull \vbox (74.42888pt too high) has occurred while \output is active []
 
- [14 <./Images/Tall_design_1.png>]
-<Images/Tall_design_2.png, id=60, 992.70876pt x 1215.54124pt>
+ [15 <./Images/Tall_design_1.png>]
+<Images/Tall_design_2.png, id=63, 992.70876pt x 1215.54124pt>
 File: Images/Tall_design_2.png Graphic file (type png)
 <use Images/Tall_design_2.png>
-Package pdftex.def Info: Images/Tall_design_2.png  used on input line 171.
+Package pdftex.def Info: Images/Tall_design_2.png  used on input line 177.
 (pdftex.def)             Requested size: 433.62pt x 530.96335pt.
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 171--172
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 177--178
 [][] 
  []
 
-[15 <./Images/Tall_design_2.png>] [16] [17] [18] [19] [20] [21]
-<Images/Benchmark.png, id=84, 731.73375pt x 294.09875pt>
+[16 <./Images/Tall_design_2.png>] [17] [18] [19] [20] [21] [22]
+<Images/Benchmark.png, id=87, 731.73375pt x 294.09875pt>
 File: Images/Benchmark.png Graphic file (type png)
 <use Images/Benchmark.png>
-Package pdftex.def Info: Images/Benchmark.png  used on input line 232.
+Package pdftex.def Info: Images/Benchmark.png  used on input line 238.
 (pdftex.def)             Requested size: 433.62pt x 174.27963pt.
 
-Overfull \hbox (17.62482pt too wide) in paragraph at lines 232--233
+Overfull \hbox (17.62482pt too wide) in paragraph at lines 238--239
 [][] 
  []
 
-[22 <./Images/Benchmark.png>] [23] [24] [25]
-<Images/Hyperparam_temperature_Comparison.png, id=99, 1011.78pt x 867.24pt>
+[23 <./Images/Benchmark.png>] [24] [25] [26]
+<Images/Hyperparam_temperature_Comparison.png, id=102, 1011.78pt x 867.24pt>
 File: Images/Hyperparam_temperature_Comparison.png Graphic file (type png)
 <use Images/Hyperparam_temperature_Comparison.png>
-Package pdftex.def Info: Images/Hyperparam_temperature_Comparison.png  used on input line 267.
+Package pdftex.def Info: Images/Hyperparam_temperature_Comparison.png  used on input line 273.
 (pdftex.def)             Requested size: 346.89731pt x 297.3455pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[26]
-<Images/Hyperparam_max_tokens_Comparison.png, id=103, 1011.78pt x 867.24pt>
+[27]
+<Images/Hyperparam_max_tokens_Comparison.png, id=106, 1011.78pt x 867.24pt>
 File: Images/Hyperparam_max_tokens_Comparison.png Graphic file (type png)
 <use Images/Hyperparam_max_tokens_Comparison.png>
-Package pdftex.def Info: Images/Hyperparam_max_tokens_Comparison.png  used on input line 276.
+Package pdftex.def Info: Images/Hyperparam_max_tokens_Comparison.png  used on input line 282.
 (pdftex.def)             Requested size: 346.89731pt x 297.3455pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[27 <./Images/Hyperparam_temperature_Comparison.png>]
-<Images/Hyperparam_top_k_Comparison.png, id=108, 1011.78pt x 867.24pt>
+[28 <./Images/Hyperparam_temperature_Comparison.png>]
+<Images/Hyperparam_top_k_Comparison.png, id=111, 1011.78pt x 867.24pt>
 File: Images/Hyperparam_top_k_Comparison.png Graphic file (type png)
 <use Images/Hyperparam_top_k_Comparison.png>
-Package pdftex.def Info: Images/Hyperparam_top_k_Comparison.png  used on input line 285.
+Package pdftex.def Info: Images/Hyperparam_top_k_Comparison.png  used on input line 291.
 (pdftex.def)             Requested size: 346.89731pt x 297.3455pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[28 <./Images/Hyperparam_max_tokens_Comparison.png>]
-<Images/Hyperparam_top_p_Comparison.png, id=113, 1011.78pt x 867.24pt>
+[29 <./Images/Hyperparam_max_tokens_Comparison.png>]
+<Images/Hyperparam_top_p_Comparison.png, id=116, 1011.78pt x 867.24pt>
 File: Images/Hyperparam_top_p_Comparison.png Graphic file (type png)
 <use Images/Hyperparam_top_p_Comparison.png>
-Package pdftex.def Info: Images/Hyperparam_top_p_Comparison.png  used on input line 294.
+Package pdftex.def Info: Images/Hyperparam_top_p_Comparison.png  used on input line 300.
 (pdftex.def)             Requested size: 346.89731pt x 297.3455pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[29 <./Images/Hyperparam_top_k_Comparison.png>]
-<Images/Model_Comparison_Fibbonaci.png, id=118, 1011.78pt x 578.16pt>
+[30 <./Images/Hyperparam_top_k_Comparison.png>]
+<Images/Model_Comparison_Fibbonaci.png, id=121, 1011.78pt x 578.16pt>
 File: Images/Model_Comparison_Fibbonaci.png Graphic file (type png)
 <use Images/Model_Comparison_Fibbonaci.png>
-Package pdftex.def Info: Images/Model_Comparison_Fibbonaci.png  used on input line 307.
+Package pdftex.def Info: Images/Model_Comparison_Fibbonaci.png  used on input line 313.
 (pdftex.def)             Requested size: 433.62pt x 247.78351pt.
- [30 <./Images/Hyperparam_top_p_Comparison.png>] [31 <./Images/Model_Comparison_Fibbonaci.png>]
-<Images/Complexity_Comparison_Fibbonaci.png, id=128, 1011.78pt x 578.16pt>
+ [31 <./Images/Hyperparam_top_p_Comparison.png>] [32 <./Images/Model_Comparison_Fibbonaci.png>]
+<Images/Complexity_Comparison_Fibbonaci.png, id=131, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Fibbonaci.png Graphic file (type png)
 <use Images/Complexity_Comparison_Fibbonaci.png>
-Package pdftex.def Info: Images/Complexity_Comparison_Fibbonaci.png  used on input line 317.
+Package pdftex.def Info: Images/Complexity_Comparison_Fibbonaci.png  used on input line 323.
 (pdftex.def)             Requested size: 433.62pt x 247.78351pt.
- [32 <./Images/Complexity_Comparison_Fibbonaci.png>]
-<Images/Model_Comparison_Arrays.png, id=133, 1011.78pt x 578.16pt>
+ [33 <./Images/Complexity_Comparison_Fibbonaci.png>]
+<Images/Model_Comparison_Arrays.png, id=136, 1011.78pt x 578.16pt>
 File: Images/Model_Comparison_Arrays.png Graphic file (type png)
 <use Images/Model_Comparison_Arrays.png>
-Package pdftex.def Info: Images/Model_Comparison_Arrays.png  used on input line 333.
+Package pdftex.def Info: Images/Model_Comparison_Arrays.png  used on input line 339.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Complexity_Comparison_Arrays.png, id=134, 1011.78pt x 578.16pt>
+<Images/Complexity_Comparison_Arrays.png, id=137, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Arrays.png Graphic file (type png)
 <use Images/Complexity_Comparison_Arrays.png>
-Package pdftex.def Info: Images/Complexity_Comparison_Arrays.png  used on input line 340.
+Package pdftex.def Info: Images/Complexity_Comparison_Arrays.png  used on input line 346.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Model_Comparison_Djikstra.png, id=135, 1011.78pt x 578.16pt>
+<Images/Model_Comparison_Djikstra.png, id=138, 1011.78pt x 578.16pt>
 File: Images/Model_Comparison_Djikstra.png Graphic file (type png)
 <use Images/Model_Comparison_Djikstra.png>
-Package pdftex.def Info: Images/Model_Comparison_Djikstra.png  used on input line 351.
+Package pdftex.def Info: Images/Model_Comparison_Djikstra.png  used on input line 357.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Complexity_Comparison_Djikstra.png, id=136, 1011.78pt x 578.16pt>
+<Images/Complexity_Comparison_Djikstra.png, id=139, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Djikstra.png Graphic file (type png)
 <use Images/Complexity_Comparison_Djikstra.png>
-Package pdftex.def Info: Images/Complexity_Comparison_Djikstra.png  used on input line 358.
+Package pdftex.def Info: Images/Complexity_Comparison_Djikstra.png  used on input line 364.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[33]
-<Images/Model_Comparison_Linked_Lists.png, id=140, 1011.78pt x 578.16pt>
+[34]
+<Images/Model_Comparison_Linked_Lists.png, id=143, 1011.78pt x 578.16pt>
 File: Images/Model_Comparison_Linked_Lists.png Graphic file (type png)
 <use Images/Model_Comparison_Linked_Lists.png>
-Package pdftex.def Info: Images/Model_Comparison_Linked_Lists.png  used on input line 367.
+Package pdftex.def Info: Images/Model_Comparison_Linked_Lists.png  used on input line 373.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Complexity_Comparison_Linked_Lists.png, id=141, 1011.78pt x 578.16pt>
+<Images/Complexity_Comparison_Linked_Lists.png, id=144, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Linked_Lists.png Graphic file (type png)
 <use Images/Complexity_Comparison_Linked_Lists.png>
-Package pdftex.def Info: Images/Complexity_Comparison_Linked_Lists.png  used on input line 374.
+Package pdftex.def Info: Images/Complexity_Comparison_Linked_Lists.png  used on input line 380.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[34 <./Images/Model_Comparison_Arrays.png> <./Images/Complexity_Comparison_Arrays.png>]
-<Images/Model_Comparison_Threads.png, id=147, 1011.78pt x 578.16pt>
+[35 <./Images/Model_Comparison_Arrays.png> <./Images/Complexity_Comparison_Arrays.png>]
+<Images/Model_Comparison_Threads.png, id=150, 1011.78pt x 578.16pt>
 File: Images/Model_Comparison_Threads.png Graphic file (type png)
 <use Images/Model_Comparison_Threads.png>
-Package pdftex.def Info: Images/Model_Comparison_Threads.png  used on input line 383.
+Package pdftex.def Info: Images/Model_Comparison_Threads.png  used on input line 389.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Complexity_Comparison_Threads.png, id=148, 1011.78pt x 578.16pt>
+<Images/Complexity_Comparison_Threads.png, id=151, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Threads.png Graphic file (type png)
 <use Images/Complexity_Comparison_Threads.png>
-Package pdftex.def Info: Images/Complexity_Comparison_Threads.png  used on input line 390.
+Package pdftex.def Info: Images/Complexity_Comparison_Threads.png  used on input line 396.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[35 <./Images/Model_Comparison_Djikstra.png> <./Images/Complexity_Comparison_Djikstra.png>] [36 <./Images/Model_Comparison_Linked_Lists.png> <./Images/Complexity_Comparison_Linked_Lists.png>] [37 <./Images/Model_Comparison_Threads.png> <./Images/Complexity_Comparison_Threads.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 402--407
+[36 <./Images/Model_Comparison_Djikstra.png> <./Images/Complexity_Comparison_Djikstra.png>] [37 <./Images/Model_Comparison_Linked_Lists.png> <./Images/Complexity_Comparison_Linked_Lists.png>] [38 <./Images/Model_Comparison_Threads.png> <./Images/Complexity_Comparison_Threads.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 408--413
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--407
+Underfull \hbox (badness 10000) in paragraph at lines 408--413
 
  []
 
-[38]
-Underfull \hbox (badness 1102) in paragraph at lines 428--429
+[39]
+Underfull \hbox (badness 1102) in paragraph at lines 434--435
 []\OT1/cmr/m/n/10.95 Whalley, J., Set-tle, A., & Luxton-Reilly, A. (2023). A Think-Aloud Study of
  []
 
 
-Underfull \hbox (badness 2376) in paragraph at lines 428--429
+Underfull \hbox (badness 2376) in paragraph at lines 434--435
 \OT1/cmr/m/n/10.95 Novice De-bug-ging. ACM Trans-ac-tions on Com-put-ing Ed-u-ca-tion, 23(2), 1{38.
  []
 
-[39]
-Underfull \hbox (badness 7558) in paragraph at lines 440--441
+[40]
+Underfull \hbox (badness 7558) in paragraph at lines 446--447
 []\OT1/cmr/m/n/10.95 David Janzen and Hos-sein Saiedian. 2008. Test-driven learn-ing in early
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 440--441
+Underfull \hbox (badness 10000) in paragraph at lines 446--447
 \OT1/cmr/m/n/10.95 pro-gram-ming courses. SIGCSE Bull. 40, 1 (March 2008), 532{536.
  []
 
-[40] (./final.aux)
+[41] (./final.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -676,10 +676,10 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  99i,7n,101p,1455b,1778s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on final.pdf (40 pages, 1249167 bytes).
+Output written on final.pdf (41 pages, 1251338 bytes).
 PDF statistics:
- 205 PDF objects out of 1000 (max. 8388607)
- 114 compressed objects within 2 object streams
+ 208 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  103 words of extra memory for PDF output out of 10000 (max. 10000000)
 

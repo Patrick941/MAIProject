@@ -22,3 +22,8 @@ Try rotate the daigram to vertical to fit in the
 
 
 Why programs fail : a guide to systematic debugging / Andreas Zeller.    
+
+Talk about the other use cases of the tool such as graphics usages.
+Talk about comparison of problem difficulty.
+Talk about ensuring bug is inserted using the AST bug insertion method
+Compare opinions from different papers

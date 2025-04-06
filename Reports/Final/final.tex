@@ -112,13 +112,17 @@ if __name__ == '__main__':
 \end{lstlisting}
 It was also a goal to create two different methods for inserting the bug which can be evaluated and compared with each other. The first method involves prompting the LLM to insert the bug into the working code. The second method modifies the code's AST to introduce either a semantic or syntax bug, creating common issues such as off-by-one errors by replacing or altering nodes.
 
-Another aim of the project was to create test cases that the code could be tested against to ensure that the bug was inserted correctly. These same test cases could then be used by a student to test their solution to the problem.
+It is a requirement of the project that there is a test case which a user can use to ensure that they have solved the bug. However an aim of the project is to create multiple test cases that can validate against different scenarios or bugs.
 
-The creation of a frontend was not a goal of this project, the meaningful work of this project is all done in the backend and a frontend could be added at a later date.
+The creation of a frontend was not a goal of this project, the meaningful work of this project is all done in the backend with the generation of code and the insertion of bugs. A frontend could be added at a later date to improve the accessability of the tool and also provide additional features such as access to a debugger.
+
+\subsection{Methodology Outline}
+
+The project was implemented using Python. The program will first collect inputs from the user or if no inputs are provided select some default inputs. These inputs are then used to generate a working piece of code for a given topic. The output of this working code for a variable number of test cases is then collected. The program will then attempt to insert a bug using either the LLM or the AST bug insertion method depending on the input provided. The test cases will then be run and ensure that the code fails. If the code fails the buggy program is then saved and the program will move onto generating another problem. 
 
 \subsection{Evaluation Metrics}
 
-It was decided early on that the evaluation and measuring of the project success would be done using desktop metrics and that there would not be a user study. The metrics that were decided on were code complexity, code diversity, attempt count and run time. The calculation of these metrics and the reasoning behind them will be discussed in the testing and evaluation section.
+It was decided early on that the evaluation and measuring of the project success would be done using desktop metrics and that there would not be a user study as it would not be required for accessing the functionality of the project, it could provide an idea of how useful the tool is for students. However desktop metrics were chosen that hope to emulate that metric. The metrics that were decided on were code complexity, code diversity, attempt count and run time. The calculation of these metrics and the reasoning behind them will be discussed in the testing and evaluation section.
 
 \subsection{Structure of the Dissertation}
 
@@ -155,7 +159,9 @@ LLMs in essentials are a type of neural network that is trained on a large datas
 
 \subsubsection{Using LLMs}
 
-For interacting with an LLM you will generally use an API. This tool uses two different APIs to interact with LLMs which can be swapped inbetween. The first API is the OpenAI GPT API which is a paid API that is very accurate and very fast, in an ideal world this would be used for all versions and iterations for the project. However, this is of course going to get very expensive very quickly. For this reason a second method of interacting with local LLMs is used to. This method is much slower and can be less accurate to varying degrees depending on the model but is free except for the small electricity cost and hardware wear and tear. The local LLMs are also more customisable with adjustable hyperparameters and can be fine-tuned on custom datasets, although this was not necessary for this project. A variety of models using the ollama API were used for the vast majority of the project but for final evaluation the same code was run using the OpenAI GPT API for comparison.
+For interacting with an LLM you will generally use an API. This tool uses two different APIs to interact with LLMs which can be swapped inbetween. The first API is the OpenAI GPT API which is a paid API that is very accurate and very fast, in an ideal world this would be used for all versions and iterations for the project. However, this is of course going to get very expensive very quickly. For this reason a second method of interacting with local LLMs is used too. This method is much slower and can be less accurate to varying degrees depending on the model but is free except for the small electricity cost and hardware wear and tear. The local LLMs are also more customisable with adjustable hyperparameters and can be fine-tuned on custom datasets, although this was not necessary for this project. A variety of models using the ollama API were used for the vast majority of the project but for final evaluation the same code was run using the OpenAI GPT API for comparison.
+
+When interacting with an LLM significant thought also has to be put into the prompts used to generate responses from the LLM. Prompt engineering is an important aspect of working with LLMs and can have a massive affect on the performance of the model. The most important aspect of prompt engineering is ensuring to get your point across clearly but there are also more subtle aspects to prompt engineering such as phrasing the prompt in a way that will get the model to 'think' deeper about the response. An example of this might be "Before you provide the final answer, please explain your reasoning step by step outlining how you arrived at your conclusion". This will cause the model to break down its thought process into steps which will encourage a structured response which is more likely to provide what you want.
 
 \subsubsection{Evaluation of LLMs}
 
