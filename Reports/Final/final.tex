@@ -152,14 +152,20 @@ Another important aspect of debugging that this tool addresses is the use of deb
 \\
 As Nguyen states in \cite{nguyen2024}, significant misunderstandings can easily arise between an AI and its user, which is especially true for novices who may struggle to articulate their problems thoroughly. This situation creates a chance to teach students how to harness LLMs effectively. The future frontend may benefit from incorporating a co-pilot like assistance, allowing professors to enable or disable it depending on the complexity level they want to set. A comparable methodology is described by Denny in \cite{denny2023}, where students restricted to using LLMs alone learned to refine their prompts for more accurate output.
 
-\subsection{Summary of LLMs}
+\subsection{LLMs and Code Generation}
 \subsubsection{How LLMs work}
 
 LLMs in essentials are a type of neural network that is trained on a large dataset of text and commonly code. They are trained to predict the next token in a sentence. The common chat bots works by rephrasing your input and allowing the LLM to predict the next token which when it continues will create a response to your question or prompt.
 
-\subsubsection{Using LLMs}
+\subsubsection{Interacting with LLMs}
 
-For interacting with an LLM you will generally use an API. This tool uses two different APIs to interact with LLMs which can be swapped inbetween. The first API is the OpenAI GPT API which is a paid API that is very accurate and very fast, in an ideal world this would be used for all versions and iterations for the project. However, this is of course going to get very expensive very quickly. For this reason a second method of interacting with local LLMs is used too. This method is much slower and can be less accurate to varying degrees depending on the model but is free except for the small electricity cost and hardware wear and tear. The local LLMs are also more customisable with adjustable hyperparameters and can be fine-tuned on custom datasets, although this was not necessary for this project. A variety of models using the ollama API were used for the vast majority of the project but for final evaluation the same code was run using the OpenAI GPT API for comparison.
+For interacting with an LLM you will generally use an API. This tool uses two different APIs to interact with LLMs which can be swapped in-between. The first API is the OpenAI GPT API which is a paid API that is very accurate and very fast, in an ideal world this would be used for all versions and iterations for the project. However, this is of course going to get very expensive very quickly. For this reason a second method of interacting with local LLMs is used too.
+
+\subsubsection{Local LLMs}
+
+Local LLMs are models that are run locally on your own machine. They are generally much smaller and cheaper models. They are also generally slower unless access to multi-million euro hardware is available. This method is much slower and can be less accurate to varying degrees depending on the model but is free except for the small electricity cost and hardware wear and tear. The local LLMs are also more customisable with adjustable hyperparameters and can be fine-tuned on custom datasets, although this was not necessary for this project. A variety of models using the ollama API were used for the vast majority of the project but for final evaluation the same code was run using the OpenAI GPT API for comparison.
+
+\subsubsection{Prompt Engineering}
 
 When interacting with an LLM significant thought also has to be put into the prompts used to generate responses from the LLM. Prompt engineering is an important aspect of working with LLMs and can have a massive affect on the performance of the model. The most important aspect of prompt engineering is ensuring to get your point across clearly but there are also more subtle aspects to prompt engineering such as phrasing the prompt in a way that will get the model to 'think' deeper about the response. An example of this might be "Before you provide the final answer, please explain your reasoning step by step outlining how you arrived at your conclusion". This will cause the model to break down its thought process into steps which will encourage a structured response which is more likely to provide what you want.
 
