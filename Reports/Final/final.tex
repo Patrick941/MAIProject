@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{xcolor}
+\usepackage{hyperref}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{pgfgantt}
 \usepackage{listings}
@@ -174,7 +175,7 @@ When interacting with an LLM significant thought also has to be put into the pro
 
 The project was designed to achieve the aims as discussed. The key aims being to generate code for a given topic, insert a bug into the code and then provide a test case to ensure that the code is working correctly. 
 
-The below diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type, bug tpe, code topic and options for overriding default prompts. It will then produce functional code based on the topic mentioned by querying the LLM then parsing and saving the code to a newly created python file provided upon compilation it will work without errors. The output and input to this python script is also saved. The bug inserter then reads this same file. Depending on the method provided in the inputs it will either use LLM bug insertion or AST bug insertion. For LLM bug insertion it will follow the same process of quering the LLM, parsing and saving the response. The code will then be run to ensure that it fails. The AST method will follow the same process but insert bugs based on a number of pairs of dictionaries of nodes or values of nodes that should be replaced with other specific nodes or values. The buggy script is then saved over the original file (Indicated as separate on diagram for clarity). This will all be loops for however many problems the user wants to generate. The evaluation section will then read all of those files. It will first get the diversity metric by one by one comparing each of the files, this is inefficient but due to the LLM runtime being many orders of magnitude larger this is not significant. The complexity metric is then calculated using the radon library. This consists of both a cyclomatic complexity and a cognitive complexity metric that will be discussed in more detail later. The attempts to generate the original code and the attempts to insert the bug were also saved for each. Each of these metrics and the averages across the debugging problems are then saved to a csv.
+The below diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type, bug tpe, code topic and options for overriding default prompts. It will then produce functional code based on the topic mentioned by querying the LLM then parsing and saving the code to a newly created python file provided upon compilation it will work without errors. The output and input to this python script is also saved. The bug inserter then reads this same file. Depending on the method provided in the inputs it will either use LLM bug insertion or AST bug insertion. For LLM bug insertion it will follow the same process of quering the LLM, parsing and saving the response. The code will then be run to ensure that it fails. The AST method will follow the same process but insert bugs based on a number of pairs of dictionaries of nodes or values of nodes that should be replaced with other specific nodes or values. The buggy script is then saved over the original file (Indicated as separate on diagram for clarity). This will all be loops for however many problems the user wants to generate. The evaluation section will then read all of those files. It will first get the diversity metric by one by one comparing each of the files, this is inefficient but due to the LLM runtime being many orders of magnitude larger this is not significant. The complexity metric is then calculated using the radon library. This consists of both a cyclomatic complexity and a cognitive complexity metric that will be discussed in more detail later. The attempts to generate the original code and the attempts to insert the bug were also saved for each. Each of these metrics and the averages across the debugging problems are then saved to a CSV.
 
 \includegraphics[width=\linewidth]{Images/Tall_design_1.png}
 
@@ -185,7 +186,7 @@ The below diagram shows a pipeline diagram of the code. There is three main bloc
 
 \subsection{Design Overview}
 
-The bug inserter will then take this working code and insert a bug into it, this is done by either the use of the LLM again or by using inspecting and altering the AST in the code. It will then check if the code now fails or produces the wrong output as it should do. This is only done for the LLM however as the AST bug inserter is not liable the same reliability issues of the LLM. This altered code is then written back out to the file overwriting the original code. The code evaluator will then take this code and run the diversity and complexity metrics on it before writing this to the csv.
+The bug inserter will then take this working code and insert a bug into it, this is done by either the use of the LLM again or by using inspecting and altering the AST in the code. It will then check if the code now fails or produces the wrong output as it should do. This is only done for the LLM however as the AST bug inserter is not liable the same reliability issues of the LLM. This altered code is then written back out to the file overwriting the original code. The code evaluator will then take this code and run the diversity and complexity metrics on it before writing this to the CSV.
 
 \subsection{Tools}
 \subsubsection{Ollama}
@@ -213,7 +214,7 @@ There is also an option for a prompt to be passed to the class which will overri
 
 As the project progressed it was clear that the local LLMs were having a lot of difficulty producing the correct code. This was very uncommmon with the openAI modules but to solve this self reflection and improvement was implemented in the code. 
 
-As it became impossible to feed the LLMs more information in training a new technique emerged when developers would get the LLM to 'think' about their response. This is done by re-querying the LLM after it returns a response and asking it if the response it gave fits the original prompt. This process is called self reflection which is good for filtering out bad responses. Another similar method is called self improvement which is where the LLM is asked to improve on its response. This will attempt to fix bad responses and also attempt to improve already acceptable responses.
+As it became impossible to feed the LLMs more information in training a new technique emerged when developers would get the LLM to 'think' about their response. This is done by re-querying the LLM after it returns a response and asking it if the response it gave fits the original prompt. This process is called self reflection \cite{shinn2023} which is good for filtering out bad responses. Another similar method is called self improvement which is where the LLM is asked to improve on its response. This will attempt to fix bad responses and also attempt to improve already acceptable responses.
 
 The issue that was noticed with this method was a significant increase in the runtime of the project. However it also meant that smaller modeuls could be used and provide better performance. It is not clear which method would be likely to yield a better response but the performance will be compared and discussed in the testing and evaluation section.
 
@@ -255,7 +256,9 @@ The final layer is a loop that will run the second layer benchmark with a number
 \subsection{Metrics}
 \subsubsection{Code Complexity}
 
-The code complexity score is calculated using the radon python library. The cyclomatic complexity is calculated for each file using the cc visit function which takes the code in text format as an argument and will return a complexity score. The same is done for the cognitive complexity. In the output csv for each run the cognitive and cyclomatic complexity of each problem is given but for the higher layer tests only the average of the complexities is shown. The complexity score has no ideal value, it is simply an indicator of how complex or otherwise the code generated is. In some settings a high complexity may be desired while in other settings a low complexity may be desired.
+The code complexity score is calculated using the radon python library. The cyclomatic complexity \cite{esposito2024} is calculated for each file using the cc visit function which takes the code in text format as an argument and will return a complexity score. The same is done for the cognitive complexity. In the output CSV for each run the cognitive and cyclomatic complexity of each problem is given but for the higher layer tests only the average of the complexities is shown. The complexity score has no ideal value, it is simply an indicator of how complex or otherwise the code generated is. In some settings a high complexity may be desired while in other settings a low complexity may be desired.
+\footnote{\url{https://radon.readthedocs.io/en/latest/}}
+
 
 \subsubsection{Code Diversity}
 
@@ -456,6 +459,11 @@ Nguyen, S., Babe, H. M., Zi, Y., Guha, A., Anderson, C. J., \& Feldman, M. Q. (2
 
 \bibitem{Janzen2008}
 David Janzen and Hossein Saiedian. 2008. Test-driven learning in early programming courses. SIGCSE Bull. 40, 1 (March 2008), 532–536. https://doi.org/10.1145/1352322.1352315
+
+\bibitem{shinn2023}
+Shinn, N., Cassano, F., Berman, E., Gopinath, A., Narasimhan, K., \& Yao, S. (2023). Reflexion: Language Agents with Verbal Reinforcement Learning. arXiv. https://arxiv.org/abs/2303.11366
+
+\bibitem{esposito2024}Esposito, M., Janes, A., Kilamo, T., \& Lenarduzzi, V. (2024). Early Career Developers' Perceptions of Code Understandability. A Study of Complexity Metrics. arXiv. https://arxiv.org/abs/2303.07722
 
 \end{thebibliography}
 
