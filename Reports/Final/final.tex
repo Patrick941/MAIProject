@@ -169,20 +169,21 @@ Local LLMs are models that are run locally on your own machine. They are general
 
 When interacting with an LLM significant thought also has to be put into the prompts used to generate responses from the LLM. Prompt engineering is an important aspect of working with LLMs and can have a massive affect on the performance of the model. The most important aspect of prompt engineering is ensuring to get your point across clearly but there are also more subtle aspects to prompt engineering such as phrasing the prompt in a way that will get the model to 'think' deeper about the response. An example of this might be "Before you provide the final answer, please explain your reasoning step by step outlining how you arrived at your conclusion". This will cause the model to break down its thought process into steps which will encourage a structured response which is more likely to provide what you want.
 
-\subsubsection{Evaluation of LLMs}
-
-Using an LLM as discussed above is very easy. You simply give the LLM the prompt and read the output. However, there are some difficulties especially with the local LLM. Although the reponses were generally good, they could not simply be taken to be in the expected format. LLMs often provide a response not in the desired format, for that reason there is a lot of code which is used to clean up and parse the response from the LLM. This also leads to the issue of sometimes the LLM will hallucinate and provide an incorrect response, this is the reason for the implementation of self reflection and improvement in the code generation which will be discussed further in the design and implementation section. However, the simple and very significant benefit of using an LLM is that it can generate code with very little effort which makes it the only option for the generation of code for this project.
-
 \newpage
 \section{Design and Implementation}
 
-\subsection{Design Overview}
+The project was designed to achieve the aims as discussed. The key aims being to generate code for a given topic, insert a bug into the code and then provide a test case to ensure that the code is working correctly. 
+
+The below diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type, bug tpe, code topic and options for overriding default prompts. It will then produce functional code based on the topic mentioned by querying the LLM then parsing and saving the code to a newly created python file provided upon compilation it will work without errors. The output and input to this python script is also saved. The bug inserter then reads this same file. Depending on the method provided in the inputs it will either use LLM bug insertion or AST bug insertion. For LLM bug insertion it will follow the same process of quering the LLM, parsing and saving the response. The code will then be run to ensure that it fails. The AST method will follow the same process but insert bugs based on a number of pairs of dictionaries of nodes or values of nodes that should be replaced with other specific nodes or values. The buggy script is then saved over the original file (Indicated as separate on diagram for clarity). This will all be loops for however many problems the user wants to generate. The evaluation section will then read all of those files. It will first get the diversity metric by one by one comparing each of the files, this is inefficient but due to the LLM runtime being many orders of magnitude larger this is not significant. The complexity metric is then calculated using the radon library. This consists of both a cyclomatic complexity and a cognitive complexity metric that will be discussed in more detail later. The attempts to generate the original code and the attempts to insert the bug were also saved for each. Each of these metrics and the averages across the debugging problems are then saved to a csv.
+
 \includegraphics[width=\linewidth]{Images/Tall_design_1.png}
 
 \newpage
 \includegraphics[width=\linewidth]{Images/Tall_design_2.png}
 
-The above diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type and code topic. It will then produce functional code based on the topic mentioned. It will also ensure that the code is functional by compiling and checking for errors. 
+
+
+\subsection{Design Overview}
 
 The bug inserter will then take this working code and insert a bug into it, this is done by either the use of the LLM again or by using inspecting and altering the AST in the code. It will then check if the code now fails or produces the wrong output as it should do. This is only done for the LLM however as the AST bug inserter is not liable the same reliability issues of the LLM. This altered code is then written back out to the file overwriting the original code. The code evaluator will then take this code and run the diversity and complexity metrics on it before writing this to the csv.
 
@@ -269,6 +270,11 @@ The attempt count metric is split up into two sections. There is the code genera
 The run time metric is very simply the length of time it takes a given run of main.py to complete. This metric is counted in seconds as the time taken to query an LLM and for it to respond can often take 5-200 seconds with the models selected. Seconds will give the most appropriate level of detail for this metric. Of course a larger run time is bad and a lower run time is good.
 \newpage
 \section{Results and Discussion}
+
+
+\subsection{Evaluation of LLMs}
+
+Using an LLM is very easy. You simply give the LLM the prompt and read the output. However, there are some difficulties especially with the local LLM. Although the reponses were generally good, they could not simply be taken to be in the expected format. LLMs often provide a response not in the desired format, for that reason there is a lot of code which is used to clean up and parse the response from the LLM. This also leads to the issue of sometimes the LLM will hallucinate and provide an incorrect response, this is the reason for the implementation of self reflection and improvement in the code generation which will be discussed further in the design and implementation section. However, the simple and very significant benefit of using an LLM is that it can generate code with very little effort which makes it the only option for the generation of code for this project.
 
 \subsection{Hyperparameter Tuning}
 
