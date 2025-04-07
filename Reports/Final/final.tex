@@ -92,7 +92,6 @@ The aim of this tool is quite simple. To generate debugging problems for users t
         a, b = b, a - b  # Bug: Subtracting instead of adding   
     return sequence
 
-
 def main():
     try:
         with open('input.txt', 'r') as file:
@@ -107,11 +106,10 @@ def main():
     print(f"Fibonacci sequence with {n} term{'s' if n != 1 else ''}:")
     print(' '.join(map(str, sequence)), fibonacci) # Fibbonacci added to print function
 
-
 if __name__ == '__main__':
     main()
 \end{lstlisting}
-It was also a goal to create two different methods for inserting the bug which can be evaluated and compared with each other. The first method involves prompting the LLM to insert the bug into the working code. The second method modifies the code's AST to introduce either a semantic or syntax bug, creating common issues such as off-by-one errors by replacing or altering nodes.
+It was also a goal to create two different methods for inserting the bug which can be evaluated and compared with each other. The first method involves prompting the LLM to generate code from the working code but that contains a bug. The second method modifies the code's AST to introduce either a semantic or syntax bug to create common issues such as off-by-one errors by replacing or altering nodes.
 
 It is a requirement of the project that there is a test case which a user can use to ensure that they have solved the bug. However an aim of the project is to create multiple test cases that can validate against different scenarios or bugs.
 
@@ -177,10 +175,19 @@ The project was designed to achieve the aims as discussed. The key aims being to
 
 The below diagram shows a pipeline diagram of the code. There is three main blocks to the code. The code generator which takes no input except for simple parameters such as model type, bug tpe, code topic and options for overriding default prompts. It will then produce functional code based on the topic mentioned by querying the LLM then parsing and saving the code to a newly created python file provided upon compilation it will work without errors. The output and input to this python script is also saved. The bug inserter then reads this same file. Depending on the method provided in the inputs it will either use LLM bug insertion or AST bug insertion. For LLM bug insertion it will follow the same process of quering the LLM, parsing and saving the response. The code will then be run to ensure that it fails. The AST method will follow the same process but insert bugs based on a number of pairs of dictionaries of nodes or values of nodes that should be replaced with other specific nodes or values. The buggy script is then saved over the original file (Indicated as separate on diagram for clarity). This will all be loops for however many problems the user wants to generate. The evaluation section will then read all of those files. It will first get the diversity metric by one by one comparing each of the files, this is inefficient but due to the LLM runtime being many orders of magnitude larger this is not significant. The complexity metric is then calculated using the radon library. This consists of both a cyclomatic complexity and a cognitive complexity metric that will be discussed in more detail later. The attempts to generate the original code and the attempts to insert the bug were also saved for each. Each of these metrics and the averages across the debugging problems are then saved to a CSV.
 
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=\linewidth]{Images/Tall_design_1.png}
+\caption{Your caption here.}
+\label{fig:tall_design}
+\end{figure}
 
-\newpage
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=\linewidth]{Images/Tall_design_2.png}
+\caption{Your caption here.}
+\label{fig:tall_design_2}
+\end{figure}
 
 
 
@@ -243,7 +250,12 @@ There were however a few issues with the github workflow. The first issue was th
 
 The decision to not evaluate this project with user feedback meant that desktop metrics were created to review the performance of the tool for a given set of parameters. The metrics that were chosen were code complexity, code diversity, attempt count and run time. The code complexity metric was chosen as it is a good indicator of how difficult the code is to debug. The code diversity metric was chosen as it indicates how useful the tool would be for either a teacher who wants to generate a different problem for each student or a student who wants to generate a couple of different problems for themselves. The attempt count metric was chosen too, this is the amount of times the LLM had to be re-prompted because it produced an incorrect or unexpected output, this was mainly a good metric to compare against different models and also to compare the self relection and improvement methods. The final metric was run time, this was chosen as it shows how viable a given model is, this metric along with the rest will be used to weigh up the benefit of run time against the quality of the output. Below is a diagram showing the different layers of testing that can be done on the project.
 
+\begin{figure}[h!]
+\centering
 \includegraphics[width=\linewidth]{Images/Benchmark.png}
+\caption{Benchmark Results}
+\label{fig:benchmark_results}
+\end{figure}
 
 The smallest possible test is to just run the main.py file. This will simply take a default topic which was set to be the fibbonaci sequence and generate problematic code for this topic. This was the test run when implementing new features and solving the bugs that were inevitably added with the new features. This would of course be much faster than the other tests as it is only one iteration of the script being run.
 
