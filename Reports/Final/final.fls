@@ -290,6 +290,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1095.tfm
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT ./Images/Tall_Design.png
 INPUT ./Images/Tall_Design.png
@@ -301,7 +302,6 @@ INPUT ./Images/Benchmark.png
 INPUT ./Images/Benchmark.png
 INPUT ./Images/Benchmark.png
 INPUT ./Images/Benchmark.png
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT ./Images/Hyperparam_temperature_Comparison.png
 INPUT ./Images/Hyperparam_temperature_Comparison.png
 INPUT ./Images/Hyperparam_temperature_Comparison.png

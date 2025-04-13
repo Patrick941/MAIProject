@@ -1,43 +1,48 @@
-\contentsline {section}{\numberline {1}Introduction}{6}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Context}{6}{subsection.1.1}%
-\contentsline {subsection}{\numberline {1.2}Aims}{6}{subsection.1.2}%
-\contentsline {subsection}{\numberline {1.3}Methodology Outline}{8}{subsection.1.3}%
-\contentsline {subsection}{\numberline {1.4}Evaluation Metrics}{8}{subsection.1.4}%
-\contentsline {subsection}{\numberline {1.5}Structure of the Dissertation}{9}{subsection.1.5}%
-\contentsline {section}{\numberline {2}Background}{10}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Literature Review}{10}{subsection.2.1}%
-\contentsline {subsubsection}{\numberline {2.1.1}Importance of Debugging Skills}{10}{subsubsection.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.1.2}Novice Programming Errors and Debugging}{10}{subsubsection.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.1.3}Teaching Debugging}{11}{subsubsection.2.1.3}%
-\contentsline {subsubsection}{\numberline {2.1.4}Test Cases in Debugging}{11}{subsubsection.2.1.4}%
-\contentsline {subsubsection}{\numberline {2.1.5}Use of Debugging Tools}{12}{subsubsection.2.1.5}%
-\contentsline {subsubsection}{\numberline {2.1.6}Misunderstandings Between AI and Users}{12}{subsubsection.2.1.6}%
-\contentsline {subsection}{\numberline {2.2}LLMs and Code Generation}{12}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}How LLMs work}{12}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Interacting with LLMs}{13}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Local LLMs}{13}{subsubsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.4}Prompt Engineering}{13}{subsubsection.2.2.4}%
-\contentsline {section}{\numberline {3}Design and Implementation}{15}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Design Overview}{17}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Tools}{17}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Ollama}{17}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}OpenAI GPT API}{18}{subsubsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Code generation}{18}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Self Reflection \& Improvement}{19}{subsubsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.4}Bug Insertion}{19}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}LLM Bug Insertion}{19}{subsubsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.2}AST Bug Insertion}{20}{subsubsection.3.4.2}%
-\contentsline {section}{\numberline {4}Evaluation Methods}{22}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Environments}{22}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Benchmark Test Suite}{23}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Metrics}{25}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Code Complexity}{25}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Code Diversity}{25}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Attempt Count}{25}{subsubsection.4.3.3}%
-\contentsline {subsubsection}{\numberline {4.3.4}Run Time}{26}{subsubsection.4.3.4}%
-\contentsline {section}{\numberline {5}Results and Discussion}{27}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Evaluation of LLMs}{27}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Hyperparameter Tuning}{27}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Model Benchmark}{31}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Topic Benchmark}{34}{subsection.5.4}%
-\contentsline {section}{\numberline {6}Conclusion}{39}{section.6}%
+\contentsline {section}{\numberline {1}Introduction}{7}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Context}{7}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Aims}{7}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Methodology Outline}{9}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Evaluation Metrics}{9}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Structure of the Dissertation}{10}{subsection.1.5}%
+\contentsline {section}{\numberline {2}Background}{11}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Literature Review}{11}{subsection.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1}Importance of Debugging Skills}{11}{subsubsection.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.2}Novice Programming Errors and Debugging}{11}{subsubsection.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.1.3}Teaching Debugging}{12}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Test Cases in Debugging}{12}{subsubsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.5}Use of Debugging Tools}{13}{subsubsection.2.1.5}%
+\contentsline {subsubsection}{\numberline {2.1.6}Misunderstandings Between AI and Users}{13}{subsubsection.2.1.6}%
+\contentsline {subsection}{\numberline {2.2}LLMs and Code Generation}{13}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}How LLMs work}{13}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Interacting with LLMs}{14}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Local LLMs}{14}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Prompt Engineering}{14}{subsubsection.2.2.4}%
+\contentsline {section}{\numberline {3}Design and Implementation}{16}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Design Overview}{18}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Tools}{18}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Ollama}{18}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}OpenAI GPT API}{19}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Code generation}{19}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Self Reflection \& Improvement}{20}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}Bug Insertion}{20}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}LLM Bug Insertion}{20}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}AST Bug Insertion}{21}{subsubsection.3.4.2}%
+\contentsline {section}{\numberline {4}Evaluation Methods}{23}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Environments}{23}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Benchmark Test Suite}{24}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Metrics}{26}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {4.3.1}Code Complexity}{26}{subsubsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.2}Code Diversity}{26}{subsubsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.3}Attempt Count}{26}{subsubsection.4.3.3}%
+\contentsline {subsubsection}{\numberline {4.3.4}Run Time}{27}{subsubsection.4.3.4}%
+\contentsline {section}{\numberline {5}Results and Discussion}{28}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Evaluation of LLMs}{28}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Hyperparameter Tuning}{28}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Model Benchmark}{32}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Topic Benchmark}{35}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Test Case Coverage}{40}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Potential Use Cases}{40}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Managing Debugging Difficulty}{41}{subsection.5.7}%
+\contentsline {subsubsection}{\numberline {5.7.1}Comparing Bug Complexity}{41}{subsubsection.5.7.1}%
+\contentsline {subsubsection}{\numberline {5.7.2}Matching Difficulty to Learner}{41}{subsubsection.5.7.2}%
+\contentsline {section}{\numberline {6}Conclusion}{43}{section.6}%
