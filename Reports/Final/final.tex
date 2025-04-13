@@ -7,6 +7,8 @@
 \usepackage{pgfgantt}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{float}
+\usepackage{subcaption}
 
 \lstset{
     language=Python,
@@ -28,9 +30,9 @@
 \date{\today}
 \maketitle
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{Images/Trinity_Main_Logo.jpg}
+\includegraphics[width=0.7\linewidth]{Images/Trinity_Main_Logo.jpg}
 \label{fig:logo}
 \end{figure}
 
@@ -227,7 +229,7 @@ The project was designed to achieve the aims as discussed. The key aims being to
 
 \begin{figure}[htbp]
 \centering
-\includegraphics[width=\linewidth]{Images/Tall_Design.png}
+\includegraphics[width=0.7\linewidth]{Images/Tall_Design.png}
 \label{fig:tall_design}
 \end{figure}
 
@@ -292,9 +294,9 @@ There were however a few issues with the Github1 workflow. The first issue was t
 
 The decision to not evaluate this project with user feedback meant that desktop metrics were created to review the performance of the tool for a given set of parameters. The metrics that were chosen were code complexity, code diversity, attempt count and run time. The code complexity metric was chosen as it is a good indicator of how difficult the code is to debug. The code diversity metric was chosen as it indicates how useful the tool would be for either a teacher who wants to generate a different problem for each student or a student who wants to generate a couple of different problems for themselves. The attempt count metric was also selected, this is the number of times the LLM had to be re-prompted because it produced an incorrect or unexpected output. This was primarily a good metric to compare different models and also to compare the self reflection and improvement methods. The final metric was run time, this was chosen as it shows how viable a given model is, this metric along with the rest will be used to weigh up the benefit of run time against the quality of the output. Below is a diagram showing the different layers of testing that can be done on the project.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{Images/Benchmark.png}
+\includegraphics[width=0.7\linewidth]{Images/Benchmark.png}
 \caption{Benchmark Results}
 \label{fig:benchmark_results}
 \end{figure}
@@ -337,36 +339,36 @@ Using an LLM is very easy. You simply give the LLM the prompt and read the outpu
 
 From all of the above testing a lot of data for model performance was collected. There has been no testing for the optimal hyperparameters for these models though. This will only be done for the best performing model in the previous examples. There is clear best model but considering the trade off between run time, reliability (attempts needed) and diversity the qwen2.5:32b model gives reliable, high quality results and does not take too excessive a quantity of time like the deepseek models. For that reason the hyperparameter-tuning will be performed on the qwen2.5:32b model using AST bug insertion. The parameters that will be tuned are the temperature, the max tokens, the top p and the top k. The temperature controls the amount of randomness in the output, the max tokens controls the maximum length of the output, the top p controls the probability of the output token being selected and the top k controls the number of tokens that are considered for the output. The tuning will be done using a grid search approach where the model will be run with a large set of possible combination of hyperparameters and the results will be compared. Each bar of each graph has the average results of the program with the current hyperparameter at the given value. The graphs for the hyperparameter tuning for each hyperparameter are shown below:
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_temperature_Comparison.png}
+\includegraphics[width=0.7\linewidth]{Images/Hyperparam_temperature_Comparison.png}
 \caption{Complexity Comparison Threads}
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
 
 As mentioned above temperature is the amount of randomness in the output. From this we might expect to see that the attempts required and resultant run time is a bit higher with a higher temperature. We would also expect to see a higher diversity score at higher temperatures. We can see in the first chart that once the temperature reaches approximately 8 the accuracy does begin to fall. We do not however see the expected results for diversity, this is likely because the topic is quite constrained and the bug insertion is done using the AST bug insertion which is not affected by temperature. For this hyperparmeter there does not appear to be a clear best value but good results are seen at approximately 0.25 so this will be the value chosen.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_max_tokens_Comparison.png}
+\includegraphics[width=0.7\linewidth]{Images/Hyperparam_max_tokens_Comparison.png}
 \caption{Complexity Comparison Threads}
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
 
 The max tokens hyperparameter is the maximum length of the output. For this we would expect to see very poor results while the max tokens is very low as the code will be cut off before it is complete. We would not expect to see much difference in the second graph as the diversity and complexity of the code should not be affected by the max token count. In the first graph we do see what we expect. Initially there is very poor results as the code is not able to be generated with the given max tokens. However, once the max tokens reaches an acceptable threshold the results get much better as most responses do not get cut off. This then slowly improves as the max tokens increases and the few longer responses begin to not be cut off either. Suprisingly though we do see a sudden significant increase in the attempts and run count after 400 tokens. We know from the increase in both the attempt count and the runtime that this is due to failed responses and not an increase in response time from the LLM. It could be due to the LLM beginning to ramble and providing lower quality responses as the max tokens increases. The increase in diversity in the second graph provides some evidence for this as the responses are becoming more varied. Taking this the hyperparameter for this will be set to 300 to get the best length support for responses without a loss of accuracy.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_top_k_Comparison.png}
+\includegraphics[width=0.7\linewidth]{Images/Hyperparam_top_k_Comparison.png}
 \caption{Complexity Comparison Threads}
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
 
 When the model is predicting the next token it will assign possibilities to all tokens. The top k hyperparameter will limit the number of tokens that are considered for the output to the top k. This has a similar affect to temperature. A decrease in accuracy as top k increases can be observed, once it goes above 3 we can see that the average attempts and runtimes begins to increase. The diversity score however, does not appear to be affected so for this hyperparameter it will be best to keep it at 1 or 2.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Hyperparam_top_p_Comparison.png}
+\includegraphics[width=0.7\linewidth]{Images/Hyperparam_top_p_Comparison.png}
 \caption{Complexity Comparison Threads}
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
@@ -377,9 +379,10 @@ Similarly to top k the top p hyperparameter will limit the number of tokens that
 \subsection{Model Benchmark}
 
 From the result of the model benchmark script the below graph was generate which compares the time taken, attempts taken and diversity score for each model with both LLM bug insertion and AST bug insertion.
-\begin{figure}[h!]
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{Images/Model_Comparison_Fibbonaci.png}
+\includegraphics[width=0.7\linewidth]{Images/Model_Comparison_Fibbonaci.png}
 \label{fig:Model_Benchmark}
 \end{figure}
 
@@ -387,9 +390,9 @@ From the graph above we see the very predictable outcome that in general the lar
 
 Across the board we can see a very large difference between the AST bug insertion and LLM bug insertion, for each model we can see that the runtime of the LLM bug insertion is at least two times larger, in some cases as much as four times larger. The same is seen for the attempts needed as the vast majority of the re-prompts are during the bug insertion, there is rarely a need for a retry in original code generation. We can see from this that the AST bug insertion is much more reliable and much faster than the LLM bug insertion. In the below graph we can see the metrics for cognitive complexity, cyclomatic complexity and diversity for each model which are the best indicator of the quality of the code generated.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{Images/Complexity_Comparison_Fibbonaci.png}
+\includegraphics[width=0.7\linewidth]{Images/Complexity_Comparison_Fibbonaci.png}
 \label{fig:Complexity_Benchmark}
 \end{figure}
 
@@ -401,34 +404,33 @@ We can see that the LLM bug insertion method tends to have a higher cognitive co
 
 The results of the Models with different bug insertion methods above were run for one topic. The same test was run a number more times with different topics and bug prompts. Some topics will have more or less scope for creativity and complexity which might provide an interesting comparison between the bug insertion methods under different circumstances.
 
-The first topic that was tested was Arrays. This is a very simple topic which tests how the models and methods performed with a more constrained topic.
-
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Arrays.png}
-\caption{Model Comparison Arrays}
-\label{fig:Model_Comparison_Arrays}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Arrays.png}
+\includegraphics[width=0.7\linewidth]{Images/Complexity_Comparison_Arrays.png}
 \caption{Complexity Comparison Arrays}
 \label{fig:Complexity_Comparison_Arrays}
+\end{figure}
+    
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{Images/Model_Comparison_Arrays.png}
+\caption{Model Comparison Arrays}
+\label{fig:Model_Comparison_Arrays}
 \end{figure}
 
 The results of both graphs in this case are very similar to that of the baseline. They follow the exact same trend but the scale is different. The results of the array topic take longer to generate, take more retries and provide more complex code, the diversity however is not improved from the baseline.
 
 The next topic that was tested was the Djikstra algorithm. From the broad phrasing of the topic we can expect to see more meaningful results in this case.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Djikstra.png}
+\includegraphics[width=0.7\linewidth]{Images/Model_Comparison_Djikstra.png}
 \caption{Model Comparison Djikstra}
 \label{fig:Model_Comparison_Djikstra}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Djikstra.png}
 \caption{Complexity Comparison Djikstra}
@@ -437,35 +439,37 @@ The next topic that was tested was the Djikstra algorithm. From the broad phrasi
 
 Much like above these graphs too follow the same trend across models but the scale is different again. There runtime and attempts required are both much higher than the baseline. this is due to the task being more complex, this is clearly only the case in the LLM bug insertion as there is no increase in attempts for the AST bug insertion, from this we can take that the LLM bug insertion becomes much less feasible for larger more complex code while the AST bug insertion will perform consistently in any setting. From the second graph we also see the expected increase in complexity and diversity from the baseline.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Linked_Lists.png}
+\includegraphics[width=0.7\linewidth]{Images/Model_Comparison_Linked_Lists.png}
 \caption{Model Comparison Linked Lists}
 \label{fig:Model_Comparison_Linked_Lists}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Linked_Lists.png}
+\includegraphics[width=0.7\linewidth]{Images/Complexity_Comparison_Linked_Lists.png}
 \caption{Complexity Comparison Linked Lists}
 \label{fig:Complexity_Comparison_Linked_Lists}
 \end{figure}
 
 The linked lists topic had performance between the baseline and the djikstra topic. The runtime and attempts required were comfortably higher than the baseline but not quite as high as djikstra, particularly for the attempts required. The complexity and diversity scores were very similar to the baseline and were not increased significantly. 
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Images/Model_Comparison_Threads.png}
+\includegraphics[width=0.7\linewidth]{Images/Complexity_Comparison_Threads.png}
+\caption{Complexity Comparison Threads}
+\label{fig:Complexity_Comparison_Threads}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{Images/Model_Comparison_Threads.png}
 \caption{Model Comparison Threads}
 \label{fig:Model_Comparison_Threads}
 \end{figure}
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\linewidth]{Images/Complexity_Comparison_Threads.png}
-\caption{Complexity Comparison Threads}
-\label{fig:Complexity_Comparison_Threads}
-\end{figure}
+
 
 The multi-threading topic had very similar results to djikstra as both have high levels of nesting and subsequent complexity. However where it does differ is the diversity score, the multi-threading does not see nearly as diverse results as djikstra. Examing the output code this appears to be because each case of multi-threading defaulted to the same few fundamental examples of a deadlock while the djikstra topic had no clear bug to insert and so the results were much more varied.
 
