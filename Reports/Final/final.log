@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.13)  13 APR 2025 14:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.1.13)  13 APR 2025 16:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -610,11 +610,11 @@ Package pdftex.def Info: Images/Hyperparam_top_p_Comparison.png  used on input l
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [32]
-<Images/Model_Comparison_Fibbonaci.png, id=459, 1011.78pt x 578.16pt>
+<Images/Model_Comparison_Fibbonaci.png, id=459, 881.694pt x 802.9197pt>
 File: Images/Model_Comparison_Fibbonaci.png Graphic file (type png)
 <use Images/Model_Comparison_Fibbonaci.png>
 Package pdftex.def Info: Images/Model_Comparison_Fibbonaci.png  used on input line 382.
-(pdftex.def)             Requested size: 433.62pt x 247.78351pt.
+(pdftex.def)             Requested size: 433.62pt x 394.87978pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -630,40 +630,47 @@ Package pdftex.def Info: Images/Complexity_Comparison_Fibbonaci.png  used on inp
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [35 <./Images/Model_Comparison_Fibbonaci.png>] [36 <./Images/Complexity_Comparison_Fibbonaci.png>]
-<Images/Model_Comparison_Arrays.png, id=483, 1011.78pt x 578.16pt>
+<Images/Model_Comparison_Arrays.png, id=483, 881.694pt x 802.9197pt>
 File: Images/Model_Comparison_Arrays.png Graphic file (type png)
 <use Images/Model_Comparison_Arrays.png>
 Package pdftex.def Info: Images/Model_Comparison_Arrays.png  used on input line 408.
-(pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
+(pdftex.def)             Requested size: 346.89731pt x 315.89401pt.
 <Images/Complexity_Comparison_Arrays.png, id=484, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Arrays.png Graphic file (type png)
 <use Images/Complexity_Comparison_Arrays.png>
 Package pdftex.def Info: Images/Complexity_Comparison_Arrays.png  used on input line 415.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
- [37 <./Images/Model_Comparison_Arrays.png> <./Images/Complexity_Comparison_Arrays.png>]
-<Images/Model_Comparison_Djikstra.png, id=494, 1011.78pt x 578.16pt>
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[37 <./Images/Model_Comparison_Arrays.png>]
+<Images/Model_Comparison_Djikstra.png, id=492, 872.2989pt x 802.9197pt>
 File: Images/Model_Comparison_Djikstra.png Graphic file (type png)
 <use Images/Model_Comparison_Djikstra.png>
 Package pdftex.def Info: Images/Model_Comparison_Djikstra.png  used on input line 426.
-(pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
-<Images/Complexity_Comparison_Djikstra.png, id=495, 1011.78pt x 578.16pt>
+(pdftex.def)             Requested size: 346.89731pt x 319.29994pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<Images/Complexity_Comparison_Djikstra.png, id=493, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Djikstra.png Graphic file (type png)
 <use Images/Complexity_Comparison_Djikstra.png>
 Package pdftex.def Info: Images/Complexity_Comparison_Djikstra.png  used on input line 433.
 (pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
 
-
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Model_Comparison_Linked_Lists.png, id=496, 1011.78pt x 578.16pt>
+<Images/Model_Comparison_Linked_Lists.png, id=494, 881.694pt x 802.9197pt>
 File: Images/Model_Comparison_Linked_Lists.png Graphic file (type png)
 <use Images/Model_Comparison_Linked_Lists.png>
 Package pdftex.def Info: Images/Model_Comparison_Linked_Lists.png  used on input line 442.
-(pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
+(pdftex.def)             Requested size: 346.89731pt x 315.89401pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Complexity_Comparison_Linked_Lists.png, id=497, 1011.78pt x 578.16pt>
+<Images/Complexity_Comparison_Linked_Lists.png, id=495, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Linked_Lists.png Graphic file (type png)
 <use Images/Complexity_Comparison_Linked_Lists.png>
 Package pdftex.def Info: Images/Complexity_Comparison_Linked_Lists.png  used on input line 449.
@@ -671,16 +678,17 @@ Package pdftex.def Info: Images/Complexity_Comparison_Linked_Lists.png  used on 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Model_Comparison_Threads.png, id=498, 1011.78pt x 578.16pt>
+[38 <./Images/Complexity_Comparison_Arrays.png>]
+<Images/Model_Comparison_Threads.png, id=502, 872.2989pt x 802.9197pt>
 File: Images/Model_Comparison_Threads.png Graphic file (type png)
 <use Images/Model_Comparison_Threads.png>
 Package pdftex.def Info: Images/Model_Comparison_Threads.png  used on input line 458.
-(pdftex.def)             Requested size: 346.89731pt x 198.23033pt.
-[38 <./Images/Model_Comparison_Djikstra.png>]
+(pdftex.def)             Requested size: 346.89731pt x 319.29994pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<Images/Complexity_Comparison_Threads.png, id=505, 1011.78pt x 578.16pt>
+<Images/Complexity_Comparison_Threads.png, id=503, 1011.78pt x 578.16pt>
 File: Images/Complexity_Comparison_Threads.png Graphic file (type png)
 <use Images/Complexity_Comparison_Threads.png>
 Package pdftex.def Info: Images/Complexity_Comparison_Threads.png  used on input line 465.
@@ -688,7 +696,7 @@ Package pdftex.def Info: Images/Complexity_Comparison_Threads.png  used on input
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[39 <./Images/Complexity_Comparison_Djikstra.png> <./Images/Model_Comparison_Linked_Lists.png>] [40 <./Images/Complexity_Comparison_Linked_Lists.png> <./Images/Model_Comparison_Threads.png>] [41 <./Images/Complexity_Comparison_Threads.png>] [42] [43]
+[39 <./Images/Model_Comparison_Djikstra.png>] [40 <./Images/Complexity_Comparison_Djikstra.png>] [41 <./Images/Model_Comparison_Linked_Lists.png>] [42 <./Images/Complexity_Comparison_Linked_Lists.png>] [43 <./Images/Model_Comparison_Threads.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 497--502
 
  []
@@ -698,7 +706,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 497--502
 
  []
 
-[44]
+[44 <./Images/Complexity_Comparison_Threads.png>] [45]
 Underfull \hbox (badness 1102) in paragraph at lines 523--524
 []\OT1/cmr/m/n/10.95 Whalley, J., Set-tle, A., & Luxton-Reilly, A. (2023). A Think-Aloud Study of
  []
@@ -708,7 +716,7 @@ Underfull \hbox (badness 2376) in paragraph at lines 523--524
 \OT1/cmr/m/n/10.95 Novice De-bug-ging. ACM Trans-ac-tions on Com-put-ing Ed-u-ca-tion, 23(2), 1{38.
  []
 
-[45]
+[46]
 Underfull \hbox (badness 7558) in paragraph at lines 535--536
 []\OT1/cmr/m/n/10.95 David Janzen and Hos-sein Saiedian. 2008. Test-driven learn-ing in early
  []
@@ -718,7 +726,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 535--536
 \OT1/cmr/m/n/10.95 pro-gram-ming courses. SIGCSE Bull. 40, 1 (March 2008), 532{536.
  []
 
-[46] (./final.aux)
+[47] (./final.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -731,18 +739,18 @@ Package rerunfilecheck Info: File `final.out' has not changed.
 (rerunfilecheck)             Checksum: 532472E158AC64006926EC74F9B56C36;7400.
  ) 
 Here is how much of TeX's memory you used:
- 23409 strings out of 474222
- 449110 string characters out of 5748733
+ 23410 strings out of 474222
+ 449117 string characters out of 5748733
  2076975 words of memory out of 5000000
  45161 multiletter control sequences out of 15000+600000
  566334 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,8n,101p,1455b,2098s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb>
-Output written on final.pdf (46 pages, 1251484 bytes).
+Output written on final.pdf (47 pages, 1380440 bytes).
 PDF statistics:
- 626 PDF objects out of 1000 (max. 8388607)
- 523 compressed objects within 6 object streams
- 150 named destinations out of 1000 (max. 500000)
+ 631 PDF objects out of 1000 (max. 8388607)
+ 527 compressed objects within 6 object streams
+ 151 named destinations out of 1000 (max. 500000)
  482 words of extra memory for PDF output out of 10000 (max. 10000000)
 

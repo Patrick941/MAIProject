@@ -21,9 +21,12 @@ def generate_graphs(data, category):
     sorted_data = sorted(zip(labels, times, attempts), key=lambda x: x[0])
     labels, times, attempts = zip(*sorted_data)
 
-    fig, ax1 = plt.subplots(figsize=(14, 8))
+    fig = plt.figure(figsize=(14, 12))
+    gs = fig.add_gridspec(2, hspace=0.6)
+    ax1 = fig.add_subplot(gs[0])
+    ax3 = fig.add_subplot(gs[1])
 
-    bar_width = 0.3
+    bar_width = 0.35
     index = np.arange(len(labels))
 
     bar1 = ax1.bar(index, times, bar_width, label='Time (s)', color='skyblue')
@@ -38,11 +41,22 @@ def generate_graphs(data, category):
 
     ax1.set_xticks(index + bar_width / 2)
     ax1.set_xticklabels(labels, rotation=45, ha='right')
+    ax1.set_title('Model and Bug Insertion Comparison')
+
+    handles1, labels1 = ax1.get_legend_handles_labels()
+    handles2, labels2 = ax2.get_legend_handles_labels()
+    ax1.legend(handles1 + handles2, labels1 + labels2, loc='upper left')
+
+    time_per_problem = [t / 10 for t in times]
+    ax3.bar(labels, time_per_problem, color='purple')
+    ax3.set_xlabel('Model and Bug Type')
+    ax3.set_ylabel('Time per Problem (s)')
+    ax3.set_title('Time per Problem')
+    ax3.tick_params(axis='x', rotation=45)
 
     fig.tight_layout()
-    plt.title('Model and Bug Insertion Comparison', pad=20)
-    fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax1.transAxes)
-    plt.savefig(f'Images/Model_Comparison_{category}.png')
+    plt.savefig(f'Images/Model_Comparison_{category}.png', bbox_inches='tight')
+    plt.close()
 
     cognitive_complexity = []
     cyclomatic_complexity = []
@@ -88,9 +102,6 @@ def generate_graphs(data, category):
     plt.title('Model and Bug Insertion Complexity and Diversity Comparison', pad=20)
     fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax1.transAxes)
     plt.savefig(f'Images/Complexity_Comparison_{category}.png')
-    
-data_fields = ['Model', 'Time', 'Bug Type', 'Cognitive Complexity', 'Cyclomatic Complexity', 'Attempts Needed Code Generation', 'Attempts Needed Bug Insertion', 'Similarity Score']
-
 
 fibbonaci_data = [
     ['deepseek-r1:14b', 336, 'ast', 42.09500770126638, 8.25, 0.25, 0.0, 1.264786867842822],
