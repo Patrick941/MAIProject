@@ -21,6 +21,9 @@
     frame=single
 }
 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
 \begin{document}
 
 \doublespacing
@@ -86,6 +89,7 @@ In recent years great strides made in the ability of LLMs to generate code. Thes
 \textbf{Improve Debuggings Skills:} The primary objective of this tool is to enable users to test and develop their debugging skills by generating debugging problems.
 
 \textbf{Customisable Generation:} The tool should allow users to specify the topic and bug type for the generated code. An example output with the topic of the Fibonacci sequence is shown below. 
+
 \begin{lstlisting}
     def fibonacci(n):
     """Return a list containing the first n Fibonacci numbers."""
@@ -178,6 +182,10 @@ Another important aspect of debugging that this tool addresses is the use of deb
 
 As Nguyen states in \cite{nguyen2024}, significant misunderstandings can easily arise between an AI and its user, which is especially true for novices who may struggle to articulate their problems thoroughly. This situation creates a chance to teach students how to harness LLMs effectively. The future frontend may benefit from incorporating a co-pilot-like assistance, allowing professors to enable or disable it depending on the complexity level they want to set. A comparable methodology is described by Denny in \cite{denny2023}, where students restricted to using LLMs alone learned to refine their prompts for more accurate output.
 
+\subsubsection{BugSpotter}
+
+BugSpotter is a similar tool that was develop to help students identify bugs in their code \cite{Victor2025}. It will generate buggy code using an LLM. The student is then given the task to create test cases that expose the bug. This tool will provide a similar benefit to students as the tool developed in this project. This tool also had the resources to carry out a classroom study and an expert review. The expert review came to the conclusion that the tool produced high-quality exercise but there was a noticed different in quality between GPT-3.5 and GPT-4o despite 4o being a more expensive model. The classroom study was tested in an introductory C programming module with 741 students. The conclusion from the classroom study was that the problems were found to match the specified difficulty very well. This study shows the usefulness of a tool that can generate debugging problems for a student or class of students.
+
 \subsection{LLMs and Code Generation}
 \subsubsection{How LLMs work}
 
@@ -185,7 +193,7 @@ LLMs in essentials are a type of neural network that is trained on a large datas
 
 \subsubsection{Interacting with LLMs}
 
-For interacting with an LLM you will generally use an API. This tool uses two different APIs to interact with LLMs which can be swapped in-between. The first API is the OpenAI GPT API which is a paid API that is very accurate and very fast, in an ideal world this would be used for all versions and iterations for the project. However, this is of course going to get very expensive very quickly. For this reason a second method of interacting with local LLMs is used too.
+For interacting with an LLM you will generally use an API. This tool uses two different APIs to interact with LLMs which can be swapped in-between. The first API is the OpenAI GPT API which is a paid API that is very accurate and very fast, in an ideal world this would be used for all versions and iterations for the project. However, this is of course going to get very expensive very quickly, for example the full benchmark costs 5 euro when run using gpt-turbo-4. For this reason a second method of interacting with local LLMs is used too.
 
 \subsubsection{Local LLMs}
 
@@ -457,14 +465,14 @@ The linked lists topic had performance between the baseline and the djikstra top
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{Images/Complexity_Comparison_Threads.png}
+\includegraphics[width=0.65\linewidth]{Images/Complexity_Comparison_Threads.png}
 \caption{Complexity Comparison Threads}
 \label{fig:Complexity_Comparison_Threads}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{Images/Model_Comparison_Threads.png}
+\includegraphics[width=0.65\linewidth]{Images/Model_Comparison_Threads.png}
 \caption{Model Comparison Threads}
 \label{fig:Model_Comparison_Threads}
 \end{figure}
@@ -502,7 +510,7 @@ This project managed to achieve its goals of first creating a tool that is able 
 \\
 Some future work to expand upon this project could include two parts. The first to develop an interactive frontend that a user could then interact with whether that user be a student or a professor. There is also the potential to then collect user feedback of the tool as although the metrics give a good idea of the quality of the code they only attempt to recreate the opinions of a developer. Another potential piece of future work which may be of less importance is inspired by the poor consistency of the LLM bug insertion method. This could be improved upon by fine-tuning a model for bug insertion, this could provide a perfect balance of the two methods provided where it could have the adaptability and customisability of the LLM method but the reliability of the AST method.\\
 \\
-In conclusion it is possible to generate useable problems to teach novice programmers how to debug using an LLM to generate the original code and then inserting bugs in a couple of methods.
+In conclusion it is possible to generate useable problems to teach novice programmers how to debug using an LLM to generate the original code and then inserting bugs.
 
 
 \newpage
@@ -542,6 +550,9 @@ David Janzen and Hossein Saiedian. 2008. Test-driven learning in early programmi
 Shinn, N., Cassano, F., Berman, E., Gopinath, A., Narasimhan, K., \& Yao, S. (2023). Reflexion: Language Agents with Verbal Reinforcement Learning. arXiv. https://arxiv.org/abs/2303.11366
 
 \bibitem{esposito2024}Esposito, M., Janes, A., Kilamo, T., \& Lenarduzzi, V. (2024). Early Career Developers' Perceptions of Code Understandability. A Study of Complexity Metrics. arXiv. https://arxiv.org/abs/2303.07722
+
+\bibitem{Victor2025}
+Pădurean, V.-A., Denny, P., \& Singla, A. (2025). BugSpotter: Automated Generation of Code Debugging Exercises. Proceedings of the 56th ACM Technical Symposium on Computer Science Education V. 1, 896–902. https://doi.org/10.1145/3641554.3701974
 
 \end{thebibliography}
 
