@@ -6,102 +6,130 @@ import matplotlib.pyplot as plt
 
 def generate_graphs(data, category):
     combinations = list(set((row[0], row[2]) for row in data))
-
-    times = []
-    attempts = []
-    labels = []
+    labels, times, attempts = [], [], []
     for model, bug_type in combinations:
         for row in data:
             if row[0] == model and row[2] == bug_type:
-                times.append(row[1])
-                attempts.append(row[5] + row[6])
                 labels.append(f"{model}\n{bug_type}")
+                times.append(float(row[1]))
+                attempts.append(float(row[5]) + float(row[6]))
                 break
-
+            
+            
     sorted_data = sorted(zip(labels, times, attempts), key=lambda x: x[0])
     labels, times, attempts = zip(*sorted_data)
-
-    fig = plt.figure(figsize=(14, 12))
-    gs = fig.add_gridspec(2, hspace=0.6)
-    ax1 = fig.add_subplot(gs[0])
-    ax3 = fig.add_subplot(gs[1])
-
-    bar_width = 0.35
-    index = np.arange(len(labels))
-
-    bar1 = ax1.bar(index, times, bar_width, label='Time (s)', color='skyblue')
-    ax1.set_xlabel('Model and Bug Type')
-    ax1.set_ylabel('Time (s)')
-    ax1.tick_params(axis='y')
-
-    ax2 = ax1.twinx()
-    bar2 = ax2.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
-    ax2.set_ylabel('Attempts')
-    ax2.tick_params(axis='y')
-
-    ax1.set_xticks(index + bar_width / 2)
-    ax1.set_xticklabels(labels, rotation=45, ha='right')
-    ax1.set_title('Model and Bug Insertion Comparison')
-
-    handles1, labels1 = ax1.get_legend_handles_labels()
-    handles2, labels2 = ax2.get_legend_handles_labels()
-    ax1.legend(handles1 + handles2, labels1 + labels2, loc='upper left')
-
-    time_per_problem = [t / 10 for t in times]
-    ax3.bar(labels, time_per_problem, color='purple')
-    ax3.set_xlabel('Model and Bug Type')
-    ax3.set_ylabel('Time per Problem (s)')
-    ax3.set_title('Time per Problem')
-    ax3.tick_params(axis='x', rotation=45)
-
-    fig.tight_layout()
-    plt.savefig(f'Images/Model_Comparison_{category}.png', bbox_inches='tight')
+    fig1, axs = plt.subplots(2, 2, figsize=(14, 12))
+    fig1.suptitle(f'Performance Metrics - {category}', fontsize=14)
+    
+    
+    axs[0,0].bar(labels, times, color='skyblue')
+    axs[0,0].set_ylabel('Time (s)', fontsize=10)
+    axs[0,0].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,0].grid(alpha=0.3)
+    axs[0,1].bar(labels, attempts, color='lightgreen')
+    axs[0,1].set_ylabel('Total Attempts', fontsize=10)
+    axs[0,1].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,1].grid(alpha=0.3)
+    
+    
+    time_per_problem = [t/10 for t in times]
+    
+    
+    axs[1,0].bar(labels, time_per_problem, color='purple')
+    axs[1,0].set_ylabel('Time/Problem (s)', fontsize=10)
+    axs[1,0].set_xlabel('Model & Bug Type', fontsize=10)
+    axs[1,0].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[1,0].grid(alpha=0.3)
+    axs[1,1].axis('off')
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.savefig(f'Images/Model_Comparison_{category}.png')
     plt.close()
-
-    cognitive_complexity = []
-    cyclomatic_complexity = []
-    inverse_similarity_scores = []
-    labels = []
+    
+    
+    cognitive, cyclomatic, diversity = [], [], []
     for model, bug_type in combinations:
         for row in data:
             if row[0] == model and row[2] == bug_type:
-                cognitive_complexity.append(row[3])
-                cyclomatic_complexity.append(row[4])
-                inverse_similarity_scores.append(1 / row[7])
-                labels.append(f"{model}\n{bug_type}")
+                cognitive.append(float(row[3]))
+                cyclomatic.append(float(row[4]))
+                diversity.append(1/float(row[7]))
                 break
-
-    sorted_data = sorted(zip(labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores), key=lambda x: x[0])
-    labels, cognitive_complexity, cyclomatic_complexity, inverse_similarity_scores = zip(*sorted_data)
-
-    fig, ax1 = plt.subplots(figsize=(14, 8))
-
-    bar_width = 0.2
-    index = np.arange(len(labels))
-
-    bar1 = ax1.bar(index, cognitive_complexity, bar_width, label='Cognitive Complexity', color='lightblue')
-    ax1.set_xlabel('Model and Bug Type')
-    ax1.set_ylabel('Cognitive Complexity')
-    ax1.tick_params(axis='y')
-
-    ax2 = ax1.twinx()
-    bar2 = ax2.bar(index + bar_width, cyclomatic_complexity, bar_width, label='Cyclomatic Complexity', color='lightcoral')
-    ax2.set_ylabel('Cyclomatic Complexity')
-    ax2.tick_params(axis='y')
-
-    ax3 = ax1.twinx()
-    ax3.spines['right'].set_position(('outward', 60))
-    bar3 = ax3.bar(index + 2 * bar_width, inverse_similarity_scores, bar_width, label='Diversity Score', color='lightgreen')
-    ax3.set_ylabel('Diversity Score')
-    ax3.tick_params(axis='y')
-
-    ax1.set_xticks(index + bar_width)
-    ax1.set_xticklabels(labels, rotation=45, ha='right')
-
-    fig.tight_layout()
-    plt.title('Model and Bug Insertion Complexity and Diversity Comparison', pad=20)
-    fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax1.transAxes)
+    fig2, axs = plt.subplots(2, 2, figsize=(14, 12))
+    fig2.suptitle(f'Complexity & Diversity - {category}', fontsize=14)
+    
+    axs[0,0].bar(labels, cognitive, color='lightblue')
+    axs[0,0].set_ylabel('Cognitive Complexity', fontsize=10)
+    axs[0,0].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,0].grid(alpha=0.3)
+    axs[0,1].bar(labels, cyclomatic, color='lightcoral')
+    axs[0,1].set_ylabel('Cyclomatic Complexity', fontsize=10)
+    axs[0,1].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,1].grid(alpha=0.3)
+    axs[1,0].bar(labels, diversity, color='lightgreen')
+    axs[1,0].set_ylabel('Diversity Score', fontsize=10)
+    axs[1,0].set_xlabel('Model & Bug Type', fontsize=10)
+    axs[1,0].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[1,0].grid(alpha=0.3)
+    axs[1,1].axis('off')
+    
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.savefig(f'Images/Complexity_Comparison_{category}.png')
+    plt.close()
+
+def generate_hyperparameter_graphs(hyperparam_data, param_name):
+    grouped = defaultdict(list)
+    for row in hyperparam_data:
+        grouped[row[param_name]].append(row)
+    labels, runtimes, attempts = [], [], []
+    cog_comp, cyc_comp, diversity = [], [], []
+    for val in sorted(grouped.keys()):
+        entries = grouped[val]
+        labels.append(str(val))
+        runtimes.append(mean(e['runtime'] for e in entries))
+        attempts.append(mean(e['code_generation_attempts'] + e['bug_insertion_attempts'] for e in entries))
+        cog_comp.append(mean(e['cognitive_complexity'] for e in entries))
+        cyc_comp.append(mean(e['cyclomatic_complexity'] for e in entries))
+        diversity.append(mean(1/e['similarity_score'] if e['similarity_score'] else float('inf') for e in entries))
+        
+        
+    fig1, axs = plt.subplots(2, 2, figsize=(14, 12))
+    fig1.suptitle(f'Hyperparameter: {param_name} - Performance', fontsize=14)
+    axs[0,0].bar(labels, runtimes, color='skyblue')
+    axs[0,0].set_ylabel('Runtime (s)', fontsize=10)
+    axs[0,0].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,0].grid(alpha=0.3)
+    axs[0,1].bar(labels, attempts, color='lightgreen')
+    axs[0,1].set_ylabel('Total Attempts', fontsize=10)
+    axs[0,1].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,1].grid(alpha=0.3)
+    axs[1,0].axis('off')
+    axs[1,1].axis('off')
+    
+    
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.savefig(f'Images/Hyperparam_{param_name}_Performance.png')
+    plt.close()
+    fig2, axs = plt.subplots(2, 2, figsize=(14, 12))
+    fig2.suptitle(f'Hyperparameter: {param_name} - Complexity & Diversity', fontsize=14)
+    
+    axs[0,0].bar(labels, cog_comp, color='lightblue')
+    axs[0,0].set_ylabel('Cognitive Complexity', fontsize=10)
+    axs[0,0].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,0].grid(alpha=0.3)
+    axs[0,1].bar(labels, cyc_comp, color='lightcoral')
+    axs[0,1].set_ylabel('Cyclomatic Complexity', fontsize=10)
+    axs[0,1].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[0,1].grid(alpha=0.3)
+    axs[1,0].bar(labels, diversity, color='lightgreen')
+    axs[1,0].set_ylabel('Diversity Score', fontsize=10)
+    axs[1,0].tick_params(axis='x', rotation=45, labelsize=8)
+    axs[1,0].grid(alpha=0.3)
+    axs[1,1].axis('off')
+    
+    
+    plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.savefig(f'Images/Hyperparam_{param_name}_Complexity.png')
+    plt.close()
 
 fibbonaci_data = [
     ['deepseek-r1:14b', 336, 'ast', 42.09500770126638, 8.25, 0.25, 0.0, 1.264786867842822],
@@ -174,80 +202,6 @@ generate_graphs(arrays_data, 'Arrays')
 generate_graphs(djikstra_data, 'Djikstra')
 generate_graphs(linked_lists_data, 'Linked_Lists')
 generate_graphs(threads_data, 'Threads')
-   
-
-def generate_hyperparameter_graphs(hyperparam_data, param_name):
-    import matplotlib.pyplot as plt
-
-    # Add derived fields
-    for row in hyperparam_data:
-        row['combined_attempts'] = row['code_generation_attempts'] + row['bug_insertion_attempts']
-        row['diversity_score'] = 1 / row['similarity_score'] if row['similarity_score'] else float('inf')
-
-    # Group data by hyperparameter value
-    grouped = defaultdict(list)
-    for row in hyperparam_data:
-        grouped[row[param_name]].append(row)
-
-    # Prepare data for runtime vs attempts
-    labels, runtimes, attempts = [], [], []
-    for val in sorted(grouped.keys()):
-        entries = grouped[val]
-        labels.append(str(val))
-        runtimes.append(mean(e['runtime'] for e in entries))
-        attempts.append(mean(e['combined_attempts'] for e in entries))
-
-    # Prepare data for complexities and diversity
-    cog_comp, cyc_comp, div_score = [], [], []
-    for val in sorted(grouped.keys()):
-        entries = grouped[val]
-        cog_comp.append(mean(e['cognitive_complexity'] for e in entries))
-        cyc_comp.append(mean(e['cyclomatic_complexity'] for e in entries))
-        div_score.append(mean(e['diversity_score'] for e in entries))
-
-    # Create a single figure with two subplots
-    fig, (ax_top, ax_bottom) = plt.subplots(2, 1, figsize=(14, 12))
-
-    # First subplot: runtime vs attempts
-    bar_width = 0.3
-    index = np.arange(len(labels))
-    bar1 = ax_top.bar(index, runtimes, bar_width, label='Runtime', color='skyblue')
-    ax_top.set_xlabel(param_name)
-    ax_top.set_ylabel('Runtime (s)')
-    ax_top.tick_params(axis='y')
-    ax_top.set_xticks(index + bar_width / 2)
-    ax_top.set_xticklabels(labels, rotation=45, ha='right')
-
-    ax_top_twin = ax_top.twinx()
-    bar2 = ax_top_twin.bar(index + bar_width, attempts, bar_width, label='Attempts', color='lightgreen')
-    ax_top_twin.set_ylabel('Attempts')
-    ax_top_twin.tick_params(axis='y')
-
-    # Second subplot: cognitive, cyclomatic, diversity (3 y-axes)
-    bar_width = 0.2
-    index = np.arange(len(labels))
-    bar1 = ax_bottom.bar(index, cog_comp, bar_width, label='Cognitive Complexity', color='lightblue')
-    ax_bottom.set_xlabel(param_name)
-    ax_bottom.set_ylabel('Cognitive Complexity')
-    ax_bottom.tick_params(axis='y')
-    ax_bottom.set_xticks(index + bar_width)
-    ax_bottom.set_xticklabels(labels, rotation=45, ha='right')
-
-    ax_bottom2 = ax_bottom.twinx()
-    bar2 = ax_bottom2.bar(index + bar_width, cyc_comp, bar_width, label='Cyclomatic Complexity', color='lightcoral')
-    ax_bottom2.set_ylabel('Cyclomatic Complexity')
-    ax_bottom2.tick_params(axis='y')
-
-    ax_bottom3 = ax_bottom.twinx()
-    ax_bottom3.spines['right'].set_position(('outward', 60))
-    bar3 = ax_bottom3.bar(index + 2 * bar_width, div_score, bar_width, label='Diversity Score', color='lightgreen')
-    ax_bottom3.set_ylabel('Diversity Score')
-    ax_bottom3.tick_params(axis='y')
-
-    fig.tight_layout()
-    fig.legend(loc='upper right', bbox_to_anchor=(1,1), bbox_transform=ax_bottom.transAxes)
-    plt.savefig(f'Images/Hyperparam_{param_name}_Comparison.png')
-    plt.close()
         
 temperature_data = [
     {'temperature': 0.001, 'runtime': 194, 'cognitive_complexity': 56.54932628534889, 'cyclomatic_complexity': 4.25, 'code_generation_attempts': 0.5, 'bug_insertion_attempts': 0.0, 'similarity_score': 1.9655366098262044},

@@ -8,42 +8,56 @@
 \contentsline {subsection}{\numberline {2.1}Literature Review}{12}{subsection.2.1}%
 \contentsline {subsubsection}{\numberline {2.1.1}Importance of Debugging Skills}{12}{subsubsection.2.1.1}%
 \contentsline {subsubsection}{\numberline {2.1.2}Novice Programming Errors and Debugging}{12}{subsubsection.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.1.3}Teaching Debugging}{13}{subsubsection.2.1.3}%
-\contentsline {subsubsection}{\numberline {2.1.4}Test Cases in Debugging}{13}{subsubsection.2.1.4}%
-\contentsline {subsubsection}{\numberline {2.1.5}Use of Debugging Tools}{14}{subsubsection.2.1.5}%
-\contentsline {subsubsection}{\numberline {2.1.6}Misunderstandings Between AI and Users}{14}{subsubsection.2.1.6}%
-\contentsline {subsubsection}{\numberline {2.1.7}BugSpotter}{15}{subsubsection.2.1.7}%
-\contentsline {subsection}{\numberline {2.2}LLMs and Code Generation}{15}{subsection.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1}How LLMs work}{15}{subsubsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2}Interacting with LLMs}{16}{subsubsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.3}Local LLMs}{16}{subsubsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.4}Prompt Engineering}{16}{subsubsection.2.2.4}%
-\contentsline {section}{\numberline {3}Design and Implementation}{18}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Design Overview}{19}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Tools}{21}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Ollama}{21}{subsubsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.2}OpenAI GPT API}{21}{subsubsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.3}Code generation}{22}{subsection.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.1}Self Reflection \& Improvement}{23}{subsubsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.4}Bug Insertion}{23}{subsection.3.4}%
-\contentsline {subsubsection}{\numberline {3.4.1}LLM Bug Insertion}{23}{subsubsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.2}AST Bug Insertion}{24}{subsubsection.3.4.2}%
-\contentsline {section}{\numberline {4}Evaluation Methods}{26}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Environments}{26}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Benchmark Test Suite}{27}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Metrics}{29}{subsection.4.3}%
-\contentsline {subsubsection}{\numberline {4.3.1}Code Complexity}{29}{subsubsection.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.3.2}Code Diversity}{29}{subsubsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.3}Attempt Count}{30}{subsubsection.4.3.3}%
-\contentsline {subsubsection}{\numberline {4.3.4}Run Time}{30}{subsubsection.4.3.4}%
-\contentsline {section}{\numberline {5}Results and Discussion}{31}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Evaluation of LLMs}{31}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Hyperparameter Tuning}{31}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Model Benchmark}{36}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Topic Benchmark}{38}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Test Case Coverage}{44}{subsection.5.5}%
-\contentsline {subsection}{\numberline {5.6}Potential Use Cases}{44}{subsection.5.6}%
-\contentsline {subsection}{\numberline {5.7}Managing Debugging Difficulty}{45}{subsection.5.7}%
-\contentsline {subsubsection}{\numberline {5.7.1}Comparing Bug Complexity}{45}{subsubsection.5.7.1}%
-\contentsline {subsubsection}{\numberline {5.7.2}Matching Difficulty to Learner}{45}{subsubsection.5.7.2}%
-\contentsline {section}{\numberline {6}Conclusion}{47}{section.6}%
+\contentsline {subsubsection}{\numberline {2.1.3}Automating Personalised Parson Problems}{13}{subsubsection.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.1.4}Teaching Debugging}{13}{subsubsection.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.1.5}Test Cases in Debugging}{14}{subsubsection.2.1.5}%
+\contentsline {subsubsection}{\numberline {2.1.6}Use of Debugging Tools}{15}{subsubsection.2.1.6}%
+\contentsline {subsubsection}{\numberline {2.1.7}Misunderstandings Between AI and Users}{15}{subsubsection.2.1.7}%
+\contentsline {subsubsection}{\numberline {2.1.8}BugSpotter}{15}{subsubsection.2.1.8}%
+\contentsline {subsubsection}{\numberline {2.1.9}Summary}{16}{subsubsection.2.1.9}%
+\contentsline {subsection}{\numberline {2.2}LLMs and Code Generation}{17}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}How LLMs work}{17}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Interacting with LLMs}{17}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Local LLMs}{17}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}LLM Choices}{18}{subsubsection.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.5}Prompt Engineering}{19}{subsubsection.2.2.5}%
+\contentsline {section}{\numberline {3}Design and Implementation}{21}{section.3}%
+\contentsline {subsubsection}{\numberline {3.0.1}The Code Generator}{21}{subsubsection.3.0.1}%
+\contentsline {subsubsection}{\numberline {3.0.2}The Bug Inserter}{21}{subsubsection.3.0.2}%
+\contentsline {subsubsection}{\numberline {3.0.3}The Code Evaluator}{22}{subsubsection.3.0.3}%
+\contentsline {subsection}{\numberline {3.1}Design Overview}{22}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Tools}{24}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Ollama}{24}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}OpenAI GPT API}{25}{subsubsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.3}Code generation}{25}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Self Reflection \& Improvement}{26}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}Bug Insertion}{28}{subsection.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.1}LLM Bug Insertion}{28}{subsubsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.2}AST Bug Insertion}{29}{subsubsection.3.4.2}%
+\contentsline {section}{\numberline {4}Evaluation Methods}{31}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Evaluation Overview}{31}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Environments}{31}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.2.1}Environments Overview}{31}{subsubsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2}Github Workflows}{32}{subsubsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.3}Self Hosted Runner}{32}{subsubsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.3}Benchmark Test Suite}{33}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Metrics}{35}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Code Complexity}{35}{subsubsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.2}Code Diversity}{36}{subsubsection.4.4.2}%
+\contentsline {subsubsection}{\numberline {4.4.3}Attempt Count}{36}{subsubsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.4}Run Time}{37}{subsubsection.4.4.4}%
+\contentsline {section}{\numberline {5}Results and Discussion}{38}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Evaluation of LLMs}{38}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Hyperparameter Tuning}{38}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Model Benchmark}{47}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Topic Benchmark}{49}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Test Case Coverage}{57}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Conclusion}{58}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Potential Use Cases}{58}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Managing Debugging Difficulty}{59}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Comparing Bug Complexity}{59}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Matching Difficulty to Learner}{59}{subsubsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.3}Future Work}{60}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Interactive Frontend}{60}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}User Feedback}{61}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}LLM Bug Insertion}{61}{subsubsection.6.3.3}%
