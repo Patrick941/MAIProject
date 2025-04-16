@@ -48,15 +48,15 @@
 \contentsline {section}{\numberline {5}Results and Discussion}{38}{section.5}%
 \contentsline {subsection}{\numberline {5.1}Evaluation of LLMs}{38}{subsection.5.1}%
 \contentsline {subsection}{\numberline {5.2}Hyperparameter Tuning}{38}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Model Benchmark}{47}{subsection.5.3}%
-\contentsline {subsection}{\numberline {5.4}Topic Benchmark}{49}{subsection.5.4}%
-\contentsline {subsection}{\numberline {5.5}Test Case Coverage}{57}{subsection.5.5}%
-\contentsline {section}{\numberline {6}Conclusion}{58}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Potential Use Cases}{58}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Managing Debugging Difficulty}{59}{subsection.6.2}%
-\contentsline {subsubsection}{\numberline {6.2.1}Comparing Bug Complexity}{59}{subsubsection.6.2.1}%
-\contentsline {subsubsection}{\numberline {6.2.2}Matching Difficulty to Learner}{59}{subsubsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.3}Future Work}{60}{subsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}Interactive Frontend}{60}{subsubsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}User Feedback}{61}{subsubsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}LLM Bug Insertion}{61}{subsubsection.6.3.3}%
+\contentsline {subsection}{\numberline {5.3}Model Benchmark}{46}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Topic Benchmark}{48}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Test Case Coverage}{54}{subsection.5.5}%
+\contentsline {section}{\numberline {6}Conclusion}{56}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Potential Use Cases}{56}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Managing Debugging Difficulty}{57}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Comparing Bug Complexity}{57}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Matching Difficulty to Learner}{57}{subsubsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.3}Future Work}{58}{subsection.6.3}%
+\contentsline {subsubsection}{\numberline {6.3.1}Interactive Frontend}{58}{subsubsection.6.3.1}%
+\contentsline {subsubsection}{\numberline {6.3.2}User Feedback}{59}{subsubsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.3}LLM Bug Insertion}{59}{subsubsection.6.3.3}%
