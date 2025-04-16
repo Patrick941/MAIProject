@@ -171,13 +171,12 @@ Debugging has always been an essential aspect of programming, yet many universit
 
 When novice programmers write code, they inevitably introduce bugs, but as Jadud mentions in \cite{jadud2006}, they often respond by making minor syntax tweaks and rerunning their code immediately rather than trying to identify and resolve the underlying issue. This is another challenge that this tool addresses: by inserting deeper bugs, students are compelled to scrutinize and understand the code.
 
-Although it is definitely beneficial to insert deep semantic bugs into the code to improve the students' debugging skills, it is also important to teach students how to notice and solve the bugs they will often cause in code they write themselves. As mentioned by Jadud, students often make minor syntax tweaks and rerun the code. This is because a lot of the bugs they write into their code are syntax errors or smaller semantic errors such as infinite loops and off-by-one errors. As such the tool developed will try to insert these types of bugs.
-
-\subsubsection{Automating Personalised Parson Problems}
-
-A parsons problem is a type of exercise where students are given correct code but in the wrong order. They will have to re-arrange the code to make it work. Del Carpio in \cite{delCarpio2024} uses GPT-3.5 to generate problem statements and code solutions. There is a set of topics that the student can choose from, or enter their own. The students found the exercises enjoyable with 100\% of students saying they found the customisable topic enjoyable. The students also found the task beneficial with 88\% of students saying that found that it improved their skills.
-
+Although it is definitely beneficial to insert deep semantic bugs into the code to improve the students' debugging skills, it is also important to teach students how to notice and solve the bugs they will often cause in code they write thprovide
 This is a project similar to the tool discussed in this paper. The above paper discusses generating parsons problem specifically while this project is focused on generating debugging problems more generally. It is useful to see that students found the tool enjoyable and beneficial. The particular aspect of the tool they found enjoyable was the ability to customise the topic. This provides good justification for the customisable topic in the tool developed in this project.
+
+A study by Brown \cite{Brown2014} challenges the common beliefs held about bugs written by beginners. It analyses a dataset contained over 100,000 blocks of code compiled by students, this is known as the Black Box Dataset. This study is focus on Java, this means that not every observation made is relevant for this project but still provides useful insights. The study found that the most common bugs written by students were mismatched brackets, wrong parameter types, missing return statements, incorrect function calls and confusing assignment with comparison (`=' vs `=='). When professors and novices were given the opportunity to predict the most common bugs there was no difference between the accuracy of their predictions. This is important as it shows that a data driven approach needs to be taken to identifying common bugs written by novices, general assumptions are not enough. Although this study set out to show the difference between common beliefs and the reality of the most common bugs. It backs up the previously made observations that the most common bugs written by novices are shallow bugs.
+
+The above studies focus on the errors made by novices, however also worth mentioning is defects in code, Effenberger investigates this in \cite{Effenberger2022}. This includes not just bugs but poor code too. This is interesting to note as it highlights issues with novice programmers code beyond just bugs. The vast majority of the defects were using while loops instead of for loops or vice versa, redundant blocks of code and poorly named variables. This is not directly addressed by the tool although this could be a piece of future work. However, since the tool is producing code that is written by an LLM, excluding the bug inserted into the code the code should be high quality that very closely matches industry standards and practices while leaving very little or no redundant code. The exposure to correct style and practices will help students learn to write better code.
 
 \subsubsection{Teaching Debugging}
 
@@ -718,6 +717,12 @@ Koutcheme, C., Dainese, N., Sarsa, S., Hellas, A., Leinonen, J., Ashraf, S., \& 
 
 \bibitem{delCarpio2024}
 del Carpio Gutierrez, A., Denny, P., \& Luxton-Reilly, A. (2024). Automating Personalized Parsons Problems with Customized Contexts and Concepts. Proceedings of the 2024 on Innovation and Technology in Computer Science Education V. 1, 688–694. https://doi.org/10.1145/3649217.3653568
+
+\bibitem{Brown2014}
+Brown, N. C. C., \& Altadmri, A. (2014). Investigating novice programming mistakes: educator beliefs vs. student data. Proceedings of the Tenth Annual Conference on International Computing Education Research, 43–50. https://doi.org/10.1145/2632320.2632343
+
+\bibitem{Effenberger2022}
+Effenberger, T., \& Pelánek, R. (2022). Code Quality Defects Across Introductory Programming Topics. Proceedings of the 53rd ACM Technical Symposium on Computer Science Education V. 1, 941--947. https://doi.org/10.1145/3478431.3499415
 
 \end{thebibliography}
 
