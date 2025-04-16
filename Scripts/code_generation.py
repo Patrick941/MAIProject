@@ -16,55 +16,74 @@ class CodeGeneration:
         self.hyperparameters = hyperparameters
 
     def write_temp_script(self):
-        if self.type == "ollama":
-            if self.hyperparameters:
-                response_generator = ollama_classes.ResponseGenerator(self.model, temperature=self.hyperparameters[0], max_tokens=self.hyperparameters[1], top_p=self.hyperparameters[2], top_k=self.hyperparameters[3])
-            else:
-                response_generator = ollama_classes.ResponseGenerator(self.model)
-        elif self.type == "openAI":
-            response_generator = openAI_classes.ResponseGenerator()
-        else:
-            raise ValueError("Invalid type. Please specify 'ollama' or 'openAI'.")
-        if self.prompt_override:
-            response = response_generator.generate_response(self.prompt_override)
-            prompt = self.prompt_override
-        else:
-            prompt = "Write a runnable non-interactive program that takes the input file input.txt incorporating " + self.topic + " in " + self.language + " that writes output to terminal"
-            response = response_generator.generate_response(prompt)
-        start_index = response.find("```")
-        end_index = response.find("```", start_index + 3)
-        if start_index == end_index:
-            end_index = len(response)
-        extracted_text = response[start_index + 3:end_index]
-        if extracted_text.startswith("Python\n") or extracted_text.startswith("python\n"):
-            extracted_text = extracted_text[7:]
-            
-        if not self.prompt_override:
-            input_prompt = "Write the input file input.txt that will work with this code:\n" + extracted_text
-            response = response_generator.generate_response(input_prompt)
+        def extract_code_block(response):
             start_index = response.find("```")
             end_index = response.find("```", start_index + 3)
             if start_index == end_index:
                 end_index = len(response)
-            extracted_input = response[start_index + 3:end_index]
+            code = response[start_index + 3:end_index]
+            if code.startswith(("Python\n", "python\n")):
+                code = code[7:]
+            return code
+
+        def generate_input_file(code):
+            input_prompt = f"Write the input file input.txt that will work with this code:\n{code}"
+            input_response = response_generator.generate_response(input_prompt)
+            extracted_input = extract_code_block(input_response)
             extracted_input = '\n'.join(extracted_input.split('\n')[1:])
             with open('input.txt', 'w') as file:
                 file.write(extracted_input)
-            
-        response = response_generator.generate_response("Respond with just a yes or a no\nDoes this code:\n " + extracted_text + "\nFit this prompt: " + prompt)
-        if response.strip().split('\n')[-1].strip().lower() == "no":
-            return 1    
+            return extracted_input
+
+        if self.type == "ollama":
+            args = {"model": self.model}
+            if self.hyperparameters:
+                args.update({
+                    "temperature": self.hyperparameters[0],
+                    "max_tokens": self.hyperparameters[1],
+                    "top_p": self.hyperparameters[2],
+                    "top_k": self.hyperparameters[3]
+                })
+            response_generator = ollama_classes.ResponseGenerator(**args)
+        elif self.type == "openAI":
+            response_generator = openAI_classes.ResponseGenerator()
         else:
-            with open(self.output_file_path, 'w') as file:
-                file.write(extracted_text)
-            return 0
+            raise ValueError("Invalid type. Must be 'ollama' or 'openAI'.")
+
+        prompt = self.prompt_override or (
+            f"Write a runnable non-interactive program that takes the input file input.txt "
+            f"incorporating {self.topic} in {self.language} that writes output to terminal"
+        )
         
-        # Self reflect
-        # response = response_generator.generate_response("Does this code:\n" + extracted_text + "\nFit this prompt well: " + prompt)
-        # if "yes" not in response.lower()[:10]:
-        #     print("\033[91mCode failed on self reflection\033[0m")
-        #     if self.debug:
-        #         print(response)
+        current_code = extract_code_block(response_generator.generate_response(prompt))
+        current_input = None if self.prompt_override else generate_input_file(current_code)
+
+        max_retries = 3
+        for attempt in range(max_retries + 1):
+            check_prompt = (
+                "Respond with just yes or no\n"
+                f"Does this code:\n{current_code}\nFit this prompt: {prompt}"
+            )
+            if "yes" in response_generator.generate_response(check_prompt).lower():
+                with open(self.output_file_path, 'w') as file:
+                    file.write(current_code)
+                return 0
+            
+            if attempt == max_retries:
+                return 1
+                
+            improvement_prompt = (
+                f"Improve this code to better fit: {prompt}\n"
+                f"Previous code: {current_code}\n"
+                "Provide only the improved code with no additional commentary."
+            )
+            current_code = extract_code_block(response_generator.generate_response(improvement_prompt))
+            
+            if not self.prompt_override:
+                current_input = generate_input_file(current_code)
+
+        return 1
+        
 
 
     def compile_script(self, keepScripts):
